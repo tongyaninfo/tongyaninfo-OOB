@@ -2,11 +2,15 @@
 
 **统一管理服务器，让巡检、远程维护和 AI 数据查询更顺手。**
 
+**通研官网**：[www.tongyaninfo.com](https://www.tongyaninfo.com/)
+
+**产品官网**：[oob.tongyaninfo.com](https://oob.tongyaninfo.com/)
+
 面向 HP iLO4、Dell iDRAC 8 的带外（Out-of-Band）管理工作台。把硬件库存、实时监控、历史趋势、虚拟控制台和运行报表集中到一个界面；通过 MCP（Model Context Protocol）为外部 AI 助手提供受控、结构化的运维数据。
 
 本仓库是通研带外系统管理的开源版本，源码基线为 **1.0.0**，版本以根 [VERSION](VERSION) 为准。支持服务端集中部署和本地桌面运行。
 
-[官网](https://www.tongyaninfo.com) · [文档中心](docs/README.md) · [English](docs/README.en.md) · [参与贡献](CONTRIBUTING.md) · [安全策略](SECURITY.md) · [变更记录](CHANGELOG.md)
+[文档中心](docs/README.md) · [English](docs/README.en.md) · [参与贡献](CONTRIBUTING.md) · [安全策略](SECURITY.md) · [变更记录](CHANGELOG.md)
 
 ## 一屏掌握服务器状态
 
