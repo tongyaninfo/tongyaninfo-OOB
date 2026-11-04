@@ -7,3 +7,6 @@ desktop/backend/OobManagement.Desktop.Storage/Persistence/Migrations/**/*.cs tex
 desktop/backend/OobManagement.Desktop.Storage/Persistence/Migrations/**/*.sql text eol=lf
 VERSION text eol=lf
 docs/releases/*.json text eol=lf
+
+# 构建检查按 LF 读取许可正文；固定检出行尾，避免 Windows 自动转换导致校验误报。
+frontend/PC/tools/**/LICENSE text eol=lf

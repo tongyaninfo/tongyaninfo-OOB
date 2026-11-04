@@ -23,7 +23,8 @@ function checkLocalPackage(policy) {
   assert.equal(metadata.version, '1.0.0', `${policy.directory}：替代包版本需重新审查`);
   assert.equal(metadata.license, 'MIT', `${policy.directory}：替代包许可漂移`);
   for (const group of groups) assert.equal(Object.keys(metadata[group] ?? {}).length, 0, `${policy.directory}：替代包不能新增依赖`);
-  assert.ok(fs.readFileSync(path.join(directory, 'LICENSE'), 'utf8').startsWith('MIT License\n'), `${policy.directory}：缺少 MIT 许可正文`);
+  const licenseText = fs.readFileSync(path.join(directory, 'LICENSE'), 'utf8').replace(/\r\n/g, '\n');
+  assert.ok(licenseText.startsWith('MIT License\n'), `${policy.directory}：缺少 MIT 许可正文`);
   return fs.realpathSync(directory);
 }
 
