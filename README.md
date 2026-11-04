@@ -6,7 +6,7 @@
 
 本仓库是通研带外系统管理的开源版本，源码基线为 **1.0.0**，版本以根 [VERSION](VERSION) 为准。支持服务端集中部署和本地桌面运行。
 
-[文档中心](docs/README.md) · [参与贡献](CONTRIBUTING.md) · [安全策略](SECURITY.md) · [变更记录](CHANGELOG.md)
+[官网](https://www.tongyaninfo.com) · [文档中心](docs/README.md) · [English](docs/README.en.md) · [参与贡献](CONTRIBUTING.md) · [安全策略](SECURITY.md) · [变更记录](CHANGELOG.md)
 
 ## 一屏掌握服务器状态
 
