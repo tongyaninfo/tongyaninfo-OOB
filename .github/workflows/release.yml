@@ -1,0 +1,259 @@
+name: Release
+
+# 推送形如 v1.0.0 的 tag 后运行：先校验 tag 与根 VERSION、版本台账一致，
+# 再构建三平台桌面安装包，汇总为草稿（draft）Release，人工检查后手动发布。
+#
+# 正式产物：Windows x64 NSIS、macOS Intel / Apple Silicon DMG、Linux x64 DEB/AppImage/RPM。
+# 实验性产物（不阻塞发布）：Windows ARM64、Linux ARM64，构建成功时一并汇总。
+#
+# 安装包为未签名测试包：macOS 使用 ad-hoc 签名，Windows 未签名；正式分发前需配置签名与公证。
+# 服务端容器镜像不在本工作流产制范围，部署方式见 deploy/ 目录。
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  NODE_VERSION: '24'
+
+jobs:
+  prepare:
+    name: 版本与台账校验
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    outputs:
+      version: ${{ steps.check.outputs.version }}
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      - name: 安装 Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: 校验 tag、VERSION 与版本台账
+        id: check
+        shell: bash
+        run: |
+          set -euo pipefail
+          version="${GITHUB_REF_NAME#v}"
+          file_version="$(tr -d '[:space:]' < VERSION)"
+          if [ "$version" != "$file_version" ]; then
+            echo "::error::tag ${GITHUB_REF_NAME} 与 VERSION ${file_version} 不一致，请先更新 VERSION 与版本台账"
+            exit 1
+          fi
+          if ! printf '%s' "$version" | grep -Eq '^[0-9]+\.[0-9]+\.[0-9]+$'; then
+            echo "::error::tag 版本必须是不带前缀的稳定语义版本，例如 v1.0.0"
+            exit 1
+          fi
+          node scripts/releases.mjs check
+          echo "version=${version}" >> "$GITHUB_OUTPUT"
+
+  desktop:
+    name: 桌面安装包（${{ matrix.label }}）
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 45
+    needs: prepare
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: windows-2025
+            platform: win32
+            arch: x64
+            label: win-x64
+          - os: macos-26
+            platform: darwin
+            arch: arm64
+            label: mac-arm64
+          - os: macos-15-intel
+            platform: darwin
+            arch: x64
+            label: mac-x64
+          - os: ubuntu-24.04
+            platform: linux
+            arch: x64
+            label: linux-x64
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      - name: 安装 .NET SDK（读取 global.json）
+        uses: actions/setup-dotnet@v4
+        with:
+          global-json-file: global.json
+
+      - name: 安装 Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+          cache-dependency-path: |
+            frontend/PC/package-lock.json
+            desktop/package-lock.json
+
+      - name: 安装 PC 依赖
+        run: npm ci --prefix frontend/PC --ignore-scripts --no-audit --no-fund
+
+      - name: Umi 本地 setup
+        run: node frontend/PC/node_modules/@umijs/max/bin/max.js setup
+
+      - name: 安装桌面依赖
+        run: npm ci --prefix desktop --ignore-scripts --no-audit --no-fund
+
+      - name: 安装 Linux 打包工具
+        if: matrix.platform == 'linux'
+        run: sudo apt-get update && sudo apt-get install -y rpm
+
+      - name: 构建安装包
+        working-directory: desktop
+        env:
+          OOB_DESKTOP_OUTPUT: ${{ github.workspace }}/out
+        run: npm run package -- --platform ${{ matrix.platform }} --arch ${{ matrix.arch }}
+
+      - name: 列出产物
+        shell: bash
+        run: ls -lh "${{ github.workspace }}/out"
+
+      - name: 上传安装包
+        uses: actions/upload-artifact@v4
+        with:
+          name: desktop-${{ matrix.label }}
+          path: ${{ github.workspace }}/out/**
+          if-no-files-found: error
+          retention-days: 7
+
+  desktop-experimental:
+    name: 实验性安装包（${{ matrix.label }}）
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 45
+    needs: prepare
+    continue-on-error: true
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: windows-11-arm
+            platform: win32
+            arch: arm64
+            label: win-arm64
+          - os: ubuntu-24.04-arm
+            platform: linux
+            arch: arm64
+            label: linux-arm64
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      - name: 安装 .NET SDK（读取 global.json）
+        uses: actions/setup-dotnet@v4
+        with:
+          global-json-file: global.json
+
+      - name: 安装 Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: 安装 PC 依赖
+        run: npm ci --prefix frontend/PC --ignore-scripts --no-audit --no-fund
+
+      - name: Umi 本地 setup
+        run: node frontend/PC/node_modules/@umijs/max/bin/max.js setup
+
+      - name: 安装桌面依赖
+        run: npm ci --prefix desktop --ignore-scripts --no-audit --no-fund
+
+      - name: 安装 Linux 打包工具
+        if: matrix.platform == 'linux'
+        run: sudo apt-get update && sudo apt-get install -y rpm
+
+      - name: 构建安装包
+        working-directory: desktop
+        env:
+          OOB_DESKTOP_OUTPUT: ${{ github.workspace }}/out
+        run: npm run package -- --platform ${{ matrix.platform }} --arch ${{ matrix.arch }}
+
+      - name: 上传安装包
+        uses: actions/upload-artifact@v4
+        with:
+          name: desktop-${{ matrix.label }}
+          path: ${{ github.workspace }}/out/**
+          if-no-files-found: error
+          retention-days: 7
+
+  release:
+    name: 生成草稿 Release
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    needs: [prepare, desktop]
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      - name: 下载安装包
+        uses: actions/download-artifact@v4
+        with:
+          pattern: desktop-*
+          path: artifacts
+
+      - name: 整理附件与校验和
+        shell: bash
+        run: |
+          set -euo pipefail
+          version="${{ needs.prepare.outputs.version }}"
+          mkdir -p release-assets
+          find artifacts -type f \( -name '*.exe' -o -name '*.dmg' -o -name '*.deb' -o -name '*.AppImage' -o -name '*.rpm' -o -name '*.zip' \) -exec cp {} release-assets/ \;
+          (cd release-assets && sha256sum * > SHA256SUMS.txt)
+          ls -lh release-assets
+
+      - name: 创建草稿 Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.ref_name }}
+          name: v${{ needs.prepare.outputs.version }}
+          draft: true
+          fail_on_unmatched_files: true
+          files: release-assets/*
+          body: |
+            ## 通研带外系统管理 v${{ needs.prepare.outputs.version }}
+
+            本 Release 由 tag `${{ github.ref_name }}` 自动构建，当前为草稿状态，检查后手动发布。
+
+            ### 产物
+
+            - Windows x64：`OutOfBandManagement-<版本>-win-x64.exe`（NSIS 安装包）
+            - macOS Apple Silicon：`OutOfBandManagement-<版本>-mac-arm64.dmg`
+            - macOS Intel：`OutOfBandManagement-<版本>-mac-x64.dmg`
+            - Linux x64：`.deb`、`.AppImage`、`.rpm`
+            - `SHA256SUMS.txt`：全部附件校验和
+
+            构建成功时，Windows ARM64 与 Linux ARM64 安装包（实验性支持）也会一并出现在附件中。
+
+            ### 未签名说明
+
+            Windows 与 macOS 安装包**未使用正式代码签名**：macOS 使用 ad-hoc 签名，首次打开如提示"无法验证开发者"，请右键选择"打开"或移除隔离属性后运行；Windows 可能触发 SmartScreen 提示，选择"仍要运行"。正式签名与公证需另行配置后发布新版本。
+
+            ### 运行说明
+
+            1. 桌面版为 Electron 外壳 + 自包含 .NET 宿主 + SQLite，安装后可直接运行，业务数据保存在系统应用数据目录。
+            2. 首次启动按界面提示初始化管理员账号；数据库迁移由应用显式处理，升级前请按文档备份数据目录。
+            3. 服务端容器部署不在本 Release 附件范围，见仓库 `deploy/` 目录与文档。
+
+            ### 校验
+
+            `sha256sum -c SHA256SUMS.txt`
+
+            ### 构建信息
+
+            - 提交：`${{ github.sha }}`
+            - 工作流：`.github/workflows/release.yml`

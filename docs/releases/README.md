@@ -38,7 +38,7 @@
 node scripts/verify.mjs --scope all
 ```
 
-本开源版本不包含内部发布台账脚本；新增版本时按下述要求手工维护 `docs/releases/<version>.md`、`<version>.json` 与 `VERSION`：先确定真实版本/日期，更新 `VERSION`、桌面 `package.json` 与锁文件的版本镜像，再创建版本说明与机器台账。已封台账的纠错通过后续版本或勘误记录解释，不重算旧摘要掩盖漂移。
+开源版本提供 `scripts/releases.mjs` 校验命令，仅校验版本、版本台账与迁移链（不包含内部变更记录，台账无 `changeRecord` 时跳过该字段）；新增版本时按下述要求手工维护 `docs/releases/<version>.md`、`<version>.json` 与 `VERSION`：先确定真实版本/日期，更新 `VERSION`、桌面 `package.json` 与锁文件的版本镜像，再创建版本说明与机器台账。已封台账的纠错通过后续版本或勘误记录解释，不重算旧摘要掩盖漂移。
 
 台账覆盖每条链的全部有序 MigrationId，以及历史迁移 `.cs`、Designer 和 SQL helper 的 SHA-256；仅有新增迁移列表不足以判断旧库是否能升级。正常演进的 `*ModelSnapshot.cs` 不作为永不变化的冻结文件，模型一致性由 EF 及相应验证核对。台账未复制源码正文，不能代替源码或数据库备份。
 
