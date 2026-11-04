@@ -1,0 +1,62 @@
+name: oob-management
+
+services:
+  postgres:
+    image: ${OOB_POSTGRES_IMAGE:?请设置 OOB_POSTGRES_IMAGE 为已核验的 PostgreSQL/TimescaleDB 镜像}
+    container_name: oob-management-postgres
+    # 系统由用户显式启停，Podman 重启后不自动恢复采集。
+    restart: "no"
+    stop_grace_period: 30s
+    labels:
+      cn.tongyaninfo.project: oob-management
+      cn.tongyaninfo.component: postgres
+    environment:
+      POSTGRES_USER: oob_bootstrap
+      POSTGRES_DB: postgres
+      POSTGRES_PASSWORD_FILE: /run/secrets/postgres_password
+      PGDATA: /var/lib/postgresql/data/pgdata
+      TZ: UTC
+      NO_TS_TUNE: "true"
+      TIMESCALEDB_TELEMETRY: "off"
+    command:
+      - postgres
+      - -c
+      - shared_preload_libraries=timescaledb
+      - -c
+      - timezone=UTC
+      - -c
+      - shared_buffers=256MB
+      - -c
+      - max_connections=100
+      - -c
+      - max_worker_processes=16
+      - -c
+      - timescaledb.max_background_workers=8
+      - -c
+      - timescaledb.telemetry_level=off
+    ports:
+      - 127.0.0.1:55432:5432
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    secrets:
+      - postgres_password
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready --username oob_bootstrap --dbname postgres --quiet"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+      start_period: 10s
+    mem_limit: 2g
+    cpus: 2
+
+secrets:
+  postgres_password:
+    file: ../../.local/oob/postgres-password.txt
+
+volumes:
+  postgres-data:
+    name: oob-management-postgres-data
+
+networks:
+  default:
+    name: oob-management-network

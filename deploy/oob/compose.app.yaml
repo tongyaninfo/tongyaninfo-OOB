@@ -1,0 +1,47 @@
+# 与 compose.yaml 合并；复用已有数据库，不创建账号、迁移或修改私密配置。
+services:
+  api:
+    image: localhost/oob-management-api:local
+    container_name: oob-management-api
+    restart: "no"
+    stop_grace_period: 120s
+    labels:
+      cn.tongyaninfo.project: oob-management
+      cn.tongyaninfo.component: api
+    environment:
+      DOTNET_ENVIRONMENT: Production
+      Urls: http://0.0.0.0:5080
+      Oob__PrivateDirectory: /run/oob
+      Oob__ReadOnlyKeys: "true"
+      Database__Host: postgres
+      Database__Port: "5432"
+      XDG_DATA_HOME: /var/lib/oob
+    ports:
+      - 127.0.0.1:5080:5080
+    volumes:
+      - ../../.local/oob/application.json:/run/oob/application.json:ro
+      - ../../.local/oob/database-connections.json:/run/oob/database-connections.json:ro
+      # 本次只读取已有密钥；轮换须另获授权，不因部署重新生成密钥。
+      - ../../.local/oob/keys:/run/oob/keys:ro
+      - ${OOB_RUNTIME_DIRECTORY:?请设置持久运行数据目录的绝对路径}:/var/lib/oob/OutOfBandManagement
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  pc:
+    image: localhost/oob-management-pc:local
+    container_name: oob-management-pc
+    restart: "no"
+    stop_grace_period: 30s
+    labels:
+      cn.tongyaninfo.project: oob-management
+      cn.tongyaninfo.component: pc
+    ports:
+      - 127.0.0.1:8000:8080
+    depends_on:
+      - api
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--spider", "http://127.0.0.1:8080/health"]
+      interval: 10s
+      timeout: 3s
+      retries: 6

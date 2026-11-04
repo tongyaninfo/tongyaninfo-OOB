@@ -1,0 +1,9 @@
+<Solution>
+  <Project Path="src/OobManagement.Domain/OobManagement.Domain.csproj" />
+  <Project Path="src/OobManagement.Application/OobManagement.Application.csproj" />
+  <Project Path="src/OobManagement.Infrastructure/OobManagement.Infrastructure.csproj" />
+  <Project Path="src/OobManagement.Api/OobManagement.Api.csproj" />
+  <Project Path="tests/OobManagement.Driver.Tests/OobManagement.Driver.Tests.csproj" />
+  <Project Path="tests/OobManagement.Integration.Tests/OobManagement.Integration.Tests.csproj" />
+  <Project Path="tools/OobReadProbe/OobReadProbe.csproj" />
+</Solution>

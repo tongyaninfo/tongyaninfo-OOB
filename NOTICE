@@ -1,0 +1,62 @@
+通研带外系统管理（tongyaninfo-OOB）
+Copyright 2026 tongyaninfo contributors
+
+本产品包含或衍生自第三方开源软件与素材。以下为主要来源及许可说明；完整许可文本
+可从对应项目的仓库或构建时安装的包中获取。本仓库不重新分发第三方完整源码。
+
+一、前端模板与 UI 素材
+
+1. Ant Design Pro（https://github.com/ant-design/ant-design-pro）
+   许可：MIT License
+   说明：frontend/PC 的目录结构、Umi Max 配置、主题与页面脚手架衍生自该模板；
+   本仓库保留其 MIT 许可声明（frontend/PC/LICENSE）。模板中的演示页面仅作兼容保留，
+   业务功能以 OOB 页面为准。
+
+2. Ant Design、@ant-design/icons、@ant-design/pro-components、@ant-design/x
+   许可：MIT License
+   说明：PC 管理端 UI 组件库与图标。
+
+3. Alipay 素材（蚂蚁集团/Alipay 提供的 Ant Design 官方图片素材）
+   许可：MIT License（随 Ant Design Pro 素材提供）
+   说明：登录页、头像与演示数据中引用的 alipayobjects.com 官方素材属于 Ant Design
+   生态资源；本仓库仅通过公开 CDN 引用，不重新分发。
+
+二、前端运行时与构建依赖（主要）
+
+- React、React DOM：MIT
+- UmiJS / Umi Max：MIT
+- TypeScript：Apache-2.0
+- dayjs：MIT
+- d3、topojson-client：ISC
+- highlight.js：BSD-3-Clause
+- @microsoft/signalr：MIT
+- @tanstack/react-query：MIT
+- antd-style、clsx：MIT
+- Biome（开发者工具）：MIT / Apache-2.0
+- Vitest、happy-dom、Testing Library：MIT
+- json-schema-to-typescript：MIT
+
+三、后端与桌面运行时（主要）
+
+- .NET、ASP.NET Core、Entity Framework Core：MIT
+- Npgsql / Npgsql.EntityFrameworkCore.PostgreSQL：PostgreSQL License
+- MailKit：MIT
+- ModelContextProtocol（C# SDK）：MIT
+- OpenIddict：Apache-2.0
+- Yitter.IdGenerator：MIT
+- xunit 及其运行器：Apache-2.0
+- Electron、electron-builder：MIT
+
+四、数据库与基础设施
+
+1. PostgreSQL：PostgreSQL License
+2. TimescaleDB（https://github.com/timescale/timescaledb）
+   许可：Timescale License（TSL）
+   说明：TimescaleDB 作为独立数据库引擎部署，不包含在本仓库源码中。部署方需自行
+   遵守 TSL 的许可条款与服务等级限制。
+
+五、说明
+
+- 本仓库的 Apache-2.0 许可（LICENSE）不改变上述第三方组件的许可及其权利归属。
+- 若第三方组件的许可与本 NOTICE 存在冲突，以对应组件随附的许可文本为准。
+- README 截图与演示配置使用合成数据，不包含真实设备、账号或客户信息。

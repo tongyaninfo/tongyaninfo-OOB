@@ -1,0 +1,186 @@
+name: outofband-harbor
+
+# 仅复用已发布镜像；私有配置由部署者准备，不写入镜像或本文件。
+x-api: &api
+  image: ${OOB_REGISTRY:-registry.example.com:443}/outofband/oob-management-api:${OOB_IMAGE_TAG:-1.0}
+  platform: linux/amd64
+  restart: "no"
+  stop_grace_period: 120s
+  labels:
+    cn.tongyaninfo.project: outofband-harbor
+    cn.tongyaninfo.component: api
+  environment: &api-environment
+    DOTNET_ENVIRONMENT: Production
+    Urls: http://0.0.0.0:5080
+    AllowedHosts: ${OOB_ALLOWED_HOSTS:?请设置访问主机名或IP，多个值用分号分隔}
+    Oob__PrivateDirectory: /run/oob
+    Oob__ReadOnlyKeys: ${OOB_KEYS_READ_ONLY:-true}
+    Database__Host: postgres
+    Database__Port: "5432"
+    Id__WorkerId: ${OOB_WORKER_ID:-1}
+    Collector__Enabled: ${OOB_COLLECTOR_ENABLED:-true}
+    PowerControl__Enabled: "false"
+    XDG_DATA_HOME: /var/lib/oob
+  volumes:
+    - type: bind
+      source: ${OOB_PRIVATE_DIRECTORY:?请设置独立私有配置目录的绝对路径}/application.json
+      target: /run/oob/application.json
+      read_only: true
+      bind:
+        create_host_path: false
+    - type: bind
+      source: ${OOB_PRIVATE_DIRECTORY:?请设置独立私有配置目录的绝对路径}/database-connections.json
+      target: /run/oob/database-connections.json
+      read_only: true
+      bind:
+        create_host_path: false
+    - type: bind
+      source: ${OOB_PRIVATE_DIRECTORY:?请设置独立私有配置目录的绝对路径}/keys
+      target: /run/oob/keys
+      # 新密钥准备时由用户显式临时设为 false；日常启动只读挂载。
+      read_only: ${OOB_KEYS_READ_ONLY:-true}
+      bind:
+        create_host_path: false
+    - application-data:/var/lib/oob/OutOfBandManagement
+
+services:
+  postgres:
+    image: ${OOB_REGISTRY:-registry.example.com:443}/outofband/oob-management-postgres:${OOB_IMAGE_TAG:-1.0}
+    platform: linux/amd64
+    restart: "no"
+    stop_grace_period: 60s
+    labels:
+      cn.tongyaninfo.project: outofband-harbor
+      cn.tongyaninfo.component: postgres
+    environment:
+      POSTGRES_USER: oob_bootstrap
+      POSTGRES_DB: postgres
+      POSTGRES_PASSWORD_FILE: /run/secrets/postgres_password
+      PGDATA: /var/lib/postgresql/data/pgdata
+      TZ: UTC
+    command:
+      - postgres
+      - -c
+      - shared_preload_libraries=timescaledb
+      - -c
+      - timezone=UTC
+      - -c
+      - timescaledb.telemetry_level=off
+      - -c
+      - shared_buffers=256MB
+      - -c
+      - max_connections=100
+      - -c
+      - max_worker_processes=16
+      - -c
+      - timescaledb.max_background_workers=8
+    volumes:
+      # 留空沿用命名卷；传入宿主绝对目录时改为 bind mount，实际 PGDATA 在其 pgdata 子目录。
+      - "${OOB_POSTGRES_DATA_DIRECTORY:-postgres-data}:/var/lib/postgresql/data:Z"
+    secrets:
+      - postgres_password
+    # TCP 认证查询避开首次 initdb 的临时 Unix socket 服务；不要求业务表先存在。
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - >-
+          PGPASSWORD="$$(cat /run/secrets/postgres_password)"
+          psql --host 127.0.0.1 --username oob_bootstrap --dbname postgres
+          --no-psqlrc --no-password --tuples-only --no-align --set ON_ERROR_STOP=1
+          --command "SELECT current_setting('server_version_num')::int BETWEEN 170000 AND 179999
+          AND current_setting('TimeZone') = 'UTC'
+          AND 'timescaledb' = ANY(string_to_array(current_setting('shared_preload_libraries'), ','))
+          AND EXISTS (SELECT 1 FROM pg_available_extension_versions WHERE name='timescaledb' AND version='2.31.0')"
+          | grep -qx t
+      interval: 10s
+      timeout: 5s
+      retries: 20
+      start_period: 20s
+    shm_size: 256mb
+    mem_limit: 2g
+    cpus: 2
+
+  api:
+    <<: *api
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  pc:
+    image: ${OOB_REGISTRY:-registry.example.com:443}/outofband/oob-management-pc:${OOB_IMAGE_TAG:-1.0}
+    platform: linux/amd64
+    restart: "no"
+    stop_grace_period: 30s
+    labels:
+      cn.tongyaninfo.project: outofband-harbor
+      cn.tongyaninfo.component: pc
+    ports:
+      - ${OOB_HTTP_BIND:-0.0.0.0}:${OOB_HTTP_PORT:-8000}:8080
+    depends_on:
+      - api
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--spider", "http://127.0.0.1:8080/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 20s
+
+  # 以下任务只在用户显式指定 initialize profile 和服务时运行。
+  db-init:
+    image: ${OOB_REGISTRY:-registry.example.com:443}/outofband/oob-management-postgres:${OOB_IMAGE_TAG:-1.0}
+    platform: linux/amd64
+    profiles: [initialize]
+    restart: "no"
+    entrypoint: ["/bin/sh", "/opt/oob/db-initialize.sh"]
+    environment:
+      PGHOST: postgres
+      PGPORT: "5432"
+      PGUSER: oob_bootstrap
+      PGDATABASE: postgres
+    volumes:
+      - type: bind
+        source: ./db-initialize.sh
+        target: /opt/oob/db-initialize.sh
+        read_only: true
+        bind:
+          create_host_path: false
+    secrets:
+      - postgres_password
+      - application_database_password
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  api-init:
+    <<: *api
+    profiles: [initialize]
+    environment:
+      <<: *api-environment
+      Collector__Enabled: "false"
+      Oob__ReadOnlyKeys: "true"
+    entrypoint: ["/bin/sh", "-ec"]
+    command:
+      - |
+        Bootstrap__AdminPassword="$$(cat /run/secrets/admin_password)"
+        case "$$Bootstrap__AdminPassword" in
+          ""|CHANGE_*) echo '请先在私有文件中配置初始管理员密码' >&2; exit 1 ;;
+        esac
+        export Bootstrap__AdminPassword
+        exec dotnet OobManagement.Api.dll --initialize
+    secrets:
+      - admin_password
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+secrets:
+  postgres_password:
+    file: ${OOB_PRIVATE_DIRECTORY:?请设置独立私有配置目录的绝对路径}/postgres-password.txt
+  application_database_password:
+    file: ${OOB_PRIVATE_DIRECTORY:?请设置独立私有配置目录的绝对路径}/application-database-password.txt
+  admin_password:
+    file: ${OOB_PRIVATE_DIRECTORY:?请设置独立私有配置目录的绝对路径}/admin-password.txt
+
+volumes:
+  postgres-data:
+  application-data:

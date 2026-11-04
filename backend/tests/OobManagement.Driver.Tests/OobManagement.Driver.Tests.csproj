@@ -1,0 +1,6 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup><TargetFramework>net10.0</TargetFramework><Nullable>enable</Nullable><ImplicitUsings>enable</ImplicitUsings><IsPackable>false</IsPackable><IsTestProject>true</IsTestProject></PropertyGroup>
+  <ItemGroup><ProjectReference Include="../../src/OobManagement.Application/OobManagement.Application.csproj" /><ProjectReference Include="../../src/OobManagement.Infrastructure/OobManagement.Infrastructure.csproj" /></ItemGroup>
+  <ItemGroup><PackageReference Include="Microsoft.NET.Test.Sdk" /><PackageReference Include="xunit" /><PackageReference Include="xunit.runner.visualstudio" PrivateAssets="all" /></ItemGroup>
+  <ItemGroup><None Update="Fixtures/console-frame-probe.mjs" CopyToOutputDirectory="PreserveNewest" /></ItemGroup>
+</Project>

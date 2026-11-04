@@ -1,0 +1,80 @@
+{
+  "description": "桌面版固定模板资源；构建仅验证并复制本地文件，不访问 CDN。",
+  "assets": [
+    {
+      "url": "https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png",
+      "file": "template-01.png",
+      "sha256": "4ef6186be35d14df3ff9a9edaaf5676e831f3a9473c05b62dd54add379897dfe",
+      "bytes": 12259
+    },
+    {
+      "url": "https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png",
+      "file": "template-02.png",
+      "sha256": "25398dffa692af8161f55aa0a36b27192eb973104734aea718c526fb18ef4f09",
+      "bytes": 53185
+    },
+    {
+      "url": "https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg",
+      "file": "template-03.svg",
+      "sha256": "72b680102dde2f939add0a75b7e494e1d3703c6e1817c3ce8e7ae58c0aa0f1c1",
+      "bytes": 4729
+    },
+    {
+      "url": "https://mdn.alipayobjects.com/huamei_iwk9zp/afts/file/A*1GSgSYDD_aIAAAAAQsAAAAgAegCCAQ/AlibabaSans-Light.woff2",
+      "file": "template-04.woff2",
+      "sha256": "ae8e02559f03bea185c541264b83095b570322250c40bd812f4691cecfb08b49",
+      "bytes": 45424
+    },
+    {
+      "url": "https://mdn.alipayobjects.com/huamei_iwk9zp/afts/file/A*2zEUQqnPNesAAAAAQtAAAAgAegCCAQ/AlibabaSans-Regular.woff2",
+      "file": "template-05.woff2",
+      "sha256": "b0a23c2f61f6a75f623a58cd4c6979e60afdbb5ee9da07b7afc106d02ba704bf",
+      "bytes": 46096
+    },
+    {
+      "url": "https://mdn.alipayobjects.com/huamei_iwk9zp/afts/file/A*E_cxRbMlZqUAAAAAQuAAAAgAegCCAQ/AlibabaSans-Bold.woff2",
+      "file": "template-06.woff2",
+      "sha256": "3e4d248570795da30f16487db0c030782420945ed3373cf6fafd3936e054cf26",
+      "bytes": 47296
+    },
+    {
+      "url": "https://mdn.alipayobjects.com/huamei_iwk9zp/afts/file/A*E_cxRbMlZqUAAAAAQuAAAAgAegCCAQ/AlibabaSans-Heavy.woff2",
+      "file": "template-07.woff2",
+      "sha256": "3e4d248570795da30f16487db0c030782420945ed3373cf6fafd3936e054cf26",
+      "bytes": 47296
+    },
+    {
+      "url": "https://mdn.alipayobjects.com/huamei_iwk9zp/afts/file/A*E_cxRbMlZqUAAAAAQuAAAAgAegCCAQ/AlibabaSans-Medium.woff2",
+      "file": "template-08.woff2",
+      "sha256": "3e4d248570795da30f16487db0c030782420945ed3373cf6fafd3936e054cf26",
+      "bytes": 47296
+    },
+    {
+      "url": "https://mdn.alipayobjects.com/yuyan_qk0oxh/afts/img/C2TWRpJpiC0AAAAAAAAAAAAAFl94AQBr",
+      "file": "template-09.png",
+      "sha256": "1b7ab50720315a9ca86eae24b48421aa207644978e828bfacd957cac1410fb0a",
+      "bytes": 42416,
+      "publicFile": "template-09.webp"
+    },
+    {
+      "url": "https://mdn.alipayobjects.com/yuyan_qk0oxh/afts/img/D2LWSqNny4sAAAAAAAAAAAAAFl94AQBr",
+      "file": "template-10.png",
+      "sha256": "1b7ab50720315a9ca86eae24b48421aa207644978e828bfacd957cac1410fb0a",
+      "bytes": 42416,
+      "publicFile": "template-10.webp"
+    },
+    {
+      "url": "https://mdn.alipayobjects.com/yuyan_qk0oxh/afts/img/F6vSTbj8KpYAAAAAAAAAAAAAFl94AQBr",
+      "file": "template-11.png",
+      "sha256": "9ba9c8e9d7d48a0617e2637da401ab358b3255f578b9b898b9696817e87c3dc8",
+      "bytes": 136048,
+      "publicFile": "template-11.webp"
+    },
+    {
+      "url": "https://mdn.alipayobjects.com/yuyan_qk0oxh/afts/img/V-_oS6r-i7wAAAAAAAAAAAAAFl94AQBr",
+      "file": "template-12.png",
+      "sha256": "8465061d1075a2c6b99370ada89f3de8676db1ca89c08b83e43d99b42d0e3730",
+      "bytes": 174555
+    }
+  ]
+}

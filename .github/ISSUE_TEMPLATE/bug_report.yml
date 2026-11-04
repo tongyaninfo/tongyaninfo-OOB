@@ -1,0 +1,80 @@
+name: 缺陷报告
+description: 报告可复现的缺陷（请勿包含真实凭据或内网地址）
+title: "[Bug] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢反馈！提交前请确认：
+        - 不要填写真实设备地址、BMC 账号密码、数据库连接串或其他凭据；
+        - 示例地址请使用 RFC 5737 文档网段（如 `192.0.2.10`），设备名称使用合成名称；
+        - 安全问题请按 SECURITY.md 的私密渠道报告，不要在此提交。
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: 影响模块
+      options:
+        - 后端 / API
+        - PC 管理端
+        - 桌面版
+        - MCP / OAuth
+        - 部署与配置
+        - 文档
+        - 其他
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: 版本
+      description: 根目录 VERSION 或安装包版本
+      placeholder: "1.0.0"
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: 运行环境
+      description: 操作系统、浏览器、.NET/Node 版本；涉及设备时只写型号与固件版本等公开信息
+      placeholder: |
+        - OS: Ubuntu 24.04 / macOS 15
+        - 浏览器: Chrome 130
+        - .NET: 10.0.300
+        - 设备: HP iLO4 2.82（仅只读）
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: 复现步骤
+      description: 尽可能提供最小、可重复的操作步骤
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: 预期结果
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: 实际结果
+      description: 可附脱敏后的日志或截图（请先删除 IP、账号、主机名）
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: confirm
+    attributes:
+      label: 确认
+      options:
+        - label: 我已阅读 SECURITY.md，且本 Issue 不包含安全漏洞细节、真实凭据或内网地址
+          required: true

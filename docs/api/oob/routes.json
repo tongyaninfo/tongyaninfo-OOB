@@ -1,0 +1,5271 @@
+{
+  "format": "oob-rest-contracts.v1",
+  "source": "MVC ApiExplorer + EndpointDataSource；非MVC协议由正式路由常量登记",
+  "routes": [
+    {
+      "method": "POST",
+      "path": "/api/auth/change-password",
+      "operation": "Auth.ChangePassword",
+      "anonymous": false,
+      "authorization": [
+        {
+          "policy": null,
+          "roles": null,
+          "schemes": null
+        }
+      ],
+      "csrf": true,
+      "requestContentTypes": [
+        "application/*+json",
+        "application/json",
+        "text/json"
+      ],
+      "parameters": [
+        {
+          "name": "request",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "schemas.json#/definitions/ChangePasswordRequest"
+          }
+        }
+      ],
+      "responses": [
+        {
+          "status": 200,
+          "contentType": "application/json",
+          "schema": {
+            "$ref": "schemas.json#/definitions/BooleanApiResult"
+          }
+        }
+      ],
+      "businessFailures": {
+        "contentType": "application/json",
+        "schema": {
+          "$ref": "schemas.json#/definitions/JsonElementApiResult"
+        },
+        "statusCodes": [
+          400,
+          401,
+          403,
+          404,
+          409,
+          413,
+          429,
+          500,
+          502,
+          503,
+          504
+        ],
+        "note": "通用错误范围；各ServiceResult实际分支及机器码以服务实现和接口说明为准，不声称每条路由均返回全部状态"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/auth/csrf",
+      "operation": "Auth.Csrf",
+      "anonymous": true,
+      "authorization": [],
+      "csrf": false,
+      "requestContentTypes": [],
+      "parameters": [],
+      "responses": [
+        {
+          "status": 200,
+          "contentType": "application/json",
+          "schema": {
+            "$ref": "schemas.json#/definitions/CsrfDtoApiResult"
+          }
+        }
+      ],
+      "businessFailures": {
+        "contentType": "application/json",
+        "schema": {
+          "$ref": "schemas.json#/definitions/JsonElementApiResult"
+        },
+        "statusCodes": [
+          400,
+          401,
+          403,
+          404,
+          409,
+          413,
+          429,
+          500,
+          502,
+          503,
+          504
+        ],
+        "note": "通用错误范围；各ServiceResult实际分支及机器码以服务实现和接口说明为准，不声称每条路由均返回全部状态"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/auth/current-user",
+      "operation": "Auth.Current",
+      "anonymous": false,
+      "authorization": [
+        {
+          "policy": null,
+          "roles": null,
+          "schemes": null
+        }
+      ],
+      "csrf": false,
+      "requestContentTypes": [],
+      "parameters": [],
+      "responses": [
+        {
+          "status": 200,
+          "contentType": "application/json",
+          "schema": {
+            "$ref": "schemas.json#/definitions/CurrentUserDtoApiResult"
+          }
+        }
+      ],
+      "businessFailures": {
+        "contentType": "application/json",
+        "schema": {
+          "$ref": "schemas.json#/definitions/JsonElementApiResult"
+        },
+        "statusCodes": [
+          400,
+          401,
+          403,
+          404,
+          409,
+          413,
+          429,
+          500,
+          502,
+          503,
+          504
+        ],
+        "note": "通用错误范围；各ServiceResult实际分支及机器码以服务实现和接口说明为准，不声称每条路由均返回全部状态"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/login",
+      "operation": "Auth.Login",
+      "anonymous": true,
+      "authorization": [],
+      "csrf": true,
+      "requestContentTypes": [
+        "application/*+json",
+        "application/json",
+        "text/json"
+      ],
+      "parameters": [
+        {
+          "name": "request",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "schemas.json#/definitions/LoginRequest"
+          }
+        }
+      ],
+      "responses": [
+        {
+          "status": 200,
+          "contentType": "application/json",
+          "schema": {
+            "$ref": "schemas.json#/definitions/CurrentUserDtoApiResult"
+          }
+        }
+      ],
+      "businessFailures": {
+        "contentType": "application/json",
+        "schema": {
+          "$ref": "schemas.json#/definitions/JsonElementApiResult"
+        },
+        "statusCodes": [
+          400,
+          401,
+          403,
+          404,
+          409,
+          413,
+          429,
+          500,
+          502,
+          503,
+          504
+        ],
+        "note": "通用错误范围；各ServiceResult实际分支及机器码以服务实现和接口说明为准，不声称每条路由均返回全部状态"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/auth/logout",
+      "operation": "Auth.Logout",
+      "anonymous": false,
+      "authorization": [
+        {
+          "policy": null,
+          "roles": null,
+          "schemes": null
+        }
+      ],
+      "csrf": true,
+      "requestContentTypes": [],
+      "parameters": [],
+      "responses": [
+        {
+          "status": 200,
+          "contentType": "application/json",
+          "schema": {
+            "$ref": "schemas.json#/definitions/BooleanApiResult"
+          }
+        }
+      ],
+      "businessFailures": {
+        "contentType": "application/json",
+        "schema": {
+          "$ref": "schemas.json#/definitions/JsonElementApiResult"
+        },
+        "statusCodes": [
+          400,
+          401,
+          403,
+          404,
+          409,
+          413,
+          429,
+          500,
+          502,
+          503,
+          504
+        ],
+        "note": "通用错误范围；各ServiceResult实际分支及机器码以服务实现和接口说明为准，不声称每条路由均返回全部状态"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/mcp/clients",
+      "operation": "Mcp.Clients",
+      "anonymous": false,
+      "authorization": [
+        {
+          "policy": null,
+          "roles": "admin",
+          "schemes": null
+        }
+      ],
+      "csrf": false,
+      "requestContentTypes": [],
+      "parameters": [
+        {
+          "name": "Current",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "integer"
+          }
+        },
+        {
+          "name": "PageSize",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "integer"
+          }
+        },
+        {
+          "name": "Keyword",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "SortField",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "SortOrder",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "responses": [
+        {
+          "status": 200,
+          "contentType": "application/json",
+          "schema": {
+            "$ref": "schemas.json#/definitions/McpClientDtoPageDataApiResult"
+          }
+        }
+      ],
+      "businessFailures": {
+        "contentType": "application/json",
+        "schema": {
+          "$ref": "schemas.json#/definitions/JsonElementApiResult"
+        },
+        "statusCodes": [
+          400,
+          401,
+          403,
+          404,
+          409,
+          413,
+          429,
+          500,
+          502,
+          503,
+          504
+        ],
+        "note": "通用错误范围；各ServiceResult实际分支及机器码以服务实现和接口说明为准，不声称每条路由均返回全部状态"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/mcp/clients",
+      "operation": "Mcp.Create",
+      "anonymous": false,
+      "authorization": [
+        {
+          "policy": null,
+          "roles": "admin",
+          "schemes": null
+        }
+      ],
+      "csrf": true,
+      "requestContentTypes": [
+        "application/*+json",
+        "application/json",
+        "text/json"
+      ],
+      "parameters": [
+        {
+          "name": "request",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "schemas.json#/definitions/McpClientRequest"
+          }
+        }
+      ],
+      "responses": [
+        {
+          "status": 200,
+          "contentType": "application/json",
+          "schema": {
+            "$ref": "schemas.json#/definitions/McpClientDtoApiResult"
+          }
+        }
+      ],
+      "businessFailures": {
+        "contentType": "application/json",
+        "schema": {
+          "$ref": "schemas.json#/definitions/JsonElementApiResult"
+        },
+        "statusCodes": [
+          400,
+          401,
+          403,
+          404,
+          409,
+          413,
+          429,
+          500,
+          502,
+          503,
+          504
+        ],
+        "note": "通用错误范围；各ServiceResult实际分支及机器码以服务实现和接口说明为准，不声称每条路由均返回全部状态"
+      },
+      "maximumRequestBytes": 262144
+    },
+    {
+      "method": "GET",
+      "path": "/api/mcp/clients/{id:long}",
+      "operation": "Mcp.Client",
+      "anonymous": false,
+      "authorization": [
+        {
+          "policy": null,
+          "roles": "admin",
+          "schemes": null
+        }
+      ],
+      "csrf": false,
+      "requestContentTypes": [],
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "pattern": "^-?(0|[1-9][0-9]*)$",
+            "description": "十进制long文本；客户端不得转number"
+          }
+        }
+      ],
+      "responses": [
+        {
+          "status": 200,
+          "contentType": "application/json",
+          "schema": {
+            "$ref": "schemas.json#/definitions/McpClientDtoApiResult"
+          }
+        }
+      ],
+      "businessFailures": {
+        "contentType": "application/json",
+        "schema": {
+          "$ref": "schemas.json#/definitions/JsonElementApiResult"
+        },
+        "statusCodes": [
+          400,
+          401,
+          403,
+          404,
+          409,
+          413,
+          429,
+          500,
+          502,
+          503,
+          504
+        ],
+        "note": "通用错误范围；各ServiceResult实际分支及机器码以服务实现和接口说明为准，不声称每条路由均返回全部状态"
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/api/mcp/clients/{id:long}",
+      "operation": "Mcp.Update",
+      "anonymous": false,
+      "authorization": [
+        {
+          "policy": null,
+          "roles": "admin",
+          "schemes": null
+        }
+      ],
+      "csrf": true,
+      "requestContentTypes": [
+        "application/*+json",
+        "application/json",
+        "text/json"
+      ],
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "pattern": "^-?(0|[1-9][0-9]*)$",
+            "description": "十进制long文本；客户端不得转number"
+          }
+        },
+        {
+          "name": "request",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "schemas.json#/definitions/McpClientRequest"
+          }
+        }
+      ],
+      "responses": [
+        {
+          "status": 200,
+          "contentType": "application/json",
+          "schema": {
+            "$ref": "schemas.json#/definitions/McpClientDtoApiResult"
+          }
+        }
+      ],
+      "businessFailures": {
+        "contentType": "application/json",
+        "schema": {
+          "$ref": "schemas.json#/definitions/JsonElementApiResult"
+        },
+        "statusCodes": [
+          400,
+          401,
+          403,
+          404,
+          409,
+          413,
+          429,
+          500,
+          502,
+          503,
+          504
+        ],
+        "note": "通用错误范围；各ServiceResult实际分支及机器码以服务实现和接口说明为准，不声称每条路由均返回全部状态"
+      },
+      "maximumRequestBytes": 262144
+    },
+    {
+      "method": "POST",
+      "path": "/api/mcp/clients/{id:long}/disable",
+      "operation": "Mcp.DisableClient",
+      "anonymous": false,
+      "authorization": [
+        {
+          "policy": null,
+          "roles": "admin",
+          "schemes": null
+        }
+      ],
+      "csrf": true,
+      "requestContentTypes": [
+        "application/*+json",
+        "application/json",
+        "text/json"
+      ],
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "pattern": "^-?(0|[1-9][0-9]*)$",
+            "description": "十进制long文本；客户端不得转number"
+          }
+        },
+        {
+          "name": "request",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "schemas.json#/definitions/McpVersionRequest"
+          }
+        }
+      ],
+      "responses": [
+        {
+          "status": 200,
+          "contentType": "application/json",
+          "schema": {
+            "$ref": "schemas.json#/definitions/McpClientDtoApiResult"
+          }
+        }
+      ],
+      "businessFailures": {
+        "contentType": "application/json",
+        "schema": {
+          "$ref": "schemas.json#/definitions/JsonElementApiResult"
+        },
+        "statusCodes": [
+          400,
+          401,
+          403,
+          404,
+          409,
+          413,
+          429,
+          500,
+          502,
+          503,
+          504
+        ],
+        "note": "通用错误范围；各ServiceResult实际分支及机器码以服务实现和接口说明为准，不声称每条路由均返回全部状态"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/mcp/clients/{id:long}/enable",
+      "operation": "Mcp.EnableClient",
+      "anonymous": false,
+      "authorization": [
+        {
+          "policy": null,
+          "roles": "admin",
+          "schemes": null
+        }
+      ],
+      "csrf": true,
+      "requestContentTypes": [
+        "application/*+json",
+        "application/json",
+        "text/json"
+      ],
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "pattern": "^-?(0|[1-9][0-9]*)$",
+            "description": "十进制long文本；客户端不得转number"
+          }
+        },
+        {
+          "name": "request",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "schemas.json#/definitions/McpVersionRequest"
+          }
+        }
+      ],
+      "responses": [
+        {
+          "status": 200,
+          "contentType": "application/json",
+          "schema": {
+            "$ref": "schemas.json#/definitions/McpClientDtoApiResult"
+          }
+        }
+      ],
+      "businessFailures": {
+        "contentType": "application/json",
+        "schema": {
+          "$ref": "schemas.json#/definitions/JsonElementApiResult"
+        },
+        "statusCodes": [
+          400,
+          401,
+          403,
+          404,
+          409,
+          413,
+          429,
+          500,
+          502,
+          503,
+          504
+        ],
+        "note": "通用错误范围；各ServiceResult实际分支及机器码以服务实现和接口说明为准，不声称每条路由均返回全部状态"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/mcp/clients/{id:long}/revoke",
+      "operation": "Mcp.Revoke",
+      "anonymous": false,
+      "authorization": [
+        {
+          "policy": null,
+          "roles": "admin",
+          "schemes": null
+        }
+      ],
+      "csrf": true,
+      "requestContentTypes": [
+        "application/*+json",
+        "application/json",
+        "text/json"
+      ],
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "pattern": "^-?(0|[1-9][0-9]*)$",
+            "description": "十进制long文本；客户端不得转number"
+          }
+        },
+        {
+          "name": "request",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "schemas.json#/definitions/McpVersionRequest"
+          }
+        }
+      ],
+      "responses": [
+        {
+          "status": 200,
+          "contentType": "application/json",
+          "schema": {
+            "$ref": "schemas.json#/definitions/McpClientDtoApiResult"
+          }
+        }
+      ],
+      "businessFailures": {
+        "contentType": "application/json",
+        "schema": {
+          "$ref": "schemas.json#/definitions/JsonElementApiResult"
+        },
+        "statusCodes": [
+          400,
+          401,
+          403,
+          404,
+          409,
+          413,
+          429,
+          500,
+          502,
+          503,
+          504
+        ],
+        "note": "通用错误范围；各ServiceResult实际分支及机器码以服务实现和接口说明为准，不声称每条路由均返回全部状态"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/mcp/clients/{id:long}/rotate-secret",
+      "operation": "Mcp.Rotate",
+      "anonymous": false,
+      "authorization": [
+        {
+          "policy": null,
+          "roles": "admin",
+          "schemes": null
+        }
+      ],
+      "csrf": true,
+      "requestContentTypes": [
+        "application/*+json",
+        "application/json",
+        "text/json"
+      ],
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "pattern": "^-?(0|[1-9][0-9]*)$",
+            "description": "十进制long文本；客户端不得转number"
+          }
+        },
+        {
+          "name": "request",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "schemas.json#/definitions/McpVersionRequest"
+          }
+        }
+      ],
+      "responses": [
+        {
+          "status": 200,
+          "contentType": "application/json",
+          "schema": {
+            "$ref": "schemas.json#/definitions/McpSecretDtoApiResult"
+          }
+        }
+      ],
+      "businessFailures": {
+        "contentType": "application/json",
+        "schema": {
+          "$ref": "schemas.json#/definitions/JsonElementApiResult"
+        },
+        "statusCodes": [
+          400,
+          401,
+          403,
+          404,
+          409,
+          413,
+          429,
+          500,
+          502,
+          503,
+          504
+        ],
+        "note": "通用错误范围；各ServiceResult实际分支及机器码以服务实现和接口说明为准，不声称每条路由均返回全部状态"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/mcp/configuration",
+      "operation": "Mcp.Configuration",
+      "anonymous": false,
+      "authorization": [
+        {
+          "policy": null,
+          "roles": "admin",
+          "schemes": null
+        }
+      ],
+      "csrf": false,
+      "requestContentTypes": [],
+      "parameters": [],
+      "responses": [
+        {
+          "status": 200,
+          "contentType": "application/json",
+          "schema": {
+            "$ref": "schemas.json#/definitions/McpConfigurationDtoApiResult"
+          }
+        }
+      ],
+      "businessFailures": {
+        "contentType": "application/json",
+        "schema": {
+          "$ref": "schemas.json#/definitions/JsonElementApiResult"
+        },
+        "statusCodes": [
+          400,
+          401,
+          403,
+          404,
+          409,
+          413,
+          429,
+          500,
+          502,
+          503,
+          504
+        ],
+        "note": "通用错误范围；各ServiceResult实际分支及机器码以服务实现和接口说明为准，不声称每条路由均返回全部状态"
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/api/mcp/configuration",
+      "operation": "Mcp.Save",
+      "anonymous": false,
+      "authorization": [
+        {
+          "policy": null,
+          "roles": "admin",
+          "schemes": null
+        }
+      ],
+      "csrf": true,
+      "requestContentTypes": [
+        "application/*+json",
+        "application/json",
+        "text/json"
+      ],
+      "parameters": [
+        {
+          "name": "request",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "schemas.json#/definitions/McpConfigurationRequest"
+          }
+        }
+      ],
+      "responses": [
+        {
+          "status": 200,
+          "contentType": "application/json",
+          "schema": {
+            "$ref": "schemas.json#/definitions/McpConfigurationDtoApiResult"
+          }
+        }
+      ],
+      "businessFailures": {
+        "contentType": "application/json",
+        "schema": {
+          "$ref": "schemas.json#/definitions/JsonElementApiResult"
+        },
+        "statusCodes": [
+          400,
+          401,
+          403,
+          404,
+          409,
+          413,
+          429,
+          500,
+          502,
+          503,
+          504
+        ],
+        "note": "通用错误范围；各ServiceResult实际分支及机器码以服务实现和接口说明为准，不声称每条路由均返回全部状态"
+      },
+      "maximumRequestBytes": 65536
+    },
+    {
+      "method": "GET",
+      "path": "/api/mcp/configuration-audits",
+      "operation": "Mcp.Audits",
+      "anonymous": false,
+      "authorization": [
+        {
+          "policy": null,
+          "roles": "admin",
+          "schemes": null
+        }
+      ],
+      "csrf": false,
+      "requestContentTypes": [],
+      "parameters": [
+        {
+          "name": "current",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "integer"
+          },
+          "default": 1
+        },
+        {
+          "name": "pageSize",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "integer"
+          },
+          "default": 20
+        }
+      ],
+      "responses": [
+        {
+          "status": 200,
+          "contentType": "application/json",
+          "schema": {
+            "$ref": "schemas.json#/definitions/McpConfigAuditDtoPageDataApiResult"
+          }
+        }
+      ],
+      "businessFailures": {
+        "contentType": "application/json",
+        "schema": {
+          "$ref": "schemas.json#/definitions/JsonElementApiResult"
+        },
+        "statusCodes": [
+          400,
+          401,
+          403,
+          404,
+          409,
+          413,
+          429,
+          500,
+          502,
+          503,
+          504
+        ],
+        "note": "通用错误范围；各ServiceResult实际分支及机器码以服务实现和接口说明为准，不声称每条路由均返回全部状态"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/mcp/configuration/disable",
+      "operation": "Mcp.Disable",
+      "anonymous": false,
+      "authorization": [
+        {
+          "policy": null,
+          "roles": "admin",
+          "schemes": null
+        }
+      ],
+      "csrf": true,
+      "requestContentTypes": [
+        "application/*+json",
+        "application/json",
+        "text/json"
+      ],
+      "parameters": [
+        {
+          "name": "request",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "schemas.json#/definitions/McpVersionRequest"
+          }
+        }
+      ],
+      "responses": [
+        {
+          "status": 200,
+          "contentType": "application/json",
+          "schema": {
+            "$ref": "schemas.json#/definitions/McpConfigurationDtoApiResult"
+          }
+        }
+      ],
+      "businessFailures": {
+        "contentType": "application/json",
+        "schema": {
+          "$ref": "schemas.json#/definitions/JsonElementApiResult"
+        },
+        "statusCodes": [
+          400,
+          401,
+          403,
+          404,
+          409,
+          413,
+          429,
+          500,
+          502,
+          503,
+          504
+        ],
+        "note": "通用错误范围；各ServiceResult实际分支及机器码以服务实现和接口说明为准，不声称每条路由均返回全部状态"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/mcp/configuration/enable",
+      "operation": "Mcp.Enable",
+      "anonymous": false,
+      "authorization": [
+        {
+          "policy": null,
+          "roles": "admin",
+          "schemes": null
+        }
+      ],
+      "csrf": true,
+      "requestContentTypes": [
+        "application/*+json",
+        "application/json",
+        "text/json"
+      ],
+      "parameters": [
+        {
+          "name": "request",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "schemas.json#/definitions/McpVersionRequest"
+          }
+        }
+      ],
+      "responses": [
+        {
+          "status": 200,
+          "contentType": "application/json",
+          "schema": {
+            "$ref": "schemas.json#/definitions/McpConfigurationDtoApiResult"
+          }
+        }
+      ],
+      "businessFailures": {
+        "contentType": "application/json",
+        "schema": {
+          "$ref": "schemas.json#/definitions/JsonElementApiResult"
+        },
+        "statusCodes": [
+          400,
+          401,
+          403,
+          404,
+          409,
+          413,
+          429,
+          500,
+          502,
+          503,
+          504
+        ],
+        "note": "通用错误范围；各ServiceResult实际分支及机器码以服务实现和接口说明为准，不声称每条路由均返回全部状态"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/mcp/logs",
+      "operation": "Mcp.Logs",
+      "anonymous": false,
+      "authorization": [
+        {
+          "policy": null,
+          "roles": "admin",
+          "schemes": null
+        }
+      ],
+      "csrf": false,
+      "requestContentTypes": [],
+      "parameters": [
+        {
+          "name": "Current",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "integer"
+          }
+        },
+        {
+          "name": "PageSize",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "integer"
+          }
+        },
+        {
+          "name": "From",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          }
+        },
+        {
+          "name": "To",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          }
+        },
+        {
+          "name": "ClientId",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "UserId",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "Method",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "Tool",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "ServerId",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "SourceIp",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "Result",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "ErrorCode",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "TraceId",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "CallId",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "SortField",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "SortOrder",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "responses": [
+        {
+          "status": 200,
+          "contentType": "application/json",
+          "schema": {
+            "$ref": "schemas.json#/definitions/McpCallLogDtoPageDataApiResult"
+          }
+        }
+      ],
+      "businessFailures": {
+        "contentType": "application/json",
+        "schema": {
+          "$ref": "schemas.json#/definitions/JsonElementApiResult"
+        },
+        "statusCodes": [
+          400,
+          401,
+          403,
+          404,
+          409,
+          413,
+          429,
+          500,
+          502,
+          503,
+          504
+        ],
+        "note": "通用错误范围；各ServiceResult实际分支及机器码以服务实现和接口说明为准，不声称每条路由均返回全部状态"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/mcp/logs/{id:long}",
+      "operation": "Mcp.Log",
+      "anonymous": false,
+      "authorization": [
+        {
+          "policy": null,
+          "roles": "admin",
+          "schemes": null
+        }
+      ],
+      "csrf": false,
+      "requestContentTypes": [],
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "pattern": "^-?(0|[1-9][0-9]*)$",
+            "description": "十进制long文本；客户端不得转number"
+          }
+        }
+      ],
+      "responses": [
+        {
+          "status": 200,
+          "contentType": "application/json",
+          "schema": {
+            "$ref": "schemas.json#/definitions/McpCallLogDtoApiResult"
+          }
+        }
+      ],
+      "businessFailures": {
+        "contentType": "application/json",
+        "schema": {
+          "$ref": "schemas.json#/definitions/JsonElementApiResult"
+        },
+        "statusCodes": [
+          400,
+          401,
+          403,
+          404,
+          409,
+          413,
+          429,
+          500,
+          502,
+          503,
+          504
+        ],
+        "note": "通用错误范围；各ServiceResult实际分支及机器码以服务实现和接口说明为准，不声称每条路由均返回全部状态"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/mcp/options",
+      "operation": "Mcp.Options",
+      "anonymous": false,
+      "authorization": [
+        {
+          "policy": null,
+          "roles": "admin",
+          "schemes": null
+        }
+      ],
+      "csrf": false,
+      "requestContentTypes": [],
+      "parameters": [],
+      "responses": [
+        {
+          "status": 200,
+          "contentType": "application/json",
+          "schema": {
+            "$ref": "schemas.json#/definitions/McpOptionsDtoApiResult"
+          }
+        }
+      ],
+      "businessFailures": {
+        "contentType": "application/json",
+        "schema": {
+          "$ref": "schemas.json#/definitions/JsonElementApiResult"
+        },
+        "statusCodes": [
+          400,
+          401,
+          403,
+          404,
+          409,
+          413,
+          429,
+          500,
+          502,
+          503,
+          504
+        ],
+        "note": "通用错误范围；各ServiceResult实际分支及机器码以服务实现和接口说明为准，不声称每条路由均返回全部状态"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/mcp/tools",
+      "operation": "Mcp.Tools",
+      "anonymous": false,
+      "authorization": [
+        {
+          "policy": null,
+          "roles": "admin",
+          "schemes": null
+        }
+      ],
+      "csrf": false,
+      "requestContentTypes": [],
+      "parameters": [],
+      "responses": [
+        {
+          "status": 200,
+          "contentType": "application/json",
+          "schema": {
+            "$ref": "schemas.json#/definitions/McpToolDtoIReadOnlyListApiResult"
+          }
+        }
+      ],
+      "businessFailures": {
+        "contentType": "application/json",
+        "schema": {
+          "$ref": "schemas.json#/definitions/JsonElementApiResult"
+        },
+        "statusCodes": [
+          400,
+          401,
+          403,
+          404,
+          409,
+          413,
+          429,
+          500,
+          502,
+          503,
+          504
+        ],
+        "note": "通用错误范围；各ServiceResult实际分支及机器码以服务实现和接口说明为准，不声称每条路由均返回全部状态"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/oob/console-sessions/by-request/{requestId}",
+      "operation": "ConsoleSessions.ByRequest",
+      "anonymous": false,
+      "authorization": [
+        {
+          "policy": "VirtualConsole",
+          "roles": null,
+          "schemes": null
+        }
+      ],
+      "csrf": false,
+      "requestContentTypes": [],
+      "parameters": [
+        {
+          "name": "requestId",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "responses": [
+        {
+          "status": 200,
+          "contentType": "application/json",
+          "schema": {
+            "$ref": "schemas.json#/definitions/ConsoleSessionDtoApiResult"
+          }
+        }
+      ],
+      "businessFailures": {
+        "contentType": "application/json",
+        "schema": {
+          "$ref": "schemas.json#/definitions/JsonElementApiResult"
+        },
+        "statusCodes": [
+          400,
+          401,
+          403,
+          404,
+          409,
+          413,
+          429,
+          500,
+          502,
+          503,
+          504
+        ],
+        "note": "通用错误范围；各ServiceResult实际分支及机器码以服务实现和接口说明为准，不声称每条路由均返回全部状态"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/oob/console-sessions/{id}",
+      "operation": "ConsoleSessions.Detail",
+      "anonymous": false,
+      "authorization": [
+        {
+          "policy": "VirtualConsole",
+          "roles": null,
+          "schemes": null
+        }
+      ],
+      "csrf": false,
+      "requestContentTypes": [],
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "responses": [
+        {
+          "status": 200,
+          "contentType": "application/json",
+          "schema": {
+            "$ref": "schemas.json#/definitions/ConsoleSessionDtoApiResult"
+          }
+        }
+      ],
+      "businessFailures": {
+        "contentType": "application/json",
+        "schema": {
+          "$ref": "schemas.json#/definitions/JsonElementApiResult"
+        },
+        "statusCodes": [
+          400,
+          401,
+          403,
+          404,
+          409,
+          413,
+          429,
+          500,
+          502,
+          503,
+          504
+        ],
+        "note": "通用错误范围；各ServiceResult实际分支及机器码以服务实现和接口说明为准，不声称每条路由均返回全部状态"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/oob/console-sessions/{id}/close",
+      "operation": "ConsoleSessions.Close",
+      "anonymous": false,
+      "authorization": [
+        {
+          "policy": "VirtualConsole",
+          "roles": null,
+          "schemes": null
+        }
+      ],
+      "csrf": true,
+      "requestContentTypes": [],
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "responses": [
+        {
+          "status": 200,
+          "contentType": "application/json",
+          "schema": {
+            "$ref": "schemas.json#/definitions/ConsoleSessionDtoApiResult"
+          }
+        }
+      ],
+      "businessFailures": {
+        "contentType": "application/json",
+        "schema": {
+          "$ref": "schemas.json#/definitions/JsonElementApiResult"
+        },
+        "statusCodes": [
+          400,
+          401,
+          403,
+          404,
+          409,
+          413,
+          429,
+          500,
+          502,
+          503,
+          504
+        ],
+        "note": "通用错误范围；各ServiceResult实际分支及机器码以服务实现和接口说明为准，不声称每条路由均返回全部状态"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/oob/console-sessions/{id}/frame/{**path}",
+      "operation": "ConsoleGateway.Resource",
+      "anonymous": false,
+      "authorization": [
+        {
+          "policy": "VirtualConsole",
+          "roles": null,
+          "schemes": null
+        }
+      ],
+      "csrf": false,
+      "requestContentTypes": [],
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "path",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "responses": [],
+      "businessFailures": {
+        "contentType": "application/json",
+        "schema": {
+          "$ref": "schemas.json#/definitions/JsonElementApiResult"
+        },
+        "statusCodes": [
+          400,
+          401,
+          403,
+          404,
+          409,
+          413,
+          429,
+          500,
+          502,
+          503,
+          504
+        ],
+        "note": "通用错误范围；各ServiceResult实际分支及机器码以服务实现和接口说明为准，不声称每条路由均返回全部状态"
+      },
+      "stream": {
+        "protocol": "firmware-resource",
+        "note": "控制台绑定会话、来源、路径与设备能力校验；资源内容类型来自已审核固件，不套JSON信封；101只用于已升级WebSocket"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/oob/console-sessions/{id}/input-state",
+      "operation": "ConsoleSessions.InputState",
+      "anonymous": false,
+      "authorization": [
+        {
+          "policy": "VirtualConsole",
+          "roles": null,
+          "schemes": null
+        }
+      ],
+      "csrf": true,
+      "requestContentTypes": [
+        "application/*+json",
+        "application/json",
+        "text/json"
+      ],
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "request",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "schemas.json#/definitions/ConsoleInputStateRequest"
+          }
+        }
+      ],
+      "responses": [
+        {
+          "status": 200,
+          "contentType": "application/json",
+          "schema": {
+            "$ref": "schemas.json#/definitions/ConsoleSessionDtoApiResult"
+          }
+        }
+      ],
+      "businessFailures": {
+        "contentType": "application/json",
+        "schema": {
+          "$ref": "schemas.json#/definitions/JsonElementApiResult"
+        },
+        "statusCodes": [
+          400,
+          401,
+          403,
+          404,
+          409,
+          413,
+          429,
+          500,
+          502,
+          503,
+          504
+        ],
+        "note": "通用错误范围；各ServiceResult实际分支及机器码以服务实现和接口说明为准，不声称每条路由均返回全部状态"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/oob/console-sessions/{id}/stream/{**path}",
+      "operation": "ConsoleGateway.Stream",
+      "anonymous": false,
+      "authorization": [
+        {
+          "policy": "VirtualConsole",
+          "roles": null,
+          "schemes": null
+        }
+      ],
+      "csrf": false,
+      "requestContentTypes": [],
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "path",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "responses": [],
+      "businessFailures": {
+        "contentType": "application/json",
+        "schema": {
+          "$ref": "schemas.json#/definitions/JsonElementApiResult"
+        },
+        "statusCodes": [
+          400,
+          401,
+          403,
+          404,
+          409,
+          413,
+          429,
+          500,
+          502,
+          503,
+          504
+        ],
+        "note": "通用错误范围；各ServiceResult实际分支及机器码以服务实现和接口说明为准，不声称每条路由均返回全部状态"
+      },
+      "stream": {
+        "protocol": "websocket",
+        "note": "控制台绑定会话、来源、路径与设备能力校验；资源内容类型来自已审核固件，不套JSON信封；101只用于已升级WebSocket"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/oob/console-sessions/{id}/traffic",
+      "operation": "ConsoleSessions.Traffic",
+      "anonymous": false,
+      "authorization": [
+        {
+          "policy": "VirtualConsole",
+          "roles": null,
+          "schemes": null
+        }
+      ],
+      "csrf": false,
+      "requestContentTypes": [],
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "responses": [
+        {
+          "status": 200,
+          "contentType": "application/json",
+          "schema": {
+            "$ref": "schemas.json#/definitions/ConsoleSessionDtoApiResult"
+          }
+        }
+      ],
+      "businessFailures": {
+        "contentType": "application/json",
+        "schema": {
+          "$ref": "schemas.json#/definitions/JsonElementApiResult"
+        },
+        "statusCodes": [
+          400,
+          401,
+          403,
+          404,
+          409,
+          413,
+          429,
+          500,
+          502,
+          503,
+          504
+        ],
+        "note": "通用错误范围；各ServiceResult实际分支及机器码以服务实现和接口说明为准，不声称每条路由均返回全部状态"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/oob/dashboard",
+      "operation": "Servers.Dashboard",
+      "anonymous": false,
+      "authorization": [
+        {
+          "policy": null,
+          "roles": null,
+          "schemes": null
+        }
+      ],
+      "csrf": false,
+      "requestContentTypes": [],
+      "parameters": [],
+      "responses": [
+        {
+          "status": 200,
+          "contentType": "application/json",
+          "schema": {
+            "$ref": "schemas.json#/definitions/DashboardDtoApiResult"
+          }
+        }
+      ],
+      "businessFailures": {
+        "contentType": "application/json",
+        "schema": {
+          "$ref": "schemas.json#/definitions/JsonElementApiResult"
+        },
+        "statusCodes": [
+          400,
+          401,
+          403,
+          404,
+          409,
+          413,
+          429,
+          500,
+          502,
+          503,
+          504
+        ],
+        "note": "通用错误范围；各ServiceResult实际分支及机器码以服务实现和接口说明为准，不声称每条路由均返回全部状态"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/oob/exceptions",
+      "operation": "Exceptions.List",
+      "anonymous": false,
+      "authorization": [
+        {
+          "policy": null,
+          "roles": null,
+          "schemes": null
+        },
+        {
+          "policy": null,
+          "roles": "admin",
+          "schemes": null
+        }
+      ],
+      "csrf": false,
+      "requestContentTypes": [],
+      "parameters": [
+        {
+          "name": "Current",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "integer"
+          }
+        },
+        {
+          "name": "PageSize",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "integer"
+          }
+        },
+        {
+          "name": "From",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          }
+        },
+        {
+          "name": "To",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          }
+        },
+        {
+          "name": "Kind",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "Level",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "Source",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "ServerId",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "pattern": "^-?(0|[1-9][0-9]*)$",
+            "description": "十进制long文本；客户端不得转number"
+          }
+        },
+        {
+          "name": "Keyword",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "responses": [
+        {
+          "status": 200,
+          "contentType": "application/json",
+          "schema": {
+            "$ref": "schemas.json#/definitions/ExceptionLogDtoPageDataApiResult"
+          }
+        }
+      ],
+      "businessFailures": {
+        "contentType": "application/json",
+        "schema": {
+          "$ref": "schemas.json#/definitions/JsonElementApiResult"
+        },
+        "statusCodes": [
+          400,
+          401,
+          403,
+          404,
+          409,
+          413,
+          429,
+          500,
+          502,
+          503,
+          504
+        ],
+        "note": "通用错误范围；各ServiceResult实际分支及机器码以服务实现和接口说明为准，不声称每条路由均返回全部状态"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/oob/exceptions/client",
+      "operation": "Exceptions.Client",
+      "anonymous": false,
+      "authorization": [
+        {
+          "policy": null,
+          "roles": null,
+          "schemes": null
+        }
+      ],
+      "csrf": true,
+      "requestContentTypes": [
+        "application/*+json",
+        "application/json",
+        "text/json"
+      ],
+      "parameters": [
+        {
+          "name": "request",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "schemas.json#/definitions/ClientExceptionRequest"
+          }
+        }
+      ],
+      "responses": [
+        {
+          "status": 200,
+          "contentType": "application/json",
+          "schema": {
+            "$ref": "schemas.json#/definitions/BooleanApiResult"
+          }
+        }
+      ],
+      "businessFailures": {
+        "contentType": "application/json",
+        "schema": {
+          "$ref": "schemas.json#/definitions/JsonElementApiResult"
+        },
+        "statusCodes": [
+          400,
+          401,
+          403,
+          404,
+          409,
+          413,
+          429,
+          500,
+          502,
+          503,
+          504
+        ],
+        "note": "通用错误范围；各ServiceResult实际分支及机器码以服务实现和接口说明为准，不声称每条路由均返回全部状态"
+      },
+      "maximumRequestBytes": 24576
+    },
+    {
+      "method": "GET",
+      "path": "/api/oob/exceptions/{id:long}",
+      "operation": "Exceptions.Detail",
+      "anonymous": false,
+      "authorization": [
+        {
+          "policy": null,
+          "roles": null,
+          "schemes": null
+        },
+        {
+          "policy": null,
+          "roles": "admin",
+          "schemes": null
+        }
+      ],
+      "csrf": false,
+      "requestContentTypes": [],
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "pattern": "^-?(0|[1-9][0-9]*)$",
+            "description": "十进制long文本；客户端不得转number"
+          }
+        }
+      ],
+      "responses": [
+        {
+          "status": 200,
+          "contentType": "application/json",
+          "schema": {
+            "$ref": "schemas.json#/definitions/ExceptionLogDtoApiResult"
+          }
+        }
+      ],
+      "businessFailures": {
+        "contentType": "application/json",
+        "schema": {
+          "$ref": "schemas.json#/definitions/JsonElementApiResult"
+        },
+        "statusCodes": [
+          400,
+          401,
+          403,
+          404,
+          409,
+          413,
+          429,
+          500,
+          502,
+          503,
+          504
+        ],
+        "note": "通用错误范围；各ServiceResult实际分支及机器码以服务实现和接口说明为准，不声称每条路由均返回全部状态"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/oob/mail/configuration",
+      "operation": "Mail.Configuration",
+      "anonymous": false,
+      "authorization": [
+        {
+          "policy": null,
+          "roles": "admin",
+          "schemes": null
+        }
+      ],
+      "csrf": false,
+      "requestContentTypes": [],
+      "parameters": [],
+      "responses": [
+        {
+          "status": 200,
+          "contentType": "application/json",
+          "schema": {
+            "$ref": "schemas.json#/definitions/MailConfigurationDtoApiResult"
+          }
+        }
+      ],
+      "businessFailures": {
+        "contentType": "application/json",
+        "schema": {
+          "$ref": "schemas.json#/definitions/JsonElementApiResult"
+        },
+        "statusCodes": [
+          400,
+          401,
+          403,
+          404,
+          409,
+          413,
+          429,
+          500,
+          502,
+          503,
+          504
+        ],
+        "note": "通用错误范围；各ServiceResult实际分支及机器码以服务实现和接口说明为准，不声称每条路由均返回全部状态"
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/api/oob/mail/configuration",
+      "operation": "Mail.SaveConfiguration",
+      "anonymous": false,
+      "authorization": [
+        {
+          "policy": null,
+          "roles": "admin",
+          "schemes": null
+        }
+      ],
+      "csrf": true,
+      "requestContentTypes": [
+        "application/*+json",
+        "application/json",
+        "text/json"
+      ],
+      "parameters": [
+        {
+          "name": "request",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "schemas.json#/definitions/MailConfigurationRequest"
+          }
+        }
+      ],
+      "responses": [
+        {
+          "status": 200,
+          "contentType": "application/json",
+          "schema": {
+            "$ref": "schemas.json#/definitions/MailConfigurationDtoApiResult"
+          }
+        }
+      ],
+      "businessFailures": {
+        "contentType": "application/json",
+        "schema": {
+          "$ref": "schemas.json#/definitions/JsonElementApiResult"
+        },
+        "statusCodes": [
+          400,
+          401,
+          403,
+          404,
+          409,
+          413,
+          429,
+          500,
+          502,
+          503,
+          504
+        ],
+        "note": "通用错误范围；各ServiceResult实际分支及机器码以服务实现和接口说明为准，不声称每条路由均返回全部状态"
+      },
+      "maximumRequestBytes": 16384
+    },
+    {
+      "method": "GET",
+      "path": "/api/oob/mail/messages",
+      "operation": "Mail.Messages",
+      "anonymous": false,
+      "authorization": [
+        {
+          "policy": null,
+          "roles": "admin",
+          "schemes": null
+        }
+      ],
+      "csrf": false,
+      "requestContentTypes": [],
+      "parameters": [
+        {
+          "name": "Keyword",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "Status",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "Kind",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "Current",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "integer"
+          }
+        },
+        {
+          "name": "PageSize",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "integer"
+          }
+        },
+        {
+          "name": "SortField",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "SortOrder",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "responses": [
+        {
+          "status": 200,
+          "contentType": "application/json",
+          "schema": {
+            "$ref": "schemas.json#/definitions/MailMessageDtoPageDataApiResult"
+          }
+        }
+      ],
+      "businessFailures": {
+        "contentType": "application/json",
+        "schema": {
+          "$ref": "schemas.json#/definitions/JsonElementApiResult"
+        },
+        "statusCodes": [
+          400,
+          401,
+          403,
+          404,
+          409,
+          413,
+          429,
+          500,
+          502,
+          503,
+          504
+        ],
+        "note": "通用错误范围；各ServiceResult实际分支及机器码以服务实现和接口说明为准，不声称每条路由均返回全部状态"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/oob/mail/messages/{id:long}",
+      "operation": "Mail.Message",
+      "anonymous": false,
+      "authorization": [
+        {
+          "policy": null,
+          "roles": "admin",
+          "schemes": null
+        }
+      ],
+      "csrf": false,
+      "requestContentTypes": [],
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "pattern": "^-?(0|[1-9][0-9]*)$",
+            "description": "十进制long文本；客户端不得转number"
+          }
+        }
+      ],
+      "responses": [
+        {
+          "status": 200,
+          "contentType": "application/json",
+          "schema": {
+            "$ref": "schemas.json#/definitions/MailMessageDtoApiResult"
+          }
+        }
+      ],
+      "businessFailures": {
+        "contentType": "application/json",
+        "schema": {
+          "$ref": "schemas.json#/definitions/JsonElementApiResult"
+        },
+        "statusCodes": [
+          400,
+          401,
+          403,
+          404,
+          409,
+          413,
+          429,
+          500,
+          502,
+          503,
+          504
+        ],
+        "note": "通用错误范围；各ServiceResult实际分支及机器码以服务实现和接口说明为准，不声称每条路由均返回全部状态"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/oob/mail/probe",
+      "operation": "Mail.Probe",
+      "anonymous": false,
+      "authorization": [
+        {
+          "policy": null,
+          "roles": "admin",
+          "schemes": null
+        }
+      ],
+      "csrf": true,
+      "requestContentTypes": [],
+      "parameters": [],
+      "responses": [
+        {
+          "status": 200,
+          "contentType": "application/json",
+          "schema": {
+            "$ref": "schemas.json#/definitions/MailProbeDtoApiResult"
+          }
+        }
+      ],
+      "businessFailures": {
+        "contentType": "application/json",
+        "schema": {
+          "$ref": "schemas.json#/definitions/JsonElementApiResult"
+        },
+        "statusCodes": [
+          400,
+          401,
+          403,
+          404,
+          409,
+          413,
+          429,
+          500,
+          502,
+          503,
+          504
+        ],
+        "note": "通用错误范围；各ServiceResult实际分支及机器码以服务实现和接口说明为准，不声称每条路由均返回全部状态"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/oob/mail/reports/configuration",
+      "operation": "MailReports.Configuration",
+      "anonymous": false,
+      "authorization": [
+        {
+          "policy": null,
+          "roles": "admin",
+          "schemes": null
+        }
+      ],
+      "csrf": false,
+      "requestContentTypes": [],
+      "parameters": [],
+      "responses": [
+        {
+          "status": 200,
+          "contentType": "application/json",
+          "schema": {
+            "$ref": "schemas.json#/definitions/MailReportConfigurationDtoApiResult"
+          }
+        }
+      ],
+      "businessFailures": {
+        "contentType": "application/json",
+        "schema": {
+          "$ref": "schemas.json#/definitions/JsonElementApiResult"
+        },
+        "statusCodes": [
+          400,
+          401,
+          403,
+          404,
+          409,
+          413,
+          429,
+          500,
+          502,
+          503,
+          504
+        ],
+        "note": "通用错误范围；各ServiceResult实际分支及机器码以服务实现和接口说明为准，不声称每条路由均返回全部状态"
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/api/oob/mail/reports/configuration",
+      "operation": "MailReports.Save",
+      "anonymous": false,
+      "authorization": [
+        {
+          "policy": null,
+          "roles": "admin",
+          "schemes": null
+        }
+      ],
+      "csrf": true,
+      "requestContentTypes": [
+        "application/*+json",
+        "application/json",
+        "text/json"
+      ],
+      "parameters": [
+        {
+          "name": "request",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "schemas.json#/definitions/MailReportConfigurationRequest"
+          }
+        }
+      ],
+      "responses": [
+        {
+          "status": 200,
+          "contentType": "application/json",
+          "schema": {
+            "$ref": "schemas.json#/definitions/MailReportConfigurationDtoApiResult"
+          }
+        }
+      ],
+      "businessFailures": {
+        "contentType": "application/json",
+        "schema": {
+          "$ref": "schemas.json#/definitions/JsonElementApiResult"
+        },
+        "statusCodes": [
+          400,
+          401,
+          403,
+          404,
+          409,
+          413,
+          429,
+          500,
+          502,
+          503,
+          504
+        ],
+        "note": "通用错误范围；各ServiceResult实际分支及机器码以服务实现和接口说明为准，不声称每条路由均返回全部状态"
+      },
+      "maximumRequestBytes": 16384
+    },
+    {
+      "method": "POST",
+      "path": "/api/oob/mail/reports/preview",
+      "operation": "MailReports.Preview",
+      "anonymous": false,
+      "authorization": [
+        {
+          "policy": null,
+          "roles": "admin",
+          "schemes": null
+        }
+      ],
+      "csrf": true,
+      "requestContentTypes": [
+        "application/*+json",
+        "application/json",
+        "text/json"
+      ],
+      "parameters": [
+        {
+          "name": "request",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "schemas.json#/definitions/MailReportPreviewRequest"
+          }
+        }
+      ],
+      "responses": [
+        {
+          "status": 200,
+          "contentType": "application/json",
+          "schema": {
+            "$ref": "schemas.json#/definitions/MailReportPreviewDtoApiResult"
+          }
+        }
+      ],
+      "businessFailures": {
+        "contentType": "application/json",
+        "schema": {
+          "$ref": "schemas.json#/definitions/JsonElementApiResult"
+        },
+        "statusCodes": [
+          400,
+          401,
+          403,
+          404,
+          409,
+          413,
+          429,
+          500,
+          502,
+          503,
+          504
+        ],
+        "note": "通用错误范围；各ServiceResult实际分支及机器码以服务实现和接口说明为准，不声称每条路由均返回全部状态"
+      },
+      "maximumRequestBytes": 4096
+    },
+    {
+      "method": "GET",
+      "path": "/api/oob/mail/requests/{requestId}",
+      "operation": "Mail.ByRequest",
+      "anonymous": false,
+      "authorization": [
+        {
+          "policy": null,
+          "roles": "admin",
+          "schemes": null
+        }
+      ],
+      "csrf": false,
+      "requestContentTypes": [],
+      "parameters": [
+        {
+          "name": "requestId",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "responses": [
+        {
+          "status": 200,
+          "contentType": "application/json",
+          "schema": {
+            "$ref": "schemas.json#/definitions/MailMessageDtoApiResult"
+          }
+        }
+      ],
+      "businessFailures": {
+        "contentType": "application/json",
+        "schema": {
+          "$ref": "schemas.json#/definitions/JsonElementApiResult"
+        },
+        "statusCodes": [
+          400,
+          401,
+          403,
+          404,
+          409,
+          413,
+          429,
+          500,
+          502,
+          503,
+          504
+        ],
+        "note": "通用错误范围；各ServiceResult实际分支及机器码以服务实现和接口说明为准，不声称每条路由均返回全部状态"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/oob/mail/send",
+      "operation": "Mail.Send",
+      "anonymous": false,
+      "authorization": [
+        {
+          "policy": null,
+          "roles": "admin",
+          "schemes": null
+        }
+      ],
+      "csrf": true,
+      "requestContentTypes": [
+        "application/*+json",
+        "application/json",
+        "text/json"
+      ],
+      "parameters": [
+        {
+          "name": "request",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "schemas.json#/definitions/MailSendRequest"
+          }
+        }
+      ],
+      "responses": [
+        {
+          "status": 200,
+          "contentType": "application/json",
+          "schema": {
+            "$ref": "schemas.json#/definitions/MailMessageDtoApiResult"
+          }
+        }
+      ],
+      "businessFailures": {
+        "contentType": "application/json",
+        "schema": {
+          "$ref": "schemas.json#/definitions/JsonElementApiResult"
+        },
+        "statusCodes": [
+          400,
+          401,
+          403,
+          404,
+          409,
+          413,
+          429,
+          500,
+          502,
+          503,
+          504
+        ],
+        "note": "通用错误范围；各ServiceResult实际分支及机器码以服务实现和接口说明为准，不声称每条路由均返回全部状态"
+      },
+      "maximumRequestBytes": 131072
+    },
+    {
+      "method": "POST",
+      "path": "/api/oob/mail/test",
+      "operation": "Mail.Test",
+      "anonymous": false,
+      "authorization": [
+        {
+          "policy": null,
+          "roles": "admin",
+          "schemes": null
+        }
+      ],
+      "csrf": true,
+      "requestContentTypes": [
+        "application/*+json",
+        "application/json",
+        "text/json"
+      ],
+      "parameters": [
+        {
+          "name": "request",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "schemas.json#/definitions/MailSendRequest"
+          }
+        }
+      ],
+      "responses": [
+        {
+          "status": 200,
+          "contentType": "application/json",
+          "schema": {
+            "$ref": "schemas.json#/definitions/MailMessageDtoApiResult"
+          }
+        }
+      ],
+      "businessFailures": {
+        "contentType": "application/json",
+        "schema": {
+          "$ref": "schemas.json#/definitions/JsonElementApiResult"
+        },
+        "statusCodes": [
+          400,
+          401,
+          403,
+          404,
+          409,
+          413,
+          429,
+          500,
+          502,
+          503,
+          504
+        ],
+        "note": "通用错误范围；各ServiceResult实际分支及机器码以服务实现和接口说明为准，不声称每条路由均返回全部状态"
+      },
+      "maximumRequestBytes": 131072
+    },
+    {
+      "method": "GET",
+      "path": "/api/oob/media-content/{accessKey}/{fileName}",
+      "operation": "VirtualMedia.Content",
+      "anonymous": true,
+      "authorization": [
+        {
+          "policy": "VirtualConsole",
+          "roles": null,
+          "schemes": null
+        }
+      ],
+      "csrf": false,
+      "requestContentTypes": [],
+      "parameters": [
+        {
+          "name": "accessKey",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "fileName",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "responses": [],
+      "stream": {
+        "contentTypes": [
+          "application/octet-stream",
+          "application/x-iso9660-image"
+        ],
+        "statusCodes": [
+          200,
+          206,
+          404,
+          416
+        ],
+        "requestHeaders": [
+          "Range"
+        ],
+        "responseHeaders": [
+          "Accept-Ranges",
+          "Content-Range",
+          "Content-Length",
+          "Cache-Control",
+          "Referrer-Policy"
+        ],
+        "note": "HEAD无正文，GET支持单段Range；accessKey不得写入日志"
+      }
+    },
+    {
+      "method": "HEAD",
+      "path": "/api/oob/media-content/{accessKey}/{fileName}",
+      "operation": "VirtualMedia.Content",
+      "anonymous": true,
+      "authorization": [
+        {
+          "policy": "VirtualConsole",
+          "roles": null,
+          "schemes": null
+        }
+      ],
+      "csrf": false,
+      "requestContentTypes": [],
+      "parameters": [
+        {
+          "name": "accessKey",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "fileName",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "responses": [],
+      "stream": {
+        "contentTypes": [
+          "application/octet-stream",
+          "application/x-iso9660-image"
+        ],
+        "statusCodes": [
+          200,
+          206,
+          404,
+          416
+        ],
+        "requestHeaders": [
+          "Range"
+        ],
+        "responseHeaders": [
+          "Accept-Ranges",
+          "Content-Range",
+          "Content-Length",
+          "Cache-Control",
+          "Referrer-Policy"
+        ],
+        "note": "HEAD无正文，GET支持单段Range；accessKey不得写入日志"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/oob/media-images",
+      "operation": "VirtualMedia.Images",
+      "anonymous": false,
+      "authorization": [
+        {
+          "policy": "VirtualConsole",
+          "roles": null,
+          "schemes": null
+        }
+      ],
+      "csrf": false,
+      "requestContentTypes": [],
+      "parameters": [
+        {
+          "name": "current",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "integer"
+          },
+          "default": 1
+        },
+        {
+          "name": "pageSize",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "integer"
+          },
+          "default": 20
+        }
+      ],
+      "responses": [
+        {
+          "status": 200,
+          "contentType": "application/json",
+          "schema": {
+            "$ref": "schemas.json#/definitions/VirtualMediaImageDtoPageDataApiResult"
+          }
+        }
+      ],
+      "businessFailures": {
+        "contentType": "application/json",
+        "schema": {
+          "$ref": "schemas.json#/definitions/JsonElementApiResult"
+        },
+        "statusCodes": [
+          400,
+          401,
+          403,
+          404,
+          409,
+          413,
+          429,
+          500,
+          502,
+          503,
+          504
+        ],
+        "note": "通用错误范围；各ServiceResult实际分支及机器码以服务实现和接口说明为准，不声称每条路由均返回全部状态"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/oob/media-images",
+      "operation": "VirtualMedia.Upload",
+      "anonymous": false,
+      "authorization": [
+        {
+          "policy": "VirtualConsole",
+          "roles": null,
+          "schemes": null
+        }
+      ],
+      "csrf": true,
+      "requestContentTypes": [],
+      "parameters": [
+        {
+          "name": "fileName",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "responses": [
+        {
+          "status": 200,
+          "contentType": "application/json",
+          "schema": {
+            "$ref": "schemas.json#/definitions/VirtualMediaImageDtoApiResult"
+          }
+        }
+      ],
+      "businessFailures": {
+        "contentType": "application/json",
+        "schema": {
+          "$ref": "schemas.json#/definitions/JsonElementApiResult"
+        },
+        "statusCodes": [
+          400,
+          401,
+          403,
+          404,
+          409,
+          413,
+          429,
+          500,
+          502,
+          503,
+          504
+        ],
+        "note": "通用错误范围；各ServiceResult实际分支及机器码以服务实现和接口说明为准，不声称每条路由均返回全部状态"
+      },
+      "maximumRequestBytes": 17179869184
+    },
+    {
+      "method": "GET",
+      "path": "/api/oob/servers",
+      "operation": "Servers.List",
+      "anonymous": false,
+      "authorization": [
+        {
+          "policy": null,
+          "roles": null,
+          "schemes": null
+        }
+      ],
+      "csrf": false,
+      "requestContentTypes": [],
+      "parameters": [
+        {
+          "name": "current",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "integer"
+          },
+          "default": 1
+        },
+        {
+          "name": "pageSize",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "integer"
+          },
+          "default": 20
+        },
+        {
+          "name": "keyword",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "responses": [
+        {
+          "status": 200,
+          "contentType": "application/json",
+          "schema": {
+            "$ref": "schemas.json#/definitions/ServerDtoPageDataApiResult"
+          }
+        }
+      ],
+      "businessFailures": {
+        "contentType": "application/json",
+        "schema": {
+          "$ref": "schemas.json#/definitions/JsonElementApiResult"
+        },
+        "statusCodes": [
+          400,
+          401,
+          403,
+          404,
+          409,
+          413,
+          429,
+          500,
+          502,
+          503,
+          504
+        ],
+        "note": "通用错误范围；各ServiceResult实际分支及机器码以服务实现和接口说明为准，不声称每条路由均返回全部状态"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/oob/servers",
+      "operation": "Servers.Create",
+      "anonymous": false,
+      "authorization": [
+        {
+          "policy": null,
+          "roles": null,
+          "schemes": null
+        },
+        {
+          "policy": "ServerManagement",
+          "roles": null,
+          "schemes": null
+        }
+      ],
+      "csrf": true,
+      "requestContentTypes": [
+        "application/*+json",
+        "application/json",
+        "text/json"
+      ],
+      "parameters": [
+        {
+          "name": "request",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "schemas.json#/definitions/SaveServerRequest"
+          }
+        }
+      ],
+      "responses": [
+        {
+          "status": 200,
+          "contentType": "application/json",
+          "schema": {
+            "$ref": "schemas.json#/definitions/ServerDtoApiResult"
+          }
+        }
+      ],
+      "businessFailures": {
+        "contentType": "application/json",
+        "schema": {
+          "$ref": "schemas.json#/definitions/JsonElementApiResult"
+        },
+        "statusCodes": [
+          400,
+          401,
+          403,
+          404,
+          409,
+          413,
+          429,
+          500,
+          502,
+          503,
+          504
+        ],
+        "note": "通用错误范围；各ServiceResult实际分支及机器码以服务实现和接口说明为准，不声称每条路由均返回全部状态"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/oob/servers/configuration/export",
+      "operation": "Servers.ExportConfiguration",
+      "anonymous": false,
+      "authorization": [
+        {
+          "policy": null,
+          "roles": null,
+          "schemes": null
+        },
+        {
+          "policy": "ServerManagement",
+          "roles": null,
+          "schemes": null
+        }
+      ],
+      "csrf": true,
+      "requestContentTypes": [
+        "application/*+json",
+        "application/json",
+        "text/json"
+      ],
+      "parameters": [
+        {
+          "name": "request",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "schemas.json#/definitions/ExportServerConfigurationRequest"
+          }
+        }
+      ],
+      "responses": [
+        {
+          "status": 200,
+          "contentType": "application/json",
+          "schema": {
+            "$ref": "schemas.json#/definitions/ServerConfigurationFileApiResult"
+          }
+        }
+      ],
+      "businessFailures": {
+        "contentType": "application/json",
+        "schema": {
+          "$ref": "schemas.json#/definitions/JsonElementApiResult"
+        },
+        "statusCodes": [
+          400,
+          401,
+          403,
+          404,
+          409,
+          413,
+          429,
+          500,
+          502,
+          503,
+          504
+        ],
+        "note": "通用错误范围；各ServiceResult实际分支及机器码以服务实现和接口说明为准，不声称每条路由均返回全部状态"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/oob/servers/configuration/import",
+      "operation": "Servers.ImportConfiguration",
+      "anonymous": false,
+      "authorization": [
+        {
+          "policy": null,
+          "roles": null,
+          "schemes": null
+        },
+        {
+          "policy": "ServerManagement",
+          "roles": null,
+          "schemes": null
+        }
+      ],
+      "csrf": true,
+      "requestContentTypes": [
+        "application/*+json",
+        "application/json",
+        "text/json"
+      ],
+      "parameters": [
+        {
+          "name": "request",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "schemas.json#/definitions/ImportServerConfigurationRequest"
+          }
+        }
+      ],
+      "responses": [
+        {
+          "status": 200,
+          "contentType": "application/json",
+          "schema": {
+            "$ref": "schemas.json#/definitions/ServerConfigurationImportResultApiResult"
+          }
+        }
+      ],
+      "businessFailures": {
+        "contentType": "application/json",
+        "schema": {
+          "$ref": "schemas.json#/definitions/JsonElementApiResult"
+        },
+        "statusCodes": [
+          400,
+          401,
+          403,
+          404,
+          409,
+          413,
+          429,
+          500,
+          502,
+          503,
+          504
+        ],
+        "note": "通用错误范围；各ServiceResult实际分支及机器码以服务实现和接口说明为准，不声称每条路由均返回全部状态"
+      },
+      "maximumRequestBytes": 4194304
+    },
+    {
+      "method": "POST",
+      "path": "/api/oob/servers/test-connection",
+      "operation": "Servers.Test",
+      "anonymous": false,
+      "authorization": [
+        {
+          "policy": null,
+          "roles": null,
+          "schemes": null
+        },
+        {
+          "policy": "ServerManagement",
+          "roles": null,
+          "schemes": null
+        }
+      ],
+      "csrf": true,
+      "requestContentTypes": [
+        "application/*+json",
+        "application/json",
+        "text/json"
+      ],
+      "parameters": [
+        {
+          "name": "request",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "schemas.json#/definitions/SaveServerRequest"
+          }
+        }
+      ],
+      "responses": [
+        {
+          "status": 200,
+          "contentType": "application/json",
+          "schema": {
+            "$ref": "schemas.json#/definitions/ConnectionTestResultApiResult"
+          }
+        }
+      ],
+      "businessFailures": {
+        "contentType": "application/json",
+        "schema": {
+          "$ref": "schemas.json#/definitions/JsonElementApiResult"
+        },
+        "statusCodes": [
+          400,
+          401,
+          403,
+          404,
+          409,
+          413,
+          429,
+          500,
+          502,
+          503,
+          504
+        ],
+        "note": "通用错误范围；各ServiceResult实际分支及机器码以服务实现和接口说明为准，不声称每条路由均返回全部状态"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/oob/servers/{id:long}",
+      "operation": "Servers.Detail",
+      "anonymous": false,
+      "authorization": [
+        {
+          "policy": null,
+          "roles": null,
+          "schemes": null
+        }
+      ],
+      "csrf": false,
+      "requestContentTypes": [],
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "pattern": "^-?(0|[1-9][0-9]*)$",
+            "description": "十进制long文本；客户端不得转number"
+          }
+        }
+      ],
+      "responses": [
+        {
+          "status": 200,
+          "contentType": "application/json",
+          "schema": {
+            "$ref": "schemas.json#/definitions/ServerDetailDtoApiResult"
+          }
+        }
+      ],
+      "businessFailures": {
+        "contentType": "application/json",
+        "schema": {
+          "$ref": "schemas.json#/definitions/JsonElementApiResult"
+        },
+        "statusCodes": [
+          400,
+          401,
+          403,
+          404,
+          409,
+          413,
+          429,
+          500,
+          502,
+          503,
+          504
+        ],
+        "note": "通用错误范围；各ServiceResult实际分支及机器码以服务实现和接口说明为准，不声称每条路由均返回全部状态"
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/api/oob/servers/{id:long}",
+      "operation": "Servers.Update",
+      "anonymous": false,
+      "authorization": [
+        {
+          "policy": null,
+          "roles": null,
+          "schemes": null
+        },
+        {
+          "policy": "ServerManagement",
+          "roles": null,
+          "schemes": null
+        }
+      ],
+      "csrf": true,
+      "requestContentTypes": [
+        "application/*+json",
+        "application/json",
+        "text/json"
+      ],
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "pattern": "^-?(0|[1-9][0-9]*)$",
+            "description": "十进制long文本；客户端不得转number"
+          }
+        },
+        {
+          "name": "request",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "schemas.json#/definitions/SaveServerRequest"
+          }
+        }
+      ],
+      "responses": [
+        {
+          "status": 200,
+          "contentType": "application/json",
+          "schema": {
+            "$ref": "schemas.json#/definitions/ServerDtoApiResult"
+          }
+        }
+      ],
+      "businessFailures": {
+        "contentType": "application/json",
+        "schema": {
+          "$ref": "schemas.json#/definitions/JsonElementApiResult"
+        },
+        "statusCodes": [
+          400,
+          401,
+          403,
+          404,
+          409,
+          413,
+          429,
+          500,
+          502,
+          503,
+          504
+        ],
+        "note": "通用错误范围；各ServiceResult实际分支及机器码以服务实现和接口说明为准，不声称每条路由均返回全部状态"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/oob/servers/{id:long}/history",
+      "operation": "Servers.History",
+      "anonymous": false,
+      "authorization": [
+        {
+          "policy": null,
+          "roles": null,
+          "schemes": null
+        }
+      ],
+      "csrf": false,
+      "requestContentTypes": [],
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "pattern": "^-?(0|[1-9][0-9]*)$",
+            "description": "十进制long文本；客户端不得转number"
+          }
+        },
+        {
+          "name": "from",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        {
+          "name": "to",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        {
+          "name": "metricCode",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "bucketSeconds",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          }
+        }
+      ],
+      "responses": [
+        {
+          "status": 200,
+          "contentType": "application/json",
+          "schema": {
+            "$ref": "schemas.json#/definitions/HistorySeriesDtoIReadOnlyListApiResult"
+          }
+        }
+      ],
+      "businessFailures": {
+        "contentType": "application/json",
+        "schema": {
+          "$ref": "schemas.json#/definitions/JsonElementApiResult"
+        },
+        "statusCodes": [
+          400,
+          401,
+          403,
+          404,
+          409,
+          413,
+          429,
+          500,
+          502,
+          503,
+          504
+        ],
+        "note": "通用错误范围；各ServiceResult实际分支及机器码以服务实现和接口说明为准，不声称每条路由均返回全部状态"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/oob/servers/{id:long}/power",
+      "operation": "Servers.Power",
+      "anonymous": false,
+      "authorization": [
+        {
+          "policy": null,
+          "roles": null,
+          "schemes": null
+        },
+        {
+          "policy": "PowerOperations",
+          "roles": null,
+          "schemes": null
+        }
+      ],
+      "csrf": true,
+      "requestContentTypes": [
+        "application/*+json",
+        "application/json",
+        "text/json"
+      ],
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "pattern": "^-?(0|[1-9][0-9]*)$",
+            "description": "十进制long文本；客户端不得转number"
+          }
+        },
+        {
+          "name": "request",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "schemas.json#/definitions/PowerRequest"
+          }
+        }
+      ],
+      "responses": [
+        {
+          "status": 200,
+          "contentType": "application/json",
+          "schema": {
+            "$ref": "schemas.json#/definitions/PowerOperationDtoApiResult"
+          }
+        }
+      ],
+      "businessFailures": {
+        "contentType": "application/json",
+        "schema": {
+          "$ref": "schemas.json#/definitions/JsonElementApiResult"
+        },
+        "statusCodes": [
+          400,
+          401,
+          403,
+          404,
+          409,
+          413,
+          429,
+          500,
+          502,
+          503,
+          504
+        ],
+        "note": "通用错误范围；各ServiceResult实际分支及机器码以服务实现和接口说明为准，不声称每条路由均返回全部状态"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/oob/servers/{id:long}/power-capabilities",
+      "operation": "Servers.PowerCapabilities",
+      "anonymous": false,
+      "authorization": [
+        {
+          "policy": null,
+          "roles": null,
+          "schemes": null
+        },
+        {
+          "policy": "PowerOperations",
+          "roles": null,
+          "schemes": null
+        }
+      ],
+      "csrf": false,
+      "requestContentTypes": [],
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "pattern": "^-?(0|[1-9][0-9]*)$",
+            "description": "十进制long文本；客户端不得转number"
+          }
+        }
+      ],
+      "responses": [
+        {
+          "status": 200,
+          "contentType": "application/json",
+          "schema": {
+            "$ref": "schemas.json#/definitions/PowerCapabilitiesDtoApiResult"
+          }
+        }
+      ],
+      "businessFailures": {
+        "contentType": "application/json",
+        "schema": {
+          "$ref": "schemas.json#/definitions/JsonElementApiResult"
+        },
+        "statusCodes": [
+          400,
+          401,
+          403,
+          404,
+          409,
+          413,
+          429,
+          500,
+          502,
+          503,
+          504
+        ],
+        "note": "通用错误范围；各ServiceResult实际分支及机器码以服务实现和接口说明为准，不声称每条路由均返回全部状态"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/oob/servers/{id:long}/power-operations",
+      "operation": "Servers.Operations",
+      "anonymous": false,
+      "authorization": [
+        {
+          "policy": null,
+          "roles": null,
+          "schemes": null
+        },
+        {
+          "policy": "PowerOperations",
+          "roles": null,
+          "schemes": null
+        }
+      ],
+      "csrf": false,
+      "requestContentTypes": [],
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "pattern": "^-?(0|[1-9][0-9]*)$",
+            "description": "十进制long文本；客户端不得转number"
+          }
+        }
+      ],
+      "responses": [
+        {
+          "status": 200,
+          "contentType": "application/json",
+          "schema": {
+            "$ref": "schemas.json#/definitions/PowerOperationDtoIReadOnlyListApiResult"
+          }
+        }
+      ],
+      "businessFailures": {
+        "contentType": "application/json",
+        "schema": {
+          "$ref": "schemas.json#/definitions/JsonElementApiResult"
+        },
+        "statusCodes": [
+          400,
+          401,
+          403,
+          404,
+          409,
+          413,
+          429,
+          500,
+          502,
+          503,
+          504
+        ],
+        "note": "通用错误范围；各ServiceResult实际分支及机器码以服务实现和接口说明为准，不声称每条路由均返回全部状态"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/oob/servers/{id:long}/power-operations/{operationId:long}/review",
+      "operation": "Servers.Review",
+      "anonymous": false,
+      "authorization": [
+        {
+          "policy": null,
+          "roles": null,
+          "schemes": null
+        },
+        {
+          "policy": "PowerOperations",
+          "roles": null,
+          "schemes": null
+        }
+      ],
+      "csrf": true,
+      "requestContentTypes": [
+        "application/*+json",
+        "application/json",
+        "text/json"
+      ],
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "pattern": "^-?(0|[1-9][0-9]*)$",
+            "description": "十进制long文本；客户端不得转number"
+          }
+        },
+        {
+          "name": "operationId",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "pattern": "^-?(0|[1-9][0-9]*)$",
+            "description": "十进制long文本；客户端不得转number"
+          }
+        },
+        {
+          "name": "request",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "schemas.json#/definitions/PowerReviewRequest"
+          }
+        }
+      ],
+      "responses": [
+        {
+          "status": 200,
+          "contentType": "application/json",
+          "schema": {
+            "$ref": "schemas.json#/definitions/PowerOperationDtoApiResult"
+          }
+        }
+      ],
+      "businessFailures": {
+        "contentType": "application/json",
+        "schema": {
+          "$ref": "schemas.json#/definitions/JsonElementApiResult"
+        },
+        "statusCodes": [
+          400,
+          401,
+          403,
+          404,
+          409,
+          413,
+          429,
+          500,
+          502,
+          503,
+          504
+        ],
+        "note": "通用错误范围；各ServiceResult实际分支及机器码以服务实现和接口说明为准，不声称每条路由均返回全部状态"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/oob/servers/{id:long}/recent",
+      "operation": "Servers.Recent",
+      "anonymous": false,
+      "authorization": [
+        {
+          "policy": null,
+          "roles": null,
+          "schemes": null
+        }
+      ],
+      "csrf": false,
+      "requestContentTypes": [],
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "pattern": "^-?(0|[1-9][0-9]*)$",
+            "description": "十进制long文本；客户端不得转number"
+          }
+        },
+        {
+          "name": "from",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        {
+          "name": "to",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      ],
+      "responses": [
+        {
+          "status": 200,
+          "contentType": "application/json",
+          "schema": {
+            "$ref": "schemas.json#/definitions/RecentTelemetryDtoApiResult"
+          }
+        }
+      ],
+      "businessFailures": {
+        "contentType": "application/json",
+        "schema": {
+          "$ref": "schemas.json#/definitions/JsonElementApiResult"
+        },
+        "statusCodes": [
+          400,
+          401,
+          403,
+          404,
+          409,
+          413,
+          429,
+          500,
+          502,
+          503,
+          504
+        ],
+        "note": "通用错误范围；各ServiceResult实际分支及机器码以服务实现和接口说明为准，不声称每条路由均返回全部状态"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/oob/servers/{id:long}/refresh-inventory",
+      "operation": "Servers.Inventory",
+      "anonymous": false,
+      "authorization": [
+        {
+          "policy": null,
+          "roles": null,
+          "schemes": null
+        },
+        {
+          "policy": "ServerManagement",
+          "roles": null,
+          "schemes": null
+        }
+      ],
+      "csrf": true,
+      "requestContentTypes": [],
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "pattern": "^-?(0|[1-9][0-9]*)$",
+            "description": "十进制long文本；客户端不得转number"
+          }
+        }
+      ],
+      "responses": [
+        {
+          "status": 200,
+          "contentType": "application/json",
+          "schema": {
+            "$ref": "schemas.json#/definitions/DeviceInventoryApiResult"
+          }
+        }
+      ],
+      "businessFailures": {
+        "contentType": "application/json",
+        "schema": {
+          "$ref": "schemas.json#/definitions/JsonElementApiResult"
+        },
+        "statusCodes": [
+          400,
+          401,
+          403,
+          404,
+          409,
+          413,
+          429,
+          500,
+          502,
+          503,
+          504
+        ],
+        "note": "通用错误范围；各ServiceResult实际分支及机器码以服务实现和接口说明为准，不声称每条路由均返回全部状态"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/oob/servers/{id:long}/sample",
+      "operation": "Servers.Sample",
+      "anonymous": false,
+      "authorization": [
+        {
+          "policy": null,
+          "roles": null,
+          "schemes": null
+        },
+        {
+          "policy": "ServerManagement",
+          "roles": null,
+          "schemes": null
+        }
+      ],
+      "csrf": true,
+      "requestContentTypes": [],
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "pattern": "^-?(0|[1-9][0-9]*)$",
+            "description": "十进制long文本；客户端不得转number"
+          }
+        }
+      ],
+      "responses": [
+        {
+          "status": 200,
+          "contentType": "application/json",
+          "schema": {
+            "$ref": "schemas.json#/definitions/TelemetryDtoApiResult"
+          }
+        }
+      ],
+      "businessFailures": {
+        "contentType": "application/json",
+        "schema": {
+          "$ref": "schemas.json#/definitions/JsonElementApiResult"
+        },
+        "statusCodes": [
+          400,
+          401,
+          403,
+          404,
+          409,
+          413,
+          429,
+          500,
+          502,
+          503,
+          504
+        ],
+        "note": "通用错误范围；各ServiceResult实际分支及机器码以服务实现和接口说明为准，不声称每条路由均返回全部状态"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/oob/servers/{id:long}/telemetry",
+      "operation": "Servers.Latest",
+      "anonymous": false,
+      "authorization": [
+        {
+          "policy": null,
+          "roles": null,
+          "schemes": null
+        }
+      ],
+      "csrf": false,
+      "requestContentTypes": [],
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "pattern": "^-?(0|[1-9][0-9]*)$",
+            "description": "十进制long文本；客户端不得转number"
+          }
+        }
+      ],
+      "responses": [
+        {
+          "status": 200,
+          "contentType": "application/json",
+          "schema": {
+            "$ref": "schemas.json#/definitions/TelemetryDtoApiResult"
+          }
+        }
+      ],
+      "businessFailures": {
+        "contentType": "application/json",
+        "schema": {
+          "$ref": "schemas.json#/definitions/JsonElementApiResult"
+        },
+        "statusCodes": [
+          400,
+          401,
+          403,
+          404,
+          409,
+          413,
+          429,
+          500,
+          502,
+          503,
+          504
+        ],
+        "note": "通用错误范围；各ServiceResult实际分支及机器码以服务实现和接口说明为准，不声称每条路由均返回全部状态"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/oob/servers/{id:long}/uid",
+      "operation": "Servers.Uid",
+      "anonymous": false,
+      "authorization": [
+        {
+          "policy": null,
+          "roles": null,
+          "schemes": null
+        },
+        {
+          "policy": "ServerManagement",
+          "roles": null,
+          "schemes": null
+        }
+      ],
+      "csrf": false,
+      "requestContentTypes": [],
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "pattern": "^-?(0|[1-9][0-9]*)$",
+            "description": "十进制long文本；客户端不得转number"
+          }
+        }
+      ],
+      "responses": [
+        {
+          "status": 200,
+          "contentType": "application/json",
+          "schema": {
+            "$ref": "schemas.json#/definitions/UidStatusDtoApiResult"
+          }
+        }
+      ],
+      "businessFailures": {
+        "contentType": "application/json",
+        "schema": {
+          "$ref": "schemas.json#/definitions/JsonElementApiResult"
+        },
+        "statusCodes": [
+          400,
+          401,
+          403,
+          404,
+          409,
+          413,
+          429,
+          500,
+          502,
+          503,
+          504
+        ],
+        "note": "通用错误范围；各ServiceResult实际分支及机器码以服务实现和接口说明为准，不声称每条路由均返回全部状态"
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/api/oob/servers/{id:long}/uid",
+      "operation": "Servers.SetUid",
+      "anonymous": false,
+      "authorization": [
+        {
+          "policy": null,
+          "roles": null,
+          "schemes": null
+        },
+        {
+          "policy": "ServerManagement",
+          "roles": null,
+          "schemes": null
+        }
+      ],
+      "csrf": true,
+      "requestContentTypes": [
+        "application/*+json",
+        "application/json",
+        "text/json"
+      ],
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "pattern": "^-?(0|[1-9][0-9]*)$",
+            "description": "十进制long文本；客户端不得转number"
+          }
+        },
+        {
+          "name": "request",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "schemas.json#/definitions/SetUidRequest"
+          }
+        }
+      ],
+      "responses": [
+        {
+          "status": 200,
+          "contentType": "application/json",
+          "schema": {
+            "$ref": "schemas.json#/definitions/UidStatusDtoApiResult"
+          }
+        }
+      ],
+      "businessFailures": {
+        "contentType": "application/json",
+        "schema": {
+          "$ref": "schemas.json#/definitions/JsonElementApiResult"
+        },
+        "statusCodes": [
+          400,
+          401,
+          403,
+          404,
+          409,
+          413,
+          429,
+          500,
+          502,
+          503,
+          504
+        ],
+        "note": "通用错误范围；各ServiceResult实际分支及机器码以服务实现和接口说明为准，不声称每条路由均返回全部状态"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/oob/servers/{id:long}/virtual-media",
+      "operation": "VirtualMedia.Status",
+      "anonymous": false,
+      "authorization": [
+        {
+          "policy": "VirtualConsole",
+          "roles": null,
+          "schemes": null
+        }
+      ],
+      "csrf": false,
+      "requestContentTypes": [],
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "pattern": "^-?(0|[1-9][0-9]*)$",
+            "description": "十进制long文本；客户端不得转number"
+          }
+        }
+      ],
+      "responses": [
+        {
+          "status": 200,
+          "contentType": "application/json",
+          "schema": {
+            "$ref": "schemas.json#/definitions/VirtualMediaStatusDtoApiResult"
+          }
+        }
+      ],
+      "businessFailures": {
+        "contentType": "application/json",
+        "schema": {
+          "$ref": "schemas.json#/definitions/JsonElementApiResult"
+        },
+        "statusCodes": [
+          400,
+          401,
+          403,
+          404,
+          409,
+          413,
+          429,
+          500,
+          502,
+          503,
+          504
+        ],
+        "note": "通用错误范围；各ServiceResult实际分支及机器码以服务实现和接口说明为准，不声称每条路由均返回全部状态"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/oob/servers/{id:long}/virtual-media/eject",
+      "operation": "VirtualMedia.Eject",
+      "anonymous": false,
+      "authorization": [
+        {
+          "policy": "VirtualConsole",
+          "roles": null,
+          "schemes": null
+        }
+      ],
+      "csrf": true,
+      "requestContentTypes": [
+        "application/*+json",
+        "application/json",
+        "text/json"
+      ],
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "pattern": "^-?(0|[1-9][0-9]*)$",
+            "description": "十进制long文本；客户端不得转number"
+          }
+        },
+        {
+          "name": "request",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "schemas.json#/definitions/EjectVirtualMediaRequest"
+          }
+        }
+      ],
+      "responses": [
+        {
+          "status": 200,
+          "contentType": "application/json",
+          "schema": {
+            "$ref": "schemas.json#/definitions/VirtualMediaOperationDtoApiResult"
+          }
+        }
+      ],
+      "businessFailures": {
+        "contentType": "application/json",
+        "schema": {
+          "$ref": "schemas.json#/definitions/JsonElementApiResult"
+        },
+        "statusCodes": [
+          400,
+          401,
+          403,
+          404,
+          409,
+          413,
+          429,
+          500,
+          502,
+          503,
+          504
+        ],
+        "note": "通用错误范围；各ServiceResult实际分支及机器码以服务实现和接口说明为准，不声称每条路由均返回全部状态"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/oob/servers/{id:long}/virtual-media/mount",
+      "operation": "VirtualMedia.Mount",
+      "anonymous": false,
+      "authorization": [
+        {
+          "policy": "VirtualConsole",
+          "roles": null,
+          "schemes": null
+        }
+      ],
+      "csrf": true,
+      "requestContentTypes": [
+        "application/*+json",
+        "application/json",
+        "text/json"
+      ],
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "pattern": "^-?(0|[1-9][0-9]*)$",
+            "description": "十进制long文本；客户端不得转number"
+          }
+        },
+        {
+          "name": "request",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "schemas.json#/definitions/MountVirtualMediaRequest"
+          }
+        }
+      ],
+      "responses": [
+        {
+          "status": 200,
+          "contentType": "application/json",
+          "schema": {
+            "$ref": "schemas.json#/definitions/VirtualMediaOperationDtoApiResult"
+          }
+        }
+      ],
+      "businessFailures": {
+        "contentType": "application/json",
+        "schema": {
+          "$ref": "schemas.json#/definitions/JsonElementApiResult"
+        },
+        "statusCodes": [
+          400,
+          401,
+          403,
+          404,
+          409,
+          413,
+          429,
+          500,
+          502,
+          503,
+          504
+        ],
+        "note": "通用错误范围；各ServiceResult实际分支及机器码以服务实现和接口说明为准，不声称每条路由均返回全部状态"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/oob/servers/{id:long}/virtual-media/operations/{requestId}",
+      "operation": "VirtualMedia.Operation",
+      "anonymous": false,
+      "authorization": [
+        {
+          "policy": "VirtualConsole",
+          "roles": null,
+          "schemes": null
+        }
+      ],
+      "csrf": false,
+      "requestContentTypes": [],
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "pattern": "^-?(0|[1-9][0-9]*)$",
+            "description": "十进制long文本；客户端不得转number"
+          }
+        },
+        {
+          "name": "requestId",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "responses": [
+        {
+          "status": 200,
+          "contentType": "application/json",
+          "schema": {
+            "$ref": "schemas.json#/definitions/VirtualMediaOperationDtoApiResult"
+          }
+        }
+      ],
+      "businessFailures": {
+        "contentType": "application/json",
+        "schema": {
+          "$ref": "schemas.json#/definitions/JsonElementApiResult"
+        },
+        "statusCodes": [
+          400,
+          401,
+          403,
+          404,
+          409,
+          413,
+          429,
+          500,
+          502,
+          503,
+          504
+        ],
+        "note": "通用错误范围；各ServiceResult实际分支及机器码以服务实现和接口说明为准，不声称每条路由均返回全部状态"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/oob/servers/{id:long}/virtual-media/operations/{requestId}/review-not-executed",
+      "operation": "VirtualMedia.Review",
+      "anonymous": false,
+      "authorization": [
+        {
+          "policy": "VirtualConsole",
+          "roles": null,
+          "schemes": null
+        }
+      ],
+      "csrf": true,
+      "requestContentTypes": [
+        "application/*+json",
+        "application/json",
+        "text/json"
+      ],
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "pattern": "^-?(0|[1-9][0-9]*)$",
+            "description": "十进制long文本；客户端不得转number"
+          }
+        },
+        {
+          "name": "requestId",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "request",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "schemas.json#/definitions/ReviewVirtualMediaRequest"
+          }
+        }
+      ],
+      "responses": [
+        {
+          "status": 200,
+          "contentType": "application/json",
+          "schema": {
+            "$ref": "schemas.json#/definitions/VirtualMediaOperationDtoApiResult"
+          }
+        }
+      ],
+      "businessFailures": {
+        "contentType": "application/json",
+        "schema": {
+          "$ref": "schemas.json#/definitions/JsonElementApiResult"
+        },
+        "statusCodes": [
+          400,
+          401,
+          403,
+          404,
+          409,
+          413,
+          429,
+          500,
+          502,
+          503,
+          504
+        ],
+        "note": "通用错误范围；各ServiceResult实际分支及机器码以服务实现和接口说明为准，不声称每条路由均返回全部状态"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/oob/servers/{id:long}/virtual-media/traffic",
+      "operation": "VirtualMedia.Traffic",
+      "anonymous": false,
+      "authorization": [
+        {
+          "policy": "VirtualConsole",
+          "roles": null,
+          "schemes": null
+        }
+      ],
+      "csrf": false,
+      "requestContentTypes": [],
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "pattern": "^-?(0|[1-9][0-9]*)$",
+            "description": "十进制long文本；客户端不得转number"
+          }
+        }
+      ],
+      "responses": [
+        {
+          "status": 200,
+          "contentType": "application/json",
+          "schema": {
+            "$ref": "schemas.json#/definitions/VirtualMediaTrafficDtoApiResult"
+          }
+        }
+      ],
+      "businessFailures": {
+        "contentType": "application/json",
+        "schema": {
+          "$ref": "schemas.json#/definitions/JsonElementApiResult"
+        },
+        "statusCodes": [
+          400,
+          401,
+          403,
+          404,
+          409,
+          413,
+          429,
+          500,
+          502,
+          503,
+          504
+        ],
+        "note": "通用错误范围；各ServiceResult实际分支及机器码以服务实现和接口说明为准，不声称每条路由均返回全部状态"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/oob/servers/{serverId:long}/console-capabilities",
+      "operation": "ConsoleSessions.Capabilities",
+      "anonymous": false,
+      "authorization": [
+        {
+          "policy": "VirtualConsole",
+          "roles": null,
+          "schemes": null
+        }
+      ],
+      "csrf": false,
+      "requestContentTypes": [],
+      "parameters": [
+        {
+          "name": "serverId",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "pattern": "^-?(0|[1-9][0-9]*)$",
+            "description": "十进制long文本；客户端不得转number"
+          }
+        }
+      ],
+      "responses": [
+        {
+          "status": 200,
+          "contentType": "application/json",
+          "schema": {
+            "$ref": "schemas.json#/definitions/ConsoleCapabilitiesDtoApiResult"
+          }
+        }
+      ],
+      "businessFailures": {
+        "contentType": "application/json",
+        "schema": {
+          "$ref": "schemas.json#/definitions/JsonElementApiResult"
+        },
+        "statusCodes": [
+          400,
+          401,
+          403,
+          404,
+          409,
+          413,
+          429,
+          500,
+          502,
+          503,
+          504
+        ],
+        "note": "通用错误范围；各ServiceResult实际分支及机器码以服务实现和接口说明为准，不声称每条路由均返回全部状态"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/oob/servers/{serverId:long}/console-sessions",
+      "operation": "ConsoleSessions.Create",
+      "anonymous": false,
+      "authorization": [
+        {
+          "policy": "VirtualConsole",
+          "roles": null,
+          "schemes": null
+        }
+      ],
+      "csrf": true,
+      "requestContentTypes": [
+        "application/*+json",
+        "application/json",
+        "text/json"
+      ],
+      "parameters": [
+        {
+          "name": "serverId",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "pattern": "^-?(0|[1-9][0-9]*)$",
+            "description": "十进制long文本；客户端不得转number"
+          }
+        },
+        {
+          "name": "request",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "schemas.json#/definitions/ConsoleSessionRequest"
+          }
+        }
+      ],
+      "responses": [
+        {
+          "status": 200,
+          "contentType": "application/json",
+          "schema": {
+            "$ref": "schemas.json#/definitions/ConsoleSessionDtoApiResult"
+          }
+        }
+      ],
+      "businessFailures": {
+        "contentType": "application/json",
+        "schema": {
+          "$ref": "schemas.json#/definitions/JsonElementApiResult"
+        },
+        "statusCodes": [
+          400,
+          401,
+          403,
+          404,
+          409,
+          413,
+          429,
+          500,
+          502,
+          503,
+          504
+        ],
+        "note": "通用错误范围；各ServiceResult实际分支及机器码以服务实现和接口说明为准，不声称每条路由均返回全部状态"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/preferences",
+      "operation": "Preferences.Get",
+      "anonymous": false,
+      "authorization": [
+        {
+          "policy": null,
+          "roles": null,
+          "schemes": null
+        }
+      ],
+      "csrf": false,
+      "requestContentTypes": [],
+      "parameters": [],
+      "responses": [
+        {
+          "status": 200,
+          "contentType": "application/json",
+          "schema": {
+            "$ref": "schemas.json#/definitions/JsonElementApiResult"
+          }
+        }
+      ],
+      "businessFailures": {
+        "contentType": "application/json",
+        "schema": {
+          "$ref": "schemas.json#/definitions/JsonElementApiResult"
+        },
+        "statusCodes": [
+          400,
+          401,
+          403,
+          404,
+          409,
+          413,
+          429,
+          500,
+          502,
+          503,
+          504
+        ],
+        "note": "通用错误范围；各ServiceResult实际分支及机器码以服务实现和接口说明为准，不声称每条路由均返回全部状态"
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/api/preferences",
+      "operation": "Preferences.Save",
+      "anonymous": false,
+      "authorization": [
+        {
+          "policy": null,
+          "roles": null,
+          "schemes": null
+        }
+      ],
+      "csrf": true,
+      "requestContentTypes": [
+        "application/*+json",
+        "application/json",
+        "text/json"
+      ],
+      "parameters": [
+        {
+          "name": "request",
+          "in": "body",
+          "required": true,
+          "schema": true
+        }
+      ],
+      "responses": [
+        {
+          "status": 200,
+          "contentType": "application/json",
+          "schema": {
+            "$ref": "schemas.json#/definitions/JsonElementApiResult"
+          }
+        }
+      ],
+      "businessFailures": {
+        "contentType": "application/json",
+        "schema": {
+          "$ref": "schemas.json#/definitions/JsonElementApiResult"
+        },
+        "statusCodes": [
+          400,
+          401,
+          403,
+          404,
+          409,
+          413,
+          429,
+          500,
+          502,
+          503,
+          504
+        ],
+        "note": "通用错误范围；各ServiceResult实际分支及机器码以服务实现和接口说明为准，不声称每条路由均返回全部状态"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/users",
+      "operation": "Users.List",
+      "anonymous": false,
+      "authorization": [
+        {
+          "policy": "UserManagement",
+          "roles": null,
+          "schemes": null
+        }
+      ],
+      "csrf": false,
+      "requestContentTypes": [],
+      "parameters": [
+        {
+          "name": "keyword",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "status",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "current",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "integer"
+          },
+          "default": 1
+        },
+        {
+          "name": "pageSize",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "integer"
+          },
+          "default": 20
+        },
+        {
+          "name": "sortField",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "sortOrder",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "responses": [
+        {
+          "status": 200,
+          "contentType": "application/json",
+          "schema": {
+            "$ref": "schemas.json#/definitions/UserDtoPageDataApiResult"
+          }
+        }
+      ],
+      "businessFailures": {
+        "contentType": "application/json",
+        "schema": {
+          "$ref": "schemas.json#/definitions/JsonElementApiResult"
+        },
+        "statusCodes": [
+          400,
+          401,
+          403,
+          404,
+          409,
+          413,
+          429,
+          500,
+          502,
+          503,
+          504
+        ],
+        "note": "通用错误范围；各ServiceResult实际分支及机器码以服务实现和接口说明为准，不声称每条路由均返回全部状态"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/users",
+      "operation": "Users.Create",
+      "anonymous": false,
+      "authorization": [
+        {
+          "policy": "UserManagement",
+          "roles": null,
+          "schemes": null
+        }
+      ],
+      "csrf": true,
+      "requestContentTypes": [
+        "application/*+json",
+        "application/json",
+        "text/json"
+      ],
+      "parameters": [
+        {
+          "name": "request",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "schemas.json#/definitions/SaveUserRequest"
+          }
+        }
+      ],
+      "responses": [
+        {
+          "status": 200,
+          "contentType": "application/json",
+          "schema": {
+            "$ref": "schemas.json#/definitions/UserDtoApiResult"
+          }
+        }
+      ],
+      "businessFailures": {
+        "contentType": "application/json",
+        "schema": {
+          "$ref": "schemas.json#/definitions/JsonElementApiResult"
+        },
+        "statusCodes": [
+          400,
+          401,
+          403,
+          404,
+          409,
+          413,
+          429,
+          500,
+          502,
+          503,
+          504
+        ],
+        "note": "通用错误范围；各ServiceResult实际分支及机器码以服务实现和接口说明为准，不声称每条路由均返回全部状态"
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/api/users/{id:long}",
+      "operation": "Users.Update",
+      "anonymous": false,
+      "authorization": [
+        {
+          "policy": "UserManagement",
+          "roles": null,
+          "schemes": null
+        }
+      ],
+      "csrf": true,
+      "requestContentTypes": [
+        "application/*+json",
+        "application/json",
+        "text/json"
+      ],
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "pattern": "^-?(0|[1-9][0-9]*)$",
+            "description": "十进制long文本；客户端不得转number"
+          }
+        },
+        {
+          "name": "request",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "schemas.json#/definitions/SaveUserRequest"
+          }
+        }
+      ],
+      "responses": [
+        {
+          "status": 200,
+          "contentType": "application/json",
+          "schema": {
+            "$ref": "schemas.json#/definitions/UserDtoApiResult"
+          }
+        }
+      ],
+      "businessFailures": {
+        "contentType": "application/json",
+        "schema": {
+          "$ref": "schemas.json#/definitions/JsonElementApiResult"
+        },
+        "statusCodes": [
+          400,
+          401,
+          403,
+          404,
+          409,
+          413,
+          429,
+          500,
+          502,
+          503,
+          504
+        ],
+        "note": "通用错误范围；各ServiceResult实际分支及机器码以服务实现和接口说明为准，不声称每条路由均返回全部状态"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/users/{id:long}/delete",
+      "operation": "Users.Delete",
+      "anonymous": false,
+      "authorization": [
+        {
+          "policy": "UserManagement",
+          "roles": null,
+          "schemes": null
+        }
+      ],
+      "csrf": true,
+      "requestContentTypes": [
+        "application/*+json",
+        "application/json",
+        "text/json"
+      ],
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "pattern": "^-?(0|[1-9][0-9]*)$",
+            "description": "十进制long文本；客户端不得转number"
+          }
+        },
+        {
+          "name": "request",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "schemas.json#/definitions/UserVersionRequest"
+          }
+        }
+      ],
+      "responses": [
+        {
+          "status": 200,
+          "contentType": "application/json",
+          "schema": {
+            "$ref": "schemas.json#/definitions/UserDtoApiResult"
+          }
+        }
+      ],
+      "businessFailures": {
+        "contentType": "application/json",
+        "schema": {
+          "$ref": "schemas.json#/definitions/JsonElementApiResult"
+        },
+        "statusCodes": [
+          400,
+          401,
+          403,
+          404,
+          409,
+          413,
+          429,
+          500,
+          502,
+          503,
+          504
+        ],
+        "note": "通用错误范围；各ServiceResult实际分支及机器码以服务实现和接口说明为准，不声称每条路由均返回全部状态"
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/api/users/{id:long}/reset-password",
+      "operation": "Users.ResetPassword",
+      "anonymous": false,
+      "authorization": [
+        {
+          "policy": "UserManagement",
+          "roles": null,
+          "schemes": null
+        }
+      ],
+      "csrf": true,
+      "requestContentTypes": [
+        "application/*+json",
+        "application/json",
+        "text/json"
+      ],
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "pattern": "^-?(0|[1-9][0-9]*)$",
+            "description": "十进制long文本；客户端不得转number"
+          }
+        },
+        {
+          "name": "request",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "schemas.json#/definitions/ResetUserPasswordRequest"
+          }
+        }
+      ],
+      "responses": [
+        {
+          "status": 200,
+          "contentType": "application/json",
+          "schema": {
+            "$ref": "schemas.json#/definitions/UserDtoApiResult"
+          }
+        }
+      ],
+      "businessFailures": {
+        "contentType": "application/json",
+        "schema": {
+          "$ref": "schemas.json#/definitions/JsonElementApiResult"
+        },
+        "statusCodes": [
+          400,
+          401,
+          403,
+          404,
+          409,
+          413,
+          429,
+          500,
+          502,
+          503,
+          504
+        ],
+        "note": "通用错误范围；各ServiceResult实际分支及机器码以服务实现和接口说明为准，不声称每条路由均返回全部状态"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/connect/authorize",
+      "operation": "McpAuthorization.Authorize",
+      "anonymous": true,
+      "authorization": [],
+      "csrf": false,
+      "requestContentTypes": [],
+      "parameters": [],
+      "responses": [],
+      "protocol": "oauth2.1",
+      "responseContentTypes": [
+        "application/json",
+        "text/html"
+      ],
+      "note": "使用OAuth原生响应和重定向，不套ApiResult；授权POST的人工同意分支由处理器验证CSRF，token由OAuth客户端认证和PKCE校验"
+    },
+    {
+      "method": "POST",
+      "path": "/connect/authorize",
+      "operation": "McpAuthorization.Authorize",
+      "anonymous": true,
+      "authorization": [],
+      "csrf": false,
+      "requestContentTypes": [],
+      "parameters": [],
+      "responses": [],
+      "protocol": "oauth2.1",
+      "responseContentTypes": [
+        "application/json",
+        "text/html"
+      ],
+      "note": "使用OAuth原生响应和重定向，不套ApiResult；授权POST的人工同意分支由处理器验证CSRF，token由OAuth客户端认证和PKCE校验"
+    },
+    {
+      "method": "POST",
+      "path": "/connect/token",
+      "operation": "McpAuthorization.Exchange",
+      "anonymous": true,
+      "authorization": [],
+      "csrf": false,
+      "requestContentTypes": [],
+      "parameters": [],
+      "responses": [],
+      "protocol": "oauth2.1",
+      "responseContentTypes": [
+        "application/json",
+        "text/html"
+      ],
+      "note": "使用OAuth原生响应和重定向，不套ApiResult；授权POST的人工同意分支由处理器验证CSRF，token由OAuth客户端认证和PKCE校验"
+    }
+  ],
+  "protocols": [
+    {
+      "method": "GET",
+      "path": "/health",
+      "protocol": "health",
+      "contentType": "application/json",
+      "note": "进程健康，不代表数据库或设备就绪"
+    },
+    {
+      "method": "GET",
+      "path": "/api/oob/live",
+      "protocol": "signalr-websocket",
+      "contentType": "application/octet-stream",
+      "note": "Cookie授权，仅WebSocket；TelemetryUpdated(ServerTelemetryDto)，UTC与长ID字符串"
+    },
+    {
+      "method": "POST",
+      "path": "/mcp",
+      "protocol": "mcp",
+      "contentType": "application/json, text/event-stream",
+      "note": "独立Bearer认证；协议响应不使用ApiResult"
+    },
+    {
+      "method": "GET",
+      "path": "/.well-known/oauth-protected-resource/mcp",
+      "protocol": "oauth-metadata",
+      "contentType": "application/json",
+      "note": "公开受保护资源发现"
+    },
+    {
+      "method": "GET,POST",
+      "path": "/connect/authorize",
+      "protocol": "oauth-authorization",
+      "contentType": "text/html, application/json",
+      "note": "OAuth授权码与PKCE；绑定用户及客户端白名单"
+    },
+    {
+      "method": "POST",
+      "path": "/connect/token",
+      "protocol": "oauth-token",
+      "contentType": "application/json",
+      "note": "OAuth标准响应，不套ApiResult"
+    },
+    {
+      "method": "POST",
+      "path": "/connect/revoke",
+      "protocol": "oauth-revocation",
+      "contentType": "application/json",
+      "note": "OAuth标准撤销响应"
+    },
+    {
+      "method": "GET",
+      "path": "/.well-known/openid-configuration",
+      "protocol": "oauth-metadata",
+      "contentType": "application/json",
+      "note": "OpenIddict标准发现"
+    },
+    {
+      "method": "GET",
+      "path": "/.well-known/oauth-authorization-server",
+      "protocol": "oauth-metadata",
+      "contentType": "application/json",
+      "note": "OAuth授权服务器标准发现"
+    }
+  ]
+}

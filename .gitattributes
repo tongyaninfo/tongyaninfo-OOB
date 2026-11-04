@@ -1,0 +1,9 @@
+# 历史迁移按原始字节冻结；固定检出行尾，避免 Windows 自动转换造成 SHA-256 误报。
+backend/src/OobManagement.Infrastructure/Persistence/Migrations/**/*.cs text eol=lf
+backend/src/OobManagement.Infrastructure/Persistence/Migrations/**/*.sql text eol=lf
+backend/src/OobManagement.Infrastructure/Persistence/OAuthMigrations/**/*.cs text eol=lf
+backend/src/OobManagement.Infrastructure/Persistence/OAuthMigrations/**/*.sql text eol=lf
+desktop/backend/OobManagement.Desktop.Storage/Persistence/Migrations/**/*.cs text eol=lf
+desktop/backend/OobManagement.Desktop.Storage/Persistence/Migrations/**/*.sql text eol=lf
+VERSION text eol=lf
+docs/releases/*.json text eol=lf

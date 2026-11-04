@@ -1,0 +1,32 @@
+{
+  "name": "oob-management-desktop",
+  "version": "1.0.0",
+  "private": true,
+  "description": "带外管理系统本地桌面版",
+  "author": "tongyaninfo",
+  "license": "Apache-2.0",
+  "main": "dist/main/index.js",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "node scripts/test.cjs",
+    "smoke": "node scripts/smoke.cjs",
+    "start": "node scripts/start.cjs",
+    "package": "node scripts/package.cjs"
+  },
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "devDependencies": {
+    "@types/node": "24.19.2",
+    "electron": "45.2.1",
+    "electron-builder": "26.18.0",
+    "typescript": "7.0.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tongyaninfo/tongyaninfo-OOB.git",
+    "directory": "desktop"
+  },
+  "homepage": "https://github.com/tongyaninfo/tongyaninfo-OOB"
+}

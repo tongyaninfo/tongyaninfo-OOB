@@ -1,0 +1,4942 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "OobContracts",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {},
+  "definitions": {
+    "BooleanApiResult": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean"
+        },
+        "data": {
+          "type": "boolean"
+        },
+        "errorCode": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "errorMessage": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "success",
+        "data",
+        "errorCode",
+        "errorMessage"
+      ]
+    },
+    "ChangePasswordRequest": {
+      "type": "object",
+      "properties": {
+        "currentPassword": {
+          "type": "string"
+        },
+        "newPassword": {
+          "type": "string"
+        },
+        "confirmPassword": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "confirmPassword",
+        "currentPassword",
+        "newPassword"
+      ]
+    },
+    "ClientExceptionRequest": {
+      "type": "object",
+      "properties": {
+        "eventType": {
+          "type": "string",
+          "maxLength": 32
+        },
+        "exceptionType": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 300
+        },
+        "stackTrace": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 20000
+        },
+        "path": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 512
+        }
+      },
+      "required": [
+        "eventType"
+      ]
+    },
+    "CollectionGapDto": {
+      "type": "object",
+      "properties": {
+        "from": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "to": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "from",
+        "to"
+      ]
+    },
+    "ConnectionTestResult": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean"
+        },
+        "identity": {
+          "$ref": "#/definitions/DeviceIdentity"
+        },
+        "capabilities": {
+          "$ref": "#/definitions/DeviceCapabilities"
+        },
+        "errorCode": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "errorMessage": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "warnings": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "success",
+        "identity",
+        "capabilities",
+        "errorCode",
+        "errorMessage",
+        "warnings"
+      ]
+    },
+    "ConnectionTestResultApiResult": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean"
+        },
+        "data": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/ConnectionTestResult"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "errorCode": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "errorMessage": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "success",
+        "data",
+        "errorCode",
+        "errorMessage"
+      ]
+    },
+    "ConsoleCapabilitiesDto": {
+      "type": "object",
+      "properties": {
+        "serverId": {
+          "type": "string"
+        },
+        "controllerType": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "mode": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "keyboardSupported": {
+          "type": "boolean"
+        },
+        "mouseSupported": {
+          "type": "boolean"
+        },
+        "reasonCode": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "message": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "localMediaSupported": {
+          "type": "boolean",
+          "default": false
+        }
+      },
+      "required": [
+        "serverId",
+        "controllerType",
+        "status",
+        "mode",
+        "keyboardSupported",
+        "mouseSupported",
+        "reasonCode",
+        "message",
+        "localMediaSupported"
+      ]
+    },
+    "ConsoleCapabilitiesDtoApiResult": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean"
+        },
+        "data": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/ConsoleCapabilitiesDto"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "errorCode": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "errorMessage": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "success",
+        "data",
+        "errorCode",
+        "errorMessage"
+      ]
+    },
+    "ConsoleInputStateRequest": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "enabled"
+      ]
+    },
+    "ConsoleSessionDto": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "requestId": {
+          "type": "string"
+        },
+        "serverId": {
+          "type": "string"
+        },
+        "serverName": {
+          "type": "string"
+        },
+        "controllerType": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "expiresAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "frameUrl": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "errorCode": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "message": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "inputEnabled": {
+          "type": "boolean"
+        },
+        "bytesReceived": {
+          "type": "string",
+          "pattern": "^-?(0|[1-9][0-9]*)$",
+          "description": "十进制long文本；客户端不得转number"
+        },
+        "bytesSent": {
+          "type": "string",
+          "pattern": "^-?(0|[1-9][0-9]*)$",
+          "description": "十进制long文本；客户端不得转number"
+        },
+        "bridgeProtocol": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "trafficAvailable": {
+          "type": "boolean",
+          "default": true
+        },
+        "mediaBytesReceived": {
+          "default": "0"
+        },
+        "mediaBytesSent": {
+          "default": "0"
+        }
+      },
+      "required": [
+        "id",
+        "requestId",
+        "serverId",
+        "serverName",
+        "controllerType",
+        "status",
+        "createdAt",
+        "expiresAt",
+        "frameUrl",
+        "errorCode",
+        "message",
+        "inputEnabled",
+        "bytesReceived",
+        "bytesSent",
+        "bridgeProtocol",
+        "trafficAvailable",
+        "mediaBytesReceived",
+        "mediaBytesSent"
+      ]
+    },
+    "ConsoleSessionDtoApiResult": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean"
+        },
+        "data": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/ConsoleSessionDto"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "errorCode": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "errorMessage": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "success",
+        "data",
+        "errorCode",
+        "errorMessage"
+      ]
+    },
+    "ConsoleSessionRequest": {
+      "type": "object",
+      "properties": {
+        "requestId": {
+          "type": "string",
+          "maxLength": 100
+        }
+      },
+      "required": [
+        "requestId"
+      ]
+    },
+    "CsrfDto": {
+      "type": "object",
+      "properties": {
+        "token": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "token"
+      ]
+    },
+    "CsrfDtoApiResult": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean"
+        },
+        "data": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/CsrfDto"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "errorCode": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "errorMessage": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "success",
+        "data",
+        "errorCode",
+        "errorMessage"
+      ]
+    },
+    "CurrentUserDto": {
+      "type": "object",
+      "properties": {
+        "userid": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "access": {
+          "type": "string"
+        },
+        "avatar": {
+          "type": "string"
+        },
+        "username": {
+          "type": "string",
+          "default": ""
+        },
+        "isAdministrator": {
+          "type": "boolean",
+          "default": false
+        },
+        "canManageUsers": {
+          "type": "boolean",
+          "default": false
+        },
+        "canUseConsole": {
+          "type": "boolean",
+          "default": false
+        },
+        "canManageServers": {
+          "type": "boolean",
+          "default": false
+        },
+        "canOperatePower": {
+          "type": "boolean",
+          "default": false
+        }
+      },
+      "required": [
+        "userid",
+        "name",
+        "access",
+        "avatar",
+        "username",
+        "isAdministrator",
+        "canManageUsers",
+        "canUseConsole",
+        "canManageServers",
+        "canOperatePower"
+      ]
+    },
+    "CurrentUserDtoApiResult": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean"
+        },
+        "data": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/CurrentUserDto"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "errorCode": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "errorMessage": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "success",
+        "data",
+        "errorCode",
+        "errorMessage"
+      ]
+    },
+    "DashboardDto": {
+      "type": "object",
+      "properties": {
+        "totalServers": {
+          "type": "integer"
+        },
+        "onlineServers": {
+          "type": "integer"
+        },
+        "offlineServers": {
+          "type": "integer"
+        },
+        "pendingServers": {
+          "type": "integer"
+        },
+        "totalPowerWatts": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "generatedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "servers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServerDto"
+          }
+        },
+        "telemetrySnapshots": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServerTelemetryDto"
+          }
+        }
+      },
+      "required": [
+        "totalServers",
+        "onlineServers",
+        "offlineServers",
+        "pendingServers",
+        "totalPowerWatts",
+        "generatedAt",
+        "servers",
+        "telemetrySnapshots"
+      ]
+    },
+    "DashboardDtoApiResult": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean"
+        },
+        "data": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/DashboardDto"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "errorCode": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "errorMessage": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "success",
+        "data",
+        "errorCode",
+        "errorMessage"
+      ]
+    },
+    "DeviceCapabilities": {
+      "type": "object",
+      "properties": {
+        "protocol": {
+          "type": "string"
+        },
+        "supportsInventory": {
+          "type": "boolean"
+        },
+        "supportedMetrics": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "powerActions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PowerAction"
+          }
+        },
+        "warnings": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "protocol",
+        "supportsInventory",
+        "supportedMetrics",
+        "powerActions",
+        "warnings"
+      ]
+    },
+    "DeviceIdentity": {
+      "type": "object",
+      "properties": {
+        "manufacturer": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "model": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "serialNumber": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "hostName": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "controllerHostName": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "controllerType": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "firmwareVersion": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "powerState": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "manufacturer",
+        "model",
+        "serialNumber",
+        "hostName",
+        "controllerHostName",
+        "controllerType",
+        "firmwareVersion",
+        "powerState"
+      ]
+    },
+    "DeviceInventory": {
+      "type": "object",
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/DeviceIdentity"
+        },
+        "collectedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "components": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HardwareComponent"
+          }
+        },
+        "warnings": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "identity",
+        "collectedAt",
+        "components",
+        "warnings"
+      ]
+    },
+    "DeviceInventoryApiResult": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean"
+        },
+        "data": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/DeviceInventory"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "errorCode": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "errorMessage": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "success",
+        "data",
+        "errorCode",
+        "errorMessage"
+      ]
+    },
+    "EjectVirtualMediaRequest": {
+      "type": "object",
+      "properties": {
+        "slotId": {
+          "type": "string"
+        },
+        "confirmation": {
+          "type": "string"
+        },
+        "requestId": {
+          "type": "string",
+          "maxLength": 100
+        }
+      },
+      "required": [
+        "confirmation",
+        "requestId",
+        "slotId"
+      ]
+    },
+    "ExceptionLogDto": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "occurredAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "kind": {
+          "type": "string"
+        },
+        "level": {
+          "type": "string"
+        },
+        "source": {
+          "type": "string"
+        },
+        "operation": {
+          "type": "string"
+        },
+        "errorCode": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "exceptionType": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "stackTrace": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "traceId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "serverId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "userId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "requestPath": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "requestMethod": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "httpStatusCode": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "occurredAt",
+        "kind",
+        "level",
+        "source",
+        "operation",
+        "errorCode",
+        "message",
+        "exceptionType",
+        "stackTrace",
+        "traceId",
+        "serverId",
+        "userId",
+        "requestPath",
+        "requestMethod",
+        "httpStatusCode"
+      ]
+    },
+    "ExceptionLogDtoApiResult": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean"
+        },
+        "data": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/ExceptionLogDto"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "errorCode": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "errorMessage": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "success",
+        "data",
+        "errorCode",
+        "errorMessage"
+      ]
+    },
+    "ExceptionLogDtoPageData": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExceptionLogDto"
+          }
+        },
+        "total": {
+          "type": "integer"
+        },
+        "current": {
+          "type": "integer"
+        },
+        "pageSize": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "items",
+        "total",
+        "current",
+        "pageSize"
+      ]
+    },
+    "ExceptionLogDtoPageDataApiResult": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean"
+        },
+        "data": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/ExceptionLogDtoPageData"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "errorCode": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "errorMessage": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "success",
+        "data",
+        "errorCode",
+        "errorMessage"
+      ]
+    },
+    "ExceptionLogQuery": {
+      "type": "object",
+      "properties": {
+        "current": {
+          "type": "integer"
+        },
+        "pageSize": {
+          "type": "integer"
+        },
+        "from": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "to": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "kind": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "level": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "source": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "serverId": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^-?(0|[1-9][0-9]*)$",
+          "description": "十进制long文本；客户端不得转number"
+        },
+        "keyword": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "current",
+        "pageSize"
+      ]
+    },
+    "ExportServerConfigurationRequest": {
+      "type": "object",
+      "properties": {
+        "password": {
+          "type": "string",
+          "maxLength": 128,
+          "minLength": 8
+        }
+      },
+      "required": [
+        "password"
+      ]
+    },
+    "HardwareComponent": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "kind": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "model": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "manufacturer": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "serialNumber": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "status": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "capacityBytes": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^-?(0|[1-9][0-9]*)$",
+          "description": "十进制long文本；客户端不得转number"
+        },
+        "attributes": {
+          "type": "object",
+          "additionalProperties": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "children": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HardwareComponent"
+          }
+        }
+      },
+      "required": [
+        "key",
+        "kind",
+        "name",
+        "model",
+        "manufacturer",
+        "serialNumber",
+        "status",
+        "capacityBytes",
+        "attributes",
+        "children"
+      ]
+    },
+    "HistoryPointDto": {
+      "type": "object",
+      "properties": {
+        "time": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "average": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "minimum": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "maximum": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "count": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "time",
+        "average",
+        "minimum",
+        "maximum",
+        "count"
+      ]
+    },
+    "HistorySeriesDto": {
+      "type": "object",
+      "properties": {
+        "sensorKey": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "metricCode": {
+          "type": "string"
+        },
+        "unit": {
+          "type": "string"
+        },
+        "points": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HistoryPointDto"
+          }
+        }
+      },
+      "required": [
+        "sensorKey",
+        "name",
+        "metricCode",
+        "unit",
+        "points"
+      ]
+    },
+    "HistorySeriesDtoIReadOnlyListApiResult": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean"
+        },
+        "data": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "#/definitions/HistorySeriesDto"
+          }
+        },
+        "errorCode": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "errorMessage": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "success",
+        "data",
+        "errorCode",
+        "errorMessage"
+      ]
+    },
+    "ImportServerConfigurationRequest": {
+      "type": "object",
+      "properties": {
+        "password": {
+          "type": "string",
+          "maxLength": 128,
+          "minLength": 8
+        },
+        "file": {
+          "$ref": "#/definitions/ServerConfigurationFile"
+        }
+      },
+      "required": [
+        "file",
+        "password"
+      ]
+    },
+    "JsonElementApiResult": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean"
+        },
+        "data": true,
+        "errorCode": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "errorMessage": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "success",
+        "data",
+        "errorCode",
+        "errorMessage"
+      ]
+    },
+    "LoginRequest": {
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "password",
+        "username"
+      ]
+    },
+    "MailConfigurationDto": {
+      "type": "object",
+      "properties": {
+        "configured": {
+          "type": "boolean"
+        },
+        "host": {
+          "type": "string"
+        },
+        "port": {
+          "type": "integer"
+        },
+        "securityMode": {
+          "type": "string"
+        },
+        "fromAddress": {
+          "type": "string"
+        },
+        "username": {
+          "type": "string"
+        },
+        "passwordConfigured": {
+          "type": "boolean"
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^-?(0|[1-9][0-9]*)$",
+          "description": "十进制long文本；客户端不得转number"
+        },
+        "updatedAt": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "configured",
+        "host",
+        "port",
+        "securityMode",
+        "fromAddress",
+        "username",
+        "passwordConfigured",
+        "version",
+        "updatedAt"
+      ]
+    },
+    "MailConfigurationDtoApiResult": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean"
+        },
+        "data": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/MailConfigurationDto"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "errorCode": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "errorMessage": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "success",
+        "data",
+        "errorCode",
+        "errorMessage"
+      ]
+    },
+    "MailConfigurationRequest": {
+      "type": "object",
+      "properties": {
+        "host": {
+          "type": "string",
+          "maxLength": 253
+        },
+        "fromAddress": {
+          "type": "string",
+          "maxLength": 320
+        },
+        "password": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 512
+        },
+        "username": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 320
+        },
+        "port": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 65535
+        },
+        "securityMode": {
+          "type": "string",
+          "maxLength": 32
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^-?(0|[1-9][0-9]*)$",
+          "description": "十进制long文本；客户端不得转number",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "fromAddress",
+        "host",
+        "port",
+        "securityMode",
+        "version"
+      ]
+    },
+    "MailMessageDto": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "requestId": {
+          "type": "string"
+        },
+        "kind": {
+          "type": "string"
+        },
+        "fromAddress": {
+          "type": "string"
+        },
+        "toAddress": {
+          "type": "string"
+        },
+        "subject": {
+          "type": "string"
+        },
+        "textBody": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "status": {
+          "type": "string"
+        },
+        "errorCode": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "message": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "createdByUserId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "completedAt": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "htmlBody": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "id",
+        "requestId",
+        "kind",
+        "fromAddress",
+        "toAddress",
+        "subject",
+        "textBody",
+        "status",
+        "errorCode",
+        "message",
+        "createdByUserId",
+        "createdAt",
+        "completedAt",
+        "htmlBody"
+      ]
+    },
+    "MailMessageDtoApiResult": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean"
+        },
+        "data": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/MailMessageDto"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "errorCode": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "errorMessage": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "success",
+        "data",
+        "errorCode",
+        "errorMessage"
+      ]
+    },
+    "MailMessageDtoPageData": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MailMessageDto"
+          }
+        },
+        "total": {
+          "type": "integer"
+        },
+        "current": {
+          "type": "integer"
+        },
+        "pageSize": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "items",
+        "total",
+        "current",
+        "pageSize"
+      ]
+    },
+    "MailMessageDtoPageDataApiResult": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean"
+        },
+        "data": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/MailMessageDtoPageData"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "errorCode": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "errorMessage": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "success",
+        "data",
+        "errorCode",
+        "errorMessage"
+      ]
+    },
+    "MailMessageQuery": {
+      "type": "object",
+      "properties": {
+        "keyword": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 100
+        },
+        "status": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "kind": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "current": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1000000
+        },
+        "pageSize": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100
+        },
+        "sortField": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "sortOrder": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "current",
+        "pageSize"
+      ]
+    },
+    "MailProbeDto": {
+      "type": "object",
+      "properties": {
+        "connected": {
+          "type": "boolean"
+        },
+        "errorCode": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "message": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "connected",
+        "errorCode",
+        "message"
+      ]
+    },
+    "MailProbeDtoApiResult": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean"
+        },
+        "data": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/MailProbeDto"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "errorCode": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "errorMessage": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "success",
+        "data",
+        "errorCode",
+        "errorMessage"
+      ]
+    },
+    "MailReportConfigurationDto": {
+      "type": "object",
+      "properties": {
+        "configured": {
+          "type": "boolean"
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^-?(0|[1-9][0-9]*)$",
+          "description": "十进制long文本；客户端不得转number"
+        },
+        "schedules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MailReportScheduleDto"
+          }
+        }
+      },
+      "required": [
+        "configured",
+        "version",
+        "schedules"
+      ]
+    },
+    "MailReportConfigurationDtoApiResult": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean"
+        },
+        "data": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/MailReportConfigurationDto"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "errorCode": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "errorMessage": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "success",
+        "data",
+        "errorCode",
+        "errorMessage"
+      ]
+    },
+    "MailReportConfigurationRequest": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string",
+          "pattern": "^-?(0|[1-9][0-9]*)$",
+          "description": "十进制long文本；客户端不得转number"
+        },
+        "schedules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MailReportScheduleRequest"
+          }
+        }
+      },
+      "required": [
+        "schedules",
+        "version"
+      ]
+    },
+    "MailReportPreviewDto": {
+      "type": "object",
+      "properties": {
+        "subject": {
+          "type": "string"
+        },
+        "textBody": {
+          "type": "string"
+        },
+        "htmlBody": {
+          "type": "string"
+        },
+        "from": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "to": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "subject",
+        "textBody",
+        "htmlBody",
+        "from",
+        "to"
+      ]
+    },
+    "MailReportPreviewDtoApiResult": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean"
+        },
+        "data": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/MailReportPreviewDto"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "errorCode": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "errorMessage": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "success",
+        "data",
+        "errorCode",
+        "errorMessage"
+      ]
+    },
+    "MailReportPreviewRequest": {
+      "type": "object",
+      "properties": {
+        "from": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "to": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "from",
+        "to"
+      ]
+    },
+    "MailReportScheduleDto": {
+      "type": "object",
+      "properties": {
+        "period": {
+          "type": "string"
+        },
+        "enabled": {
+          "type": "boolean"
+        },
+        "toAddress": {
+          "type": "string"
+        },
+        "sendTime": {
+          "type": "string"
+        },
+        "dayOfWeek": {
+          "type": "integer"
+        },
+        "dayOfMonth": {
+          "type": "integer"
+        },
+        "effectiveFrom": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "nextSendAt": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "period",
+        "enabled",
+        "toAddress",
+        "sendTime",
+        "dayOfWeek",
+        "dayOfMonth",
+        "effectiveFrom",
+        "nextSendAt"
+      ]
+    },
+    "MailReportScheduleRequest": {
+      "type": "object",
+      "properties": {
+        "period": {
+          "type": "string"
+        },
+        "enabled": {
+          "type": "boolean"
+        },
+        "toAddress": {
+          "type": "string"
+        },
+        "sendTime": {
+          "type": "string"
+        },
+        "dayOfWeek": {
+          "type": "integer",
+          "default": 1
+        },
+        "dayOfMonth": {
+          "type": "integer",
+          "default": 1
+        }
+      },
+      "required": [
+        "dayOfMonth",
+        "dayOfWeek",
+        "enabled",
+        "period",
+        "sendTime",
+        "toAddress"
+      ]
+    },
+    "MailSendRequest": {
+      "type": "object",
+      "properties": {
+        "requestId": {
+          "type": "string",
+          "maxLength": 100
+        },
+        "toAddress": {
+          "type": "string",
+          "maxLength": 320
+        },
+        "subject": {
+          "type": "string",
+          "maxLength": 200
+        },
+        "textBody": {
+          "type": "string",
+          "maxLength": 20000
+        }
+      },
+      "required": [
+        "requestId",
+        "subject",
+        "textBody",
+        "toAddress"
+      ]
+    },
+    "McpCallLogDto": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "callId": {
+          "type": "string"
+        },
+        "occurredAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "completedAt": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "clientId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "clientName": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "userId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "method": {
+          "type": "string"
+        },
+        "tool": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "serverId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "sourceIp": {
+          "type": "string"
+        },
+        "protocolVersion": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "result": {
+          "type": "string"
+        },
+        "errorCode": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "httpStatusCode": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "durationMilliseconds": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^-?(0|[1-9][0-9]*)$",
+          "description": "十进制long文本；客户端不得转number"
+        },
+        "traceId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "requestId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "parametersSummary": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "outputSummary": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "policySummary": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "exceptionId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "callId",
+        "occurredAt",
+        "completedAt",
+        "clientId",
+        "clientName",
+        "userId",
+        "method",
+        "tool",
+        "serverId",
+        "sourceIp",
+        "protocolVersion",
+        "result",
+        "errorCode",
+        "httpStatusCode",
+        "durationMilliseconds",
+        "traceId",
+        "requestId",
+        "parametersSummary",
+        "outputSummary",
+        "policySummary",
+        "exceptionId"
+      ]
+    },
+    "McpCallLogDtoApiResult": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean"
+        },
+        "data": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/McpCallLogDto"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "errorCode": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "errorMessage": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "success",
+        "data",
+        "errorCode",
+        "errorMessage"
+      ]
+    },
+    "McpCallLogDtoPageData": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/McpCallLogDto"
+          }
+        },
+        "total": {
+          "type": "integer"
+        },
+        "current": {
+          "type": "integer"
+        },
+        "pageSize": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "items",
+        "total",
+        "current",
+        "pageSize"
+      ]
+    },
+    "McpCallLogDtoPageDataApiResult": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean"
+        },
+        "data": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/McpCallLogDtoPageData"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "errorCode": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "errorMessage": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "success",
+        "data",
+        "errorCode",
+        "errorMessage"
+      ]
+    },
+    "McpClientDto": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "oAuthClientId": {
+          "type": "string"
+        },
+        "clientType": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "string"
+        },
+        "enabled": {
+          "type": "boolean"
+        },
+        "expiresAt": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "serverScope": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "tools": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "serverIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "networks": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "origins": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "redirectUris": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "lastCalledAt": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "oAuthClientId",
+        "clientType",
+        "userId",
+        "enabled",
+        "expiresAt",
+        "serverScope",
+        "version",
+        "tools",
+        "serverIds",
+        "networks",
+        "origins",
+        "redirectUris",
+        "createdAt",
+        "updatedAt",
+        "lastCalledAt"
+      ]
+    },
+    "McpClientDtoApiResult": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean"
+        },
+        "data": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/McpClientDto"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "errorCode": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "errorMessage": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "success",
+        "data",
+        "errorCode",
+        "errorMessage"
+      ]
+    },
+    "McpClientDtoPageData": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/McpClientDto"
+          }
+        },
+        "total": {
+          "type": "integer"
+        },
+        "current": {
+          "type": "integer"
+        },
+        "pageSize": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "items",
+        "total",
+        "current",
+        "pageSize"
+      ]
+    },
+    "McpClientDtoPageDataApiResult": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean"
+        },
+        "data": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/McpClientDtoPageData"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "errorCode": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "errorMessage": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "success",
+        "data",
+        "errorCode",
+        "errorMessage"
+      ]
+    },
+    "McpClientQuery": {
+      "type": "object",
+      "properties": {
+        "current": {
+          "type": "integer"
+        },
+        "pageSize": {
+          "type": "integer"
+        },
+        "keyword": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "sortField": {
+          "type": "string"
+        },
+        "sortOrder": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "current",
+        "pageSize",
+        "sortField",
+        "sortOrder"
+      ]
+    },
+    "McpClientRequest": {
+      "type": "object",
+      "properties": {
+        "expectedVersion": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "clientType": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "string"
+        },
+        "expiresAt": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "serverScope": {
+          "type": "string"
+        },
+        "tools": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "serverIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "networks": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "origins": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "redirectUris": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "clientType",
+        "expectedVersion",
+        "name",
+        "networks",
+        "origins",
+        "redirectUris",
+        "serverIds",
+        "serverScope",
+        "tools",
+        "userId"
+      ]
+    },
+    "McpConfigAuditDto": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "occurredAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "userId": {
+          "type": "string"
+        },
+        "action": {
+          "type": "string"
+        },
+        "objectId": {
+          "type": "string"
+        },
+        "previousVersion": {
+          "type": "string"
+        },
+        "currentVersion": {
+          "type": "string"
+        },
+        "summary": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "occurredAt",
+        "userId",
+        "action",
+        "objectId",
+        "previousVersion",
+        "currentVersion",
+        "summary"
+      ]
+    },
+    "McpConfigAuditDtoPageData": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/McpConfigAuditDto"
+          }
+        },
+        "total": {
+          "type": "integer"
+        },
+        "current": {
+          "type": "integer"
+        },
+        "pageSize": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "items",
+        "total",
+        "current",
+        "pageSize"
+      ]
+    },
+    "McpConfigAuditDtoPageDataApiResult": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean"
+        },
+        "data": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/McpConfigAuditDtoPageData"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "errorCode": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "errorMessage": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "success",
+        "data",
+        "errorCode",
+        "errorMessage"
+      ]
+    },
+    "McpConfigurationDto": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "version": {
+          "type": "string"
+        },
+        "supported": {
+          "type": "boolean"
+        },
+        "ready": {
+          "type": "boolean"
+        },
+        "endpoint": {
+          "type": "string"
+        },
+        "protocolVersions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "readinessErrors": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "requestsPerMinute": {
+          "type": "integer"
+        },
+        "clientConcurrency": {
+          "type": "integer"
+        },
+        "globalConcurrency": {
+          "type": "integer"
+        },
+        "queryTimeoutSeconds": {
+          "type": "integer"
+        },
+        "maxRequestBytes": {
+          "type": "integer"
+        },
+        "maxResponseBytes": {
+          "type": "integer"
+        },
+        "enabledTools": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "enabled",
+        "version",
+        "supported",
+        "ready",
+        "endpoint",
+        "protocolVersions",
+        "readinessErrors",
+        "requestsPerMinute",
+        "clientConcurrency",
+        "globalConcurrency",
+        "queryTimeoutSeconds",
+        "maxRequestBytes",
+        "maxResponseBytes",
+        "enabledTools"
+      ]
+    },
+    "McpConfigurationDtoApiResult": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean"
+        },
+        "data": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/McpConfigurationDto"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "errorCode": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "errorMessage": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "success",
+        "data",
+        "errorCode",
+        "errorMessage"
+      ]
+    },
+    "McpConfigurationRequest": {
+      "type": "object",
+      "properties": {
+        "expectedVersion": {
+          "type": "string"
+        },
+        "requestsPerMinute": {
+          "type": "integer"
+        },
+        "clientConcurrency": {
+          "type": "integer"
+        },
+        "globalConcurrency": {
+          "type": "integer"
+        },
+        "queryTimeoutSeconds": {
+          "type": "integer"
+        },
+        "maxRequestBytes": {
+          "type": "integer"
+        },
+        "maxResponseBytes": {
+          "type": "integer"
+        },
+        "enabledTools": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "clientConcurrency",
+        "enabledTools",
+        "expectedVersion",
+        "globalConcurrency",
+        "maxRequestBytes",
+        "maxResponseBytes",
+        "queryTimeoutSeconds",
+        "requestsPerMinute"
+      ]
+    },
+    "McpLogQuery": {
+      "type": "object",
+      "properties": {
+        "current": {
+          "type": "integer"
+        },
+        "pageSize": {
+          "type": "integer"
+        },
+        "from": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "to": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "clientId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "userId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "method": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "tool": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "serverId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "sourceIp": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "result": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "errorCode": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "traceId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "callId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "sortField": {
+          "type": "string"
+        },
+        "sortOrder": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "current",
+        "pageSize",
+        "sortField",
+        "sortOrder"
+      ]
+    },
+    "McpOptionsDto": {
+      "type": "object",
+      "properties": {
+        "users": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/McpUserOptionDto"
+          }
+        },
+        "servers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/McpServerOptionDto"
+          }
+        }
+      },
+      "required": [
+        "users",
+        "servers"
+      ]
+    },
+    "McpOptionsDtoApiResult": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean"
+        },
+        "data": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/McpOptionsDto"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "errorCode": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "errorMessage": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "success",
+        "data",
+        "errorCode",
+        "errorMessage"
+      ]
+    },
+    "McpSecretDto": {
+      "type": "object",
+      "properties": {
+        "clientId": {
+          "type": "string"
+        },
+        "secret": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "clientId",
+        "secret"
+      ]
+    },
+    "McpSecretDtoApiResult": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean"
+        },
+        "data": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/McpSecretDto"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "errorCode": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "errorMessage": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "success",
+        "data",
+        "errorCode",
+        "errorMessage"
+      ]
+    },
+    "McpServerOptionDto": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "brand": {
+          "type": "string"
+        },
+        "enabled": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "brand",
+        "enabled"
+      ]
+    },
+    "McpToolDto": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "requiredPermission": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "enabled": {
+          "type": "boolean"
+        },
+        "readOnly": {
+          "type": "boolean"
+        },
+        "inputSchema": true,
+        "outputSchema": true
+      },
+      "required": [
+        "name",
+        "description",
+        "requiredPermission",
+        "enabled",
+        "readOnly",
+        "inputSchema",
+        "outputSchema"
+      ]
+    },
+    "McpToolDtoIReadOnlyListApiResult": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean"
+        },
+        "data": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "#/definitions/McpToolDto"
+          }
+        },
+        "errorCode": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "errorMessage": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "success",
+        "data",
+        "errorCode",
+        "errorMessage"
+      ]
+    },
+    "McpUserOptionDto": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "username": {
+          "type": "string"
+        },
+        "enabled": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "id",
+        "displayName",
+        "username",
+        "enabled"
+      ]
+    },
+    "McpVersionRequest": {
+      "type": "object",
+      "properties": {
+        "expectedVersion": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "expectedVersion"
+      ]
+    },
+    "MetricReading": {
+      "type": "object",
+      "properties": {
+        "sensorKey": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "metricCode": {
+          "type": "string"
+        },
+        "value": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "unit": {
+          "type": "string"
+        },
+        "availability": {
+          "type": "string"
+        },
+        "source": {
+          "type": "string"
+        },
+        "health": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "observedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "deviceTime": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "sensorKey",
+        "name",
+        "metricCode",
+        "value",
+        "unit",
+        "availability",
+        "source",
+        "health",
+        "observedAt",
+        "deviceTime"
+      ]
+    },
+    "MountVirtualMediaRequest": {
+      "type": "object",
+      "properties": {
+        "imageId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "slotId": {
+          "type": "string"
+        },
+        "confirmation": {
+          "type": "string"
+        },
+        "requestId": {
+          "type": "string",
+          "maxLength": 100
+        },
+        "imageUrl": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "confirmation",
+        "requestId",
+        "slotId"
+      ]
+    },
+    "PowerAction": {
+      "enum": [
+        "On",
+        "GracefulShutdown",
+        "ForceOff",
+        "GracefulRestart",
+        "ForceRestart",
+        "PowerCycle",
+        "PushPowerButton"
+      ]
+    },
+    "PowerCapabilitiesDto": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "capabilities": {
+          "$ref": "#/definitions/DeviceCapabilities"
+        },
+        "powerState": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "enabled",
+        "capabilities",
+        "powerState"
+      ]
+    },
+    "PowerCapabilitiesDtoApiResult": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean"
+        },
+        "data": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/PowerCapabilitiesDto"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "errorCode": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "errorMessage": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "success",
+        "data",
+        "errorCode",
+        "errorMessage"
+      ]
+    },
+    "PowerOperationDto": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "requestId": {
+          "type": "string"
+        },
+        "action": {
+          "$ref": "#/definitions/PowerAction"
+        },
+        "status": {
+          "type": "string"
+        },
+        "message": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "completedAt": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "requestId",
+        "action",
+        "status",
+        "message",
+        "createdAt",
+        "completedAt"
+      ]
+    },
+    "PowerOperationDtoApiResult": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean"
+        },
+        "data": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/PowerOperationDto"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "errorCode": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "errorMessage": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "success",
+        "data",
+        "errorCode",
+        "errorMessage"
+      ]
+    },
+    "PowerOperationDtoIReadOnlyListApiResult": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean"
+        },
+        "data": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "#/definitions/PowerOperationDto"
+          }
+        },
+        "errorCode": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "errorMessage": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "success",
+        "data",
+        "errorCode",
+        "errorMessage"
+      ]
+    },
+    "PowerRequest": {
+      "type": "object",
+      "properties": {
+        "action": {
+          "$ref": "#/definitions/PowerAction"
+        },
+        "confirmation": {
+          "type": "string"
+        },
+        "requestId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "action",
+        "confirmation",
+        "requestId"
+      ]
+    },
+    "PowerReviewRequest": {
+      "type": "object",
+      "properties": {
+        "confirmation": {
+          "type": "string"
+        },
+        "outcome": {
+          "type": "string"
+        },
+        "note": {
+          "type": "string",
+          "maxLength": 500
+        }
+      },
+      "required": [
+        "confirmation",
+        "note",
+        "outcome"
+      ]
+    },
+    "RecentTelemetryDto": {
+      "type": "object",
+      "properties": {
+        "series": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HistorySeriesDto"
+          }
+        },
+        "gaps": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CollectionGapDto"
+          }
+        }
+      },
+      "required": [
+        "series",
+        "gaps"
+      ]
+    },
+    "RecentTelemetryDtoApiResult": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean"
+        },
+        "data": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/RecentTelemetryDto"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "errorCode": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "errorMessage": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "success",
+        "data",
+        "errorCode",
+        "errorMessage"
+      ]
+    },
+    "ResetUserPasswordRequest": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string",
+          "pattern": "^-?(0|[1-9][0-9]*)$",
+          "description": "十进制long文本；客户端不得转number",
+          "minimum": 1
+        },
+        "newPassword": {
+          "type": "string"
+        },
+        "confirmPassword": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "confirmPassword",
+        "newPassword",
+        "version"
+      ]
+    },
+    "ReviewVirtualMediaRequest": {
+      "type": "object",
+      "properties": {
+        "confirmation": {
+          "type": "string"
+        },
+        "note": {
+          "type": "string",
+          "maxLength": 500
+        }
+      },
+      "required": [
+        "confirmation",
+        "note"
+      ]
+    },
+    "SaveServerRequest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "maxLength": 100
+        },
+        "brand": {
+          "type": "string"
+        },
+        "controllerType": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string",
+          "maxLength": 255
+        },
+        "username": {
+          "type": "string",
+          "maxLength": 100
+        },
+        "password": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "samplingIntervalSeconds": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 86400
+        },
+        "enabled": {
+          "type": "boolean"
+        },
+        "certificateFingerprint": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "ignoreCertificateErrors": {
+          "type": "boolean"
+        },
+        "existingServerId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "address",
+        "brand",
+        "controllerType",
+        "enabled",
+        "ignoreCertificateErrors",
+        "name",
+        "samplingIntervalSeconds",
+        "username"
+      ]
+    },
+    "SaveUserRequest": {
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string",
+          "maxLength": 100
+        },
+        "displayName": {
+          "type": "string",
+          "maxLength": 100
+        },
+        "enabled": {
+          "type": "boolean"
+        },
+        "canManageUsers": {
+          "type": "boolean"
+        },
+        "canUseConsole": {
+          "type": "boolean"
+        },
+        "canManageServers": {
+          "type": "boolean"
+        },
+        "canOperatePower": {
+          "type": "boolean"
+        },
+        "password": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "version": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^-?(0|[1-9][0-9]*)$",
+          "description": "十进制long文本；客户端不得转number"
+        }
+      },
+      "required": [
+        "canManageServers",
+        "canManageUsers",
+        "canOperatePower",
+        "canUseConsole",
+        "displayName",
+        "enabled",
+        "username"
+      ]
+    },
+    "ServerConfigurationFile": {
+      "type": "object",
+      "properties": {
+        "format": {
+          "type": "string",
+          "maxLength": 64
+        },
+        "version": {
+          "type": "integer"
+        },
+        "salt": {
+          "type": "string",
+          "maxLength": 24
+        },
+        "nonce": {
+          "type": "string",
+          "maxLength": 16
+        },
+        "ciphertext": {
+          "type": "string",
+          "maxLength": 2796204
+        },
+        "tag": {
+          "type": "string",
+          "maxLength": 24
+        }
+      },
+      "required": [
+        "format",
+        "version",
+        "salt",
+        "nonce",
+        "ciphertext",
+        "tag"
+      ]
+    },
+    "ServerConfigurationFileApiResult": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean"
+        },
+        "data": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/ServerConfigurationFile"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "errorCode": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "errorMessage": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "success",
+        "data",
+        "errorCode",
+        "errorMessage"
+      ]
+    },
+    "ServerConfigurationImportResult": {
+      "type": "object",
+      "properties": {
+        "added": {
+          "type": "integer"
+        },
+        "updated": {
+          "type": "integer"
+        },
+        "skipped": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "added",
+        "updated",
+        "skipped"
+      ]
+    },
+    "ServerConfigurationImportResultApiResult": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean"
+        },
+        "data": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/ServerConfigurationImportResult"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "errorCode": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "errorMessage": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "success",
+        "data",
+        "errorCode",
+        "errorMessage"
+      ]
+    },
+    "ServerDetailDto": {
+      "type": "object",
+      "properties": {
+        "server": {
+          "$ref": "#/definitions/ServerDto"
+        },
+        "inventory": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/DeviceInventory"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "telemetry": {
+          "$ref": "#/definitions/TelemetryDto"
+        },
+        "capabilities": {
+          "$ref": "#/definitions/DeviceCapabilities"
+        },
+        "powerOperations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PowerOperationDto"
+          }
+        }
+      },
+      "required": [
+        "server",
+        "inventory",
+        "telemetry",
+        "capabilities",
+        "powerOperations"
+      ]
+    },
+    "ServerDetailDtoApiResult": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean"
+        },
+        "data": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/ServerDetailDto"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "errorCode": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "errorMessage": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "success",
+        "data",
+        "errorCode",
+        "errorMessage"
+      ]
+    },
+    "ServerDto": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "brand": {
+          "type": "string"
+        },
+        "controllerType": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        },
+        "username": {
+          "type": "string"
+        },
+        "samplingIntervalSeconds": {
+          "type": "integer"
+        },
+        "enabled": {
+          "type": "boolean"
+        },
+        "certificateFingerprint": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "identity": {
+          "$ref": "#/definitions/DeviceIdentity"
+        },
+        "connectionStatus": {
+          "type": "string"
+        },
+        "lastCollectedAt": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "lastInventoryAt": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "lastError": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "ignoreCertificateErrors": {
+          "type": "boolean",
+          "default": true
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "brand",
+        "controllerType",
+        "address",
+        "username",
+        "samplingIntervalSeconds",
+        "enabled",
+        "certificateFingerprint",
+        "identity",
+        "connectionStatus",
+        "lastCollectedAt",
+        "lastInventoryAt",
+        "lastError",
+        "createdAt",
+        "updatedAt",
+        "ignoreCertificateErrors"
+      ]
+    },
+    "ServerDtoApiResult": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean"
+        },
+        "data": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/ServerDto"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "errorCode": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "errorMessage": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "success",
+        "data",
+        "errorCode",
+        "errorMessage"
+      ]
+    },
+    "ServerDtoPageData": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServerDto"
+          }
+        },
+        "total": {
+          "type": "integer"
+        },
+        "current": {
+          "type": "integer"
+        },
+        "pageSize": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "items",
+        "total",
+        "current",
+        "pageSize"
+      ]
+    },
+    "ServerDtoPageDataApiResult": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean"
+        },
+        "data": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/ServerDtoPageData"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "errorCode": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "errorMessage": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "success",
+        "data",
+        "errorCode",
+        "errorMessage"
+      ]
+    },
+    "ServerTelemetryDto": {
+      "type": "object",
+      "properties": {
+        "server": {
+          "$ref": "#/definitions/ServerDto"
+        },
+        "telemetry": {
+          "$ref": "#/definitions/TelemetryDto"
+        },
+        "publishedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "server",
+        "telemetry",
+        "publishedAt"
+      ]
+    },
+    "SetUidRequest": {
+      "type": "object",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/UidControlState"
+        },
+        "confirmation": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "confirmation",
+        "state"
+      ]
+    },
+    "TelemetryDto": {
+      "type": "object",
+      "properties": {
+        "collectedAt": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "stale": {
+          "type": "boolean"
+        },
+        "metrics": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricReading"
+          }
+        },
+        "warnings": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "collectedAt",
+        "stale",
+        "metrics",
+        "warnings"
+      ]
+    },
+    "TelemetryDtoApiResult": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean"
+        },
+        "data": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/TelemetryDto"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "errorCode": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "errorMessage": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "success",
+        "data",
+        "errorCode",
+        "errorMessage"
+      ]
+    },
+    "UidControlState": {
+      "enum": [
+        "Off",
+        "Lit",
+        "Blinking"
+      ]
+    },
+    "UidState": {
+      "enum": [
+        "Off",
+        "Lit",
+        "Blinking",
+        "Unknown"
+      ]
+    },
+    "UidStatusDto": {
+      "type": "object",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/UidState"
+        },
+        "canControl": {
+          "type": "boolean"
+        },
+        "supportedStates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UidControlState"
+          }
+        },
+        "observedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "message": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "state",
+        "canControl",
+        "supportedStates",
+        "observedAt",
+        "message"
+      ]
+    },
+    "UidStatusDtoApiResult": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean"
+        },
+        "data": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/UidStatusDto"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "errorCode": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "errorMessage": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "success",
+        "data",
+        "errorCode",
+        "errorMessage"
+      ]
+    },
+    "UserDto": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "username": {
+          "type": "string"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "enabled": {
+          "type": "boolean"
+        },
+        "deletedAt": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "isAdministrator": {
+          "type": "boolean"
+        },
+        "canManageUsers": {
+          "type": "boolean"
+        },
+        "canUseConsole": {
+          "type": "boolean"
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^-?(0|[1-9][0-9]*)$",
+          "description": "十进制long文本；客户端不得转number"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "canManageServers": {
+          "type": "boolean",
+          "default": false
+        },
+        "canOperatePower": {
+          "type": "boolean",
+          "default": false
+        }
+      },
+      "required": [
+        "id",
+        "username",
+        "displayName",
+        "enabled",
+        "deletedAt",
+        "isAdministrator",
+        "canManageUsers",
+        "canUseConsole",
+        "version",
+        "createdAt",
+        "updatedAt",
+        "canManageServers",
+        "canOperatePower"
+      ]
+    },
+    "UserDtoApiResult": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean"
+        },
+        "data": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/UserDto"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "errorCode": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "errorMessage": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "success",
+        "data",
+        "errorCode",
+        "errorMessage"
+      ]
+    },
+    "UserDtoPageData": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UserDto"
+          }
+        },
+        "total": {
+          "type": "integer"
+        },
+        "current": {
+          "type": "integer"
+        },
+        "pageSize": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "items",
+        "total",
+        "current",
+        "pageSize"
+      ]
+    },
+    "UserDtoPageDataApiResult": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean"
+        },
+        "data": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/UserDtoPageData"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "errorCode": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "errorMessage": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "success",
+        "data",
+        "errorCode",
+        "errorMessage"
+      ]
+    },
+    "UserVersionRequest": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string",
+          "pattern": "^-?(0|[1-9][0-9]*)$",
+          "description": "十进制long文本；客户端不得转number",
+          "minimum": 1
+        }
+      },
+      "required": [
+        "version"
+      ]
+    },
+    "VirtualMediaImageDto": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "fileName": {
+          "type": "string"
+        },
+        "mediaType": {
+          "type": "string"
+        },
+        "sizeBytes": {
+          "type": "string",
+          "pattern": "^-?(0|[1-9][0-9]*)$",
+          "description": "十进制long文本；客户端不得转number"
+        },
+        "sha256": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "fileName",
+        "mediaType",
+        "sizeBytes",
+        "sha256",
+        "createdAt"
+      ]
+    },
+    "VirtualMediaImageDtoApiResult": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean"
+        },
+        "data": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/VirtualMediaImageDto"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "errorCode": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "errorMessage": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "success",
+        "data",
+        "errorCode",
+        "errorMessage"
+      ]
+    },
+    "VirtualMediaImageDtoPageData": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualMediaImageDto"
+          }
+        },
+        "total": {
+          "type": "integer"
+        },
+        "current": {
+          "type": "integer"
+        },
+        "pageSize": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "items",
+        "total",
+        "current",
+        "pageSize"
+      ]
+    },
+    "VirtualMediaImageDtoPageDataApiResult": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean"
+        },
+        "data": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/VirtualMediaImageDtoPageData"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "errorCode": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "errorMessage": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "success",
+        "data",
+        "errorCode",
+        "errorMessage"
+      ]
+    },
+    "VirtualMediaOperationDto": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "serverId": {
+          "type": "string"
+        },
+        "slotId": {
+          "type": "string"
+        },
+        "imageId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "action": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "requestId": {
+          "type": "string"
+        },
+        "message": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "canReviewNotExecuted": {
+          "type": "boolean",
+          "default": false
+        }
+      },
+      "required": [
+        "id",
+        "serverId",
+        "slotId",
+        "imageId",
+        "action",
+        "status",
+        "requestId",
+        "message",
+        "createdAt",
+        "updatedAt",
+        "canReviewNotExecuted"
+      ]
+    },
+    "VirtualMediaOperationDtoApiResult": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean"
+        },
+        "data": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/VirtualMediaOperationDto"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "errorCode": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "errorMessage": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "success",
+        "data",
+        "errorCode",
+        "errorMessage"
+      ]
+    },
+    "VirtualMediaSlotDto": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "mediaType": {
+          "type": "string"
+        },
+        "inserted": {
+          "type": "boolean"
+        },
+        "writeProtected": {
+          "type": "boolean"
+        },
+        "imageName": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "mountedImageId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "canMount": {
+          "type": "boolean"
+        },
+        "canEject": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "mediaType",
+        "inserted",
+        "writeProtected",
+        "imageName",
+        "mountedImageId",
+        "canMount",
+        "canEject"
+      ]
+    },
+    "VirtualMediaStatusDto": {
+      "type": "object",
+      "properties": {
+        "serverId": {
+          "type": "string"
+        },
+        "supported": {
+          "type": "boolean"
+        },
+        "canMount": {
+          "type": "boolean"
+        },
+        "mediaBaseUrlConfigured": {
+          "type": "boolean"
+        },
+        "slots": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualMediaSlotDto"
+          }
+        },
+        "operations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualMediaOperationDto"
+          }
+        },
+        "warnings": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "serverId",
+        "supported",
+        "canMount",
+        "mediaBaseUrlConfigured",
+        "slots",
+        "operations",
+        "warnings"
+      ]
+    },
+    "VirtualMediaStatusDtoApiResult": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean"
+        },
+        "data": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/VirtualMediaStatusDto"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "errorCode": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "errorMessage": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "success",
+        "data",
+        "errorCode",
+        "errorMessage"
+      ]
+    },
+    "VirtualMediaTrafficDto": {
+      "type": "object",
+      "properties": {
+        "bytesRead": {
+          "type": "string",
+          "pattern": "^-?(0|[1-9][0-9]*)$",
+          "description": "十进制long文本；客户端不得转number"
+        },
+        "bytesPerSecond": {
+          "type": "number"
+        },
+        "observedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "bytesRead",
+        "bytesPerSecond",
+        "observedAt"
+      ]
+    },
+    "VirtualMediaTrafficDtoApiResult": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "boolean"
+        },
+        "data": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/VirtualMediaTrafficDto"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "errorCode": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        },
+        "errorMessage": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "success",
+        "data",
+        "errorCode",
+        "errorMessage"
+      ]
+    }
+  },
+  "description": "后端DTO与实际JSON序列化的离线合同；draft-07兼容子集，类型约束不替代服务运行时校验"
+}

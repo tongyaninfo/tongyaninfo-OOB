@@ -1,0 +1,22 @@
+{
+  "architecture": "arm64",
+  "postgresMajor": 17,
+  "timescaleVersion": "2.31.0",
+  "packageVersion": "2.31.0~debian13-1711",
+  "baseImage": "public.ecr.aws/docker/library/postgres@sha256:8630835ad34e3e09007371ac2d8785bd941c3c1fccc02145e3af050b9e520659",
+  "baseTag": "public.ecr.aws/docker/library/postgres:17",
+  "outputImage": "localhost/oob-timescaledb:pg17-ts2.31.0",
+  "index": "https://packagecloud.io/timescale/timescaledb/debian/dists/trixie/main/binary-arm64/Packages.gz",
+  "packages": [
+    {
+      "name": "timescaledb-2-loader-postgresql-17_2.31.0~debian13-1711_arm64.deb",
+      "sha256": "e0dd1b04bb266269f38ec63d092d7a3013108e82a446c5d38a4a641b4e5a6bad",
+      "url": "https://packagecloud.io/timescale/timescaledb/debian/pool/trixie/main/t/timescaledb-2-2.31.0-postgresql-17/timescaledb-2-loader-postgresql-17_2.31.0~debian13-1711_arm64.deb"
+    },
+    {
+      "name": "timescaledb-2-postgresql-17_2.31.0~debian13-1711_arm64.deb",
+      "sha256": "1b6c782d15929b7e381c67f953fe7b7a39ea45e2996d1cd166ec07b3c4ad1f52",
+      "url": "https://packagecloud.io/timescale/timescaledb/debian/pool/trixie/main/t/timescaledb-2-2.31.0-postgresql-17/timescaledb-2-postgresql-17_2.31.0~debian13-1711_arm64.deb"
+    }
+  ]
+}

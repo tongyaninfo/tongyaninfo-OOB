@@ -1,0 +1,5 @@
+/* 锁版 SettingDrawer 没有主题列表扩展 API；仅替换首个深浅色区块，其余设置继续复用。 */
+.oob-appearance-settings .ant-pro-setting-drawer-drawer-content
+  > div:first-child {
+  display: none;
+}

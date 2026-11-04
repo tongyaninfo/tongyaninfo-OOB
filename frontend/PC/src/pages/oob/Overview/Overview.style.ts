@@ -1,0 +1,180 @@
+import { createStyles } from 'antd-style';
+
+export default createStyles(({ token }) => ({
+  viewport: {
+    position: 'relative',
+    minWidth: 0,
+    padding: '4px 0 0',
+    // 标题包含可操作的看板切换块，不能沿用模板的省略号把箭头裁掉。
+    '.ant-page-header-heading-left': { overflow: 'visible', minWidth: 0 },
+    '.ant-page-header-heading-title': {
+      overflow: 'visible',
+      whiteSpace: 'normal',
+      textOverflow: 'clip',
+    },
+    // 原生全屏只包含本看板，系统侧栏、头像和页脚自然留在全屏元素外。
+    '&:fullscreen': {
+      width: '100vw',
+      height: '100vh',
+      overflow: 'auto',
+      overscrollBehavior: 'contain',
+      backgroundColor: token.colorBgLayout,
+      color: token.colorText,
+    },
+    '&::backdrop': { backgroundColor: token.colorBgLayout },
+  },
+  page: {
+    '.ant-page-header': { paddingTop: 12, paddingBottom: 12 },
+    '.ant-page-header-heading': { gap: 12 },
+    '.ant-page-header-heading-extra': { marginLeft: 0, maxWidth: '100%' },
+    '.ant-page-header-heading-extra .ant-space': { justifyContent: 'flex-end' },
+    '.ant-card': { boxShadow: '0 3px 14px #193a6410' },
+    '@media (max-width: 767px)': {
+      '.ant-page-header': { paddingInline: 16 },
+      '.ant-pro-page-container-children-container': {
+        paddingInline: 16,
+        marginInline: 0,
+      },
+      '.ant-page-header-heading': {
+        flexDirection: 'column',
+        alignItems: 'flex-start',
+      },
+      '.ant-page-header-heading-extra .ant-space': {
+        justifyContent: 'flex-start',
+      },
+    },
+  },
+  introduction: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    flexWrap: 'wrap',
+    gap: 12,
+    padding: '4px 0 2px',
+  },
+  brandLabel: {
+    color: token.colorPrimary,
+    fontSize: 13,
+    fontWeight: 600,
+    letterSpacing: 1,
+  },
+  subtitle: {
+    margin: '6px 0 0',
+    color: token.colorTextSecondary,
+    fontSize: 13,
+    lineHeight: 1.7,
+  },
+  updated: {
+    color: token.colorTextSecondary,
+    fontSize: 12,
+    fontVariantNumeric: 'tabular-nums',
+  },
+  statistics: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(4, minmax(0, 1fr))',
+    gap: 16,
+    '@media (max-width: 1000px)': {
+      gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
+    },
+    '@media (max-width: 479px)': { gap: 10 },
+  },
+  statisticCard: {
+    minWidth: 0,
+    borderRadius: 12,
+    '.ant-card-body': { padding: '20px 22px' },
+    '.ant-statistic-content': {
+      fontSize: 30,
+      fontWeight: 600,
+      lineHeight: 1.5,
+      fontVariantNumeric: 'tabular-nums',
+      overflowWrap: 'anywhere',
+    },
+    '.ant-statistic-title': { color: token.colorTextSecondary, fontSize: 13 },
+    '@media (max-width: 479px)': {
+      '.ant-card-body': { padding: '16px 14px' },
+      '.ant-statistic-content': { fontSize: 24 },
+    },
+  },
+  statisticInner: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    gap: 8,
+    minWidth: 0,
+  },
+  statisticIcon: {
+    flexShrink: 0,
+    display: 'inline-flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 42,
+    height: 42,
+    borderRadius: 12,
+    color: token.colorPrimary,
+    background: token.colorPrimaryBg,
+    fontSize: 21,
+    '&[data-kind="online"]': {
+      color: token.colorSuccessText,
+      background: token.colorSuccessBg,
+    },
+    '&[data-kind="offline"]': {
+      color: token.colorTextSecondary,
+      background: token.colorFillSecondary,
+    },
+    '&[data-kind="power"]': {
+      color: token.colorWarningText,
+      background: token.colorWarningBg,
+    },
+    '@media (max-width: 479px)': {
+      width: 30,
+      height: 30,
+      borderRadius: 8,
+      fontSize: 16,
+    },
+  },
+  dataHint: {
+    margin: '0 !important',
+    fontSize: 12,
+    lineHeight: 1.8,
+    color: token.colorTextSecondary,
+  },
+  serverCard: {
+    borderRadius: 12,
+    overflow: 'hidden',
+    '.ant-card-head': { minHeight: 52 },
+    '.ant-table-wrapper': { minWidth: 0 },
+  },
+  headingRow: {
+    display: 'inline-flex',
+    alignItems: 'center',
+    flexWrap: 'wrap',
+    gap: '8px 16px',
+  },
+  headingTitle: {
+    whiteSpace: 'nowrap',
+    fontSize: 23,
+    fontWeight: 600,
+    letterSpacing: -0.5,
+  },
+  switcher: {
+    display: 'inline-flex',
+    alignItems: 'center',
+    flexShrink: 0,
+    gap: 6,
+    fontSize: 14,
+    fontWeight: 400,
+    lineHeight: 1.4,
+    background: token.colorBgContainer,
+    border: `1px solid ${token.colorBorderSecondary}`,
+    borderRadius: 9,
+    padding: '5px 6px',
+    button: { border: 0, boxShadow: 'none' },
+  },
+  switcherLabel: {
+    display: 'inline-flex',
+    flexDirection: 'column',
+    minWidth: 112,
+    maxWidth: 240,
+    textAlign: 'center',
+  },
+}));

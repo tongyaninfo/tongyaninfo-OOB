@@ -1,0 +1,131 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  docs:
+    name: 文档检查
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: 检查 Markdown 本地链接
+        run: node scripts/check-docs.mjs
+
+  backend:
+    name: 后端构建与驱动测试
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.300'
+      - name: 恢复与构建
+        run: |
+          dotnet restore backend/OobManagement.slnx
+          dotnet build backend/OobManagement.slnx --no-restore -c Release
+      - name: 驱动测试（不访问真实设备）
+        run: dotnet test backend/tests/OobManagement.Driver.Tests/OobManagement.Driver.Tests.csproj --no-build -c Release
+      - name: 集成测试说明
+        # 集成测试需要 PostgreSQL 17 + TimescaleDB 的真实 Testing 库；CI 默认不启动，
+        # 本地或专用环境配置数据库后单独执行，不得把跳过记为通过。
+        run: echo "集成测试需要真实 PostgreSQL/TimescaleDB，本工作流不执行。"
+
+  desktop-dotnet:
+    name: 桌面 .NET 宿主构建与测试
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.300'
+      - name: 恢复与构建
+        run: |
+          dotnet restore desktop/OobManagement.Desktop.slnx
+          dotnet build desktop/OobManagement.Desktop.slnx --no-restore -c Release
+      - name: SQLite 测试
+        run: dotnet test desktop/tests/OobManagement.Desktop.Tests/OobManagement.Desktop.Tests.csproj --no-build -c Release
+
+  contracts:
+    name: 接口合同漂移检查
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.300'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: 安装合同生成工具
+        run: npm install --prefix frontend --no-audit --no-fund
+      - name: 逐字比较合同产物
+        run: |
+          dotnet restore backend/tools/OobContracts/OobContracts.csproj
+          node scripts/oob-contracts.mjs check
+
+  frontend:
+    name: PC 前端检查
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: frontend/PC/package-lock.json
+      - name: 安装依赖
+        run: npm ci --prefix frontend/PC --ignore-scripts --no-audit --no-fund
+      - name: Umi 本地 setup
+        run: node frontend/PC/node_modules/@umijs/max/bin/max.js setup
+      - name: 静态检查
+        run: npm --prefix frontend/PC run lint
+      - name: 单元测试
+        run: npm --prefix frontend/PC test
+      - name: 构建
+        run: npm --prefix frontend/PC run build
+
+  desktop-js:
+    name: 桌面 Electron 层检查
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: desktop/package-lock.json
+      - name: 安装依赖（忽略下载生命周期脚本）
+        run: npm ci --prefix desktop --ignore-scripts --no-audit --no-fund
+      - name: 类型检查
+        run: npm --prefix desktop run typecheck
+      - name: 进程协议测试
+        run: npm --prefix desktop test
+      - name: 构建
+        run: npm --prefix desktop run build
+
+  sensitive-scan:
+    name: 敏感信息扫描
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+      - name: 安装 Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: 扫描敏感信息
+        run: node scripts/scan-open-source-sensitive.mjs --root .

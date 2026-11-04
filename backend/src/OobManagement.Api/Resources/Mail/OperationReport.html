@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{TITLE}}</title>
+  <style>
+    /* 主体保留邮件兼容的表格与内联样式；这里仅补充小屏折行，不影响离线打开。 */
+    .dashboard-grid { width:100%;table-layout:fixed;border-collapse:collapse; }
+    .dashboard-card { width:100%;border-collapse:separate;border-spacing:0; }
+    .chart-image { display:block;width:100%;max-width:100%;height:auto;border:0; }
+    .chart-legend,.chart-axis,.chart-note { overflow-wrap:anywhere;word-break:break-word; }
+    .detail-table th,.detail-table td { overflow-wrap:anywhere;word-break:break-word;vertical-align:top; }
+    .detail-table td { padding:9px 8px;border:1px solid #dbe3ed;font-size:12px;line-height:1.6; }
+    @media only screen and (max-width:680px) {
+      .report-shell { width:100% !important; }
+      .report-section { padding-left:14px !important;padding-right:14px !important; }
+      .report-title { font-size:22px !important; }
+      .dashboard-cell { display:block !important;width:100% !important;box-sizing:border-box; }
+      .dashboard-cell-wide { width:100% !important; }
+      .detail-table th,.detail-table td { padding:7px 4px !important;font-size:11px !important; }
+    }
+  </style>
+</head>
+<body style="margin:0;padding:24px 12px;background:#f5f6f8;color:#262626;font-family:Arial,'Microsoft YaHei','PingFang SC',sans-serif;-webkit-text-size-adjust:100%;">
+  <!-- 模板只负责布局；图表和统计来自同一已入库数据快照，邮件无需执行脚本或请求远程资源。 -->
+  <table role="presentation" class="report-shell" width="100%" cellspacing="0" cellpadding="0" style="width:100%;max-width:1160px;margin:0 auto;border-collapse:separate;border-spacing:0;background:#ffffff;border:1px solid #e8eaed;border-radius:8px;table-layout:fixed;">
+    <tr><td class="report-section" style="padding:26px 24px 18px;border-bottom:1px solid #f0f0f0;">
+      <p style="margin:0 0 12px;font-size:12px;line-height:1.6;color:#8c8c8c;">带外管理 / 运行报告</p>
+      <h1 class="report-title" style="margin:0 0 12px;font-size:26px;font-weight:600;line-height:1.45;color:#262626;overflow-wrap:anywhere;">{{TITLE}}</h1>
+      <p style="margin:0;font-size:13px;line-height:1.9;color:#595959;overflow-wrap:anywhere;">统计窗口：{{PERIOD}}</p>
+      <p style="margin:6px 0 0;font-size:12px;line-height:1.8;color:#8c8c8c;">生成时间：{{GENERATED_AT}}（Asia/Shanghai）</p>
+    </td></tr>
+    <tr><td class="report-section" style="padding:20px 24px 4px;">
+      <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="width:100%;border-collapse:separate;border-spacing:0;background:#f6faff;border:1px solid #d6e4ff;border-radius:6px;table-layout:fixed;">
+        <tr><td style="padding:13px 16px;font-size:13px;line-height:1.9;color:#434343;overflow-wrap:anywhere;">{{SUMMARY}}</td></tr>
+      </table>
+    </td></tr>
+    <tr><td class="report-section" style="padding:16px 16px 4px;">
+      <h2 style="margin:0 8px 5px;font-size:17px;font-weight:600;line-height:1.7;color:#262626;">运行概览</h2>
+      <p style="margin:0 8px 12px;font-size:12px;line-height:1.8;color:#8c8c8c;">按 CPU 温度、整机功率、风扇、阵列卡温度和进排气温度展示所选区间趋势。图中缺口表示该时段没有有效读数。</p>
+      {{DASHBOARD}}
+    </td></tr>
+    <tr><td class="report-section" style="padding:20px 24px 12px;border-top:1px solid #f0f0f0;">
+      <h2 style="margin:0 0 8px;font-size:17px;font-weight:600;line-height:1.7;color:#262626;">服务器采集明细</h2>
+      <p style="margin:0 0 14px;font-size:12px;line-height:1.8;color:#8c8c8c;">以实际入库轮次统计，采集成功率不等于服务器在线率。平均耗时与最大耗时的单位均为秒。</p>
+      <table class="detail-table" width="100%" cellspacing="0" cellpadding="8" style="width:100%;border-collapse:collapse;table-layout:fixed;text-align:left;">
+        <thead><tr style="background:#fafafa;color:#595959;">
+          <th scope="col" width="23%" style="padding:10px 8px;border:1px solid #e8eaed;font-size:12px;font-weight:600;line-height:1.7;overflow-wrap:anywhere;">服务器</th>
+          <th scope="col" style="padding:10px 8px;border:1px solid #e8eaed;font-size:12px;font-weight:600;line-height:1.7;">采集轮次</th>
+          <th scope="col" style="padding:10px 8px;border:1px solid #e8eaed;font-size:12px;font-weight:600;line-height:1.7;">成功</th>
+          <th scope="col" style="padding:10px 8px;border:1px solid #e8eaed;font-size:12px;font-weight:600;line-height:1.7;">失败</th>
+          <th scope="col" style="padding:10px 8px;border:1px solid #e8eaed;font-size:12px;font-weight:600;line-height:1.7;">采集成功率</th>
+          <th scope="col" style="padding:10px 8px;border:1px solid #e8eaed;font-size:12px;font-weight:600;line-height:1.7;">平均耗时</th>
+          <th scope="col" style="padding:10px 8px;border:1px solid #e8eaed;font-size:12px;font-weight:600;line-height:1.7;">最大耗时</th>
+          <th scope="col" style="padding:10px 8px;border:1px solid #e8eaed;font-size:12px;font-weight:600;line-height:1.7;">异常记录</th>
+        </tr></thead>
+        <tbody>{{SERVER_ROWS}}</tbody>
+      </table>
+    </td></tr>
+    <tr><td class="report-section" style="padding:16px 24px 24px;">
+      <h2 style="margin:0 0 8px;font-size:17px;font-weight:600;line-height:1.7;color:#262626;">传感器统计明细</h2>
+      <p style="margin:0 0 14px;font-size:12px;line-height:1.8;color:#8c8c8c;">保留每个传感器的单位和有效样本数；风扇 RPM 与百分比独立统计。缺测显示“无有效采样”，不会补成零。</p>
+      <table class="detail-table" width="100%" cellspacing="0" cellpadding="8" style="width:100%;border-collapse:collapse;table-layout:fixed;text-align:left;">
+        <thead><tr style="background:#fafafa;color:#595959;">
+          <th scope="col" width="20%" style="padding:10px 8px;border:1px solid #e8eaed;font-size:12px;font-weight:600;line-height:1.7;overflow-wrap:anywhere;">服务器</th>
+          <th scope="col" width="22%" style="padding:10px 8px;border:1px solid #e8eaed;font-size:12px;font-weight:600;line-height:1.7;overflow-wrap:anywhere;">传感器</th>
+          <th scope="col" style="padding:10px 8px;border:1px solid #e8eaed;font-size:12px;font-weight:600;line-height:1.7;">指标</th>
+          <th scope="col" style="padding:10px 8px;border:1px solid #e8eaed;font-size:12px;font-weight:600;line-height:1.7;">单位</th>
+          <th scope="col" style="padding:10px 8px;border:1px solid #e8eaed;font-size:12px;font-weight:600;line-height:1.7;">有效样本数</th>
+          <th scope="col" style="padding:10px 8px;border:1px solid #e8eaed;font-size:12px;font-weight:600;line-height:1.7;">平均</th>
+          <th scope="col" style="padding:10px 8px;border:1px solid #e8eaed;font-size:12px;font-weight:600;line-height:1.7;">最小</th>
+          <th scope="col" style="padding:10px 8px;border:1px solid #e8eaed;font-size:12px;font-weight:600;line-height:1.7;">最大</th>
+        </tr></thead>
+        <tbody>{{SENSOR_ROWS}}</tbody>
+      </table>
+    </td></tr>
+    <tr><td class="report-section" style="padding:20px 24px;background:#fafafa;border-top:1px solid #f0f0f0;">
+      <h2 style="margin:0 0 8px;font-size:13px;font-weight:600;line-height:1.7;color:#595959;">统计口径与数据边界</h2>
+      <p style="margin:0;font-size:12px;line-height:1.9;color:#8c8c8c;overflow-wrap:anywhere;">{{NOTES}}</p>
+      <p style="margin:14px 0 0;font-size:11px;line-height:1.8;color:#b0b0b0;">带外管理系统 · 所有时间均按 Asia/Shanghai 展示</p>
+    </td></tr>
+  </table>
+</body>
+</html>

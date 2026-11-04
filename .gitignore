@@ -1,0 +1,93 @@
+# 操作系统与个人 IDE 状态
+.DS_Store
+Thumbs.db
+.idea/
+.vs/
+*.user
+*.suo
+*.rsuser
+*.userosscache
+*.sln.docstates
+.vscode/*.local.json
+# Claude Code 个人设置；.claude 下的共享配置（settings.json、commands、agents 等）仍纳入版本管理
+**/.claude/settings.local.json
+
+# 前端依赖与构建产物；保留锁文件和生成的接口合同
+node_modules/
+dist/
+dist-*/
+/frontend/**/build/
+
+# 前端开发、类型检查与包管理缓存；目录规则不匹配 .umirc.ts 等源配置
+.vite/
+.vite-temp/
+.vitest/
+.umi/
+.umi-*/
+.mfsu/
+.mfsu-production/
+.turbo/
+.parcel-cache/
+.npm/
+.pnpm-store/
+.eslintcache
+.stylelintcache
+*.tsbuildinfo
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# 前端自动化测试与覆盖率临时产物，源码中的测试用例仍纳入版本控制
+coverage/
+.nyc_output/
+playwright-report/
+playwright/.cache/
+blob-report/
+test-results/
+
+# .NET 编译中间目录覆盖所有层级及大小写变体，不屏蔽正式引用的 DLL 文件
+**/[Bb][Ii][Nn]/
+**/[Oo][Bb][Jj]/
+
+# .NET 独立发布与集中构建输出，仅限制工程目录，保留部署脚本和发行原件
+/artifacts/
+/backend/**/artifacts/
+/backend/**/publish/
+**/.nuget/packages/
+
+# .NET 测试、覆盖率、构建日志及本地打包产物
+[Tt]est[Rr]esults/
+*.trx
+*.coverage
+*.coveragexml
+*.binlog
+*.nupkg
+*.snupkg
+
+
+# 本机私有覆盖与凭据（示例仅能含占位符）
+.env
+.env.*
+!.env.example
+!.env.*.example
+**/appsettings.Local.json
+**/appsettings.*.Local.json
+**/appsettings.Private.json
+**/appsettings.*.Private.json
+*.pfx
+*.p12
+*.key
+
+# 运行数据与临时输出；不忽略 docs、reference、锁文件或正式 SQL
+*.log
+**/.local/
+**/.cache/
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# 本机 AI 任务状态与验证输出；正式规则和检查脚本仍纳入版本管理
+.dsh-tasks/
+.code-review-graph/

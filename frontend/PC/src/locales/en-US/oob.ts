@@ -1,0 +1,252 @@
+import { consolesEnUS } from '@/pages/oob/Consoles/messages';
+import { uidEnUS } from '@/pages/oob/components/uidMessages';
+import { exceptionsEnUS } from '@/pages/oob/Exceptions/messages';
+import { mailEnUS } from '@/pages/oob/Mail/messages';
+import { overviewEnUS } from '@/pages/oob/Overview/messages';
+import { configurationEnUS } from '@/pages/oob/Servers/messages';
+import { usersEnUS } from '@/pages/oob/Users/messages';
+import { mcpEnUS } from '@/pages/system/Mcp/messages';
+
+export default {
+  ...mcpEnUS,
+  'oob.brand.login.title': 'Sign in to your workspace',
+  'oob.brand.login.headline': 'Your infrastructure,',
+  'oob.brand.login.headlineAccent': 'clearly in view.',
+  'oob.brand.login.description':
+    'View server status, hardware metrics and historical trends, and connect to virtual consoles from one workspace.',
+  'oob.brand.login.monitoring': 'Live hardware monitoring',
+  'oob.brand.login.console': 'Virtual consoles',
+  'oob.brand.login.permissions': 'Permission management',
+  'oob.brand.login.welcome': 'Welcome back. Sign in with your system account.',
+  'oob.brand.login.submit': 'Sign in',
+  'oob.brand.login.account': 'Account',
+  'oob.brand.login.accountPlaceholder': 'Enter your account',
+  'oob.brand.login.accountRequired': 'Enter your account',
+  'oob.brand.login.password': 'Password',
+  'oob.brand.login.passwordPlaceholder': 'Enter your password',
+  'oob.brand.login.passwordRequired': 'Enter your password',
+  'oob.brand.login.invalid': 'Incorrect account or password. Please try again.',
+  'oob.brand.login.success': 'Signed in successfully.',
+  'oob.brand.login.failure': 'Could not sign in. Please try again.',
+  'oob.brand.login.hint':
+    'Use the account assigned by your administrator and keep your sign-in information private.',
+  'oob.brand.overview.description':
+    'Review device status, key hardware metrics and recent trends.',
+  ...mailEnUS,
+  ...configurationEnUS,
+  ...usersEnUS,
+  ...consolesEnUS,
+  ...exceptionsEnUS,
+  ...overviewEnUS,
+  ...uidEnUS,
+  'oob.live.connecting': 'Connecting live stream',
+  'oob.live.connected': 'Live stream connected',
+  'oob.live.reconnecting': 'Reconnecting live stream',
+  'oob.live.disconnected': 'Live stream disconnected',
+  'oob.live.gap':
+    'Showing the last received readings. Reconnection resumes future samples without fetching missed data.',
+  'oob.live.help':
+    'Samples are persisted. Initial history uses actual samples from the last 15 minutes, followed by live updates. Missed data is not fetched on reconnect. Total running power includes only fresh available readings.',
+  'oob.trends.failed':
+    'Recent history could not be loaded; future live readings are still received',
+  'oob.availability.Available': 'Available',
+  'oob.availability.Unsupported': 'Unsupported',
+  'oob.availability.TemporarilyUnavailable': 'Temporarily unavailable',
+  'oob.availability.NotInstalled': 'Not installed',
+  'oob.availability.PermissionDenied': 'Permission denied',
+  'oob.availability.ReadFailed': 'Read failed',
+  'oob.availability.Failed': 'Read failed',
+  'oob.availability.Stale': 'Stale',
+  'oob.availability.Unknown': 'Unknown',
+  'oob.source.Device': 'Device reading',
+  'oob.source.Derived': 'Derived',
+  'oob.source.Estimated': 'Estimated',
+  'oob.source.Observed': 'Observed readings',
+  'oob.power.review.title': 'Review operation outcome',
+  'oob.power.review.help':
+    'This only updates the original audit record. It never sends or repeats a device power command. The original operator must verify the physical server, console, or on-site evidence before clearing the pending state.',
+  'oob.power.review.outcome': 'Verified outcome',
+  'oob.power.review.confirmed': 'Confirmed: action completed',
+  'oob.power.review.notExecuted': 'Confirmed: action did not execute',
+  'oob.power.review.note':
+    'Verification evidence (required, up to 500 characters; no credentials)',
+  'oob.power.review.submit': 'Save verified outcome',
+  'oob.power.review.invalid':
+    'Confirm the server name, choose the verified outcome, and provide evidence.',
+  'oob.power.review.saved': 'Verified outcome saved',
+  'oob.power.review.ConfirmedByUser': 'Confirmed by operator',
+  'oob.power.review.NotExecutedByUser': 'Not executed, verified by operator',
+  'oob.table.settings': 'Table settings',
+  'oob.table.compact': 'Compact',
+  'oob.table.medium': 'Medium',
+  'oob.table.large': 'Comfortable',
+  'oob.password.reentry':
+    'Re-enter the password when changing the management address, username, or controller. Existing credentials are never forwarded to a changed target.',
+  'menu.oob': 'Out-of-band management',
+  'menu.oob.overview': 'Overview',
+  'menu.oob.servers': 'Servers',
+  'menu.oob.server-detail': 'Server details',
+  'oob.overview': 'Out-of-band system monitoring',
+  'oob.overview.subtitle':
+    'Hardware inventory and telemetry collected from your management controllers.',
+  'oob.servers': 'Server management',
+  'oob.total': 'Servers',
+  'oob.online': 'Reachable',
+  'oob.offline': 'Unavailable',
+  'oob.pending': 'Not sampled',
+  'oob.totalPower': 'Total running power',
+  'oob.updated': 'Updated',
+  'oob.refresh': 'Refresh',
+  'oob.add': 'Add server',
+  'oob.edit': 'Edit server',
+  'oob.name': 'Name',
+  'oob.brand': 'Brand',
+  'oob.controller': 'Management controller',
+  'oob.address': 'Management address',
+  'oob.username': 'Management username',
+  'oob.password': 'Management password',
+  'oob.password.keep': 'Leave blank to retain the existing password',
+  'oob.interval': 'Sampling interval (seconds)',
+  'oob.enabled': 'Enable sampling',
+  'oob.ignoreCertificateErrors': 'Ignore HTTPS certificate errors',
+  'oob.ignoreCertificateErrors.help':
+    'Ignore chain, hostname and expiry errors for this device only. Clear to validate certificates normally. A configured fingerprint must still match.',
+  'oob.fingerprint': 'Trusted certificate SHA-256 fingerprint',
+  'oob.fingerprint.help':
+    'Optional: only accept the matching device certificate. Fingerprint verification remains enforced even when certificate errors are ignored.',
+  'oob.test': 'Test connection',
+  'oob.test.success': 'Connection verified',
+  'oob.test.failure': 'Connection failed',
+  'oob.test.help':
+    'Connection testing does not save the server or perform a power action.',
+  'oob.save': 'Save',
+  'oob.cancel': 'Cancel',
+  'oob.saved': 'Server saved',
+  'oob.error': 'The request failed',
+  'oob.required': 'This field is required',
+  'oob.interval.help':
+    'Controller measurements may refresh more slowly than the polling interval. Concurrent polls for the same server are prevented.',
+  'oob.search': 'Search name or address',
+  'oob.status': 'Status',
+  'oob.model': 'Model',
+  'oob.firmware': 'Firmware',
+  'oob.powerState': 'Power state',
+  'oob.sampled': 'Last sample',
+  'oob.inventory.updated': 'Inventory updated',
+  'oob.actions': 'Actions',
+  'oob.details': 'Details',
+  'oob.noServers': 'No servers configured',
+  'oob.noServers.help':
+    'Add a server and test its management connection to begin.',
+  'oob.noData': 'No samples are available',
+  'oob.noData.help':
+    'Measurements appear after a successful poll. Missing values are not zero.',
+  'oob.paused': 'Sampling paused',
+  'oob.unavailable': 'Unavailable',
+  'oob.available': 'Available',
+  'oob.stale': 'Stale readings',
+  'oob.overview.fresh':
+    'Only fresh, available readings contribute to total running power.',
+  'oob.identity': 'Basic information',
+  'oob.inventory': 'Hardware inventory',
+  'oob.realtime': 'Live telemetry',
+  'oob.history': 'History',
+  'oob.power': 'Power operations',
+  'oob.serial': 'Serial number',
+  'oob.hostName': 'OS hostname',
+  'oob.controllerHostName': 'Controller hostname',
+  'oob.protocol': 'Protocol',
+  'oob.capabilities': 'Discovered capabilities',
+  'oob.inventory.refresh': 'Refresh inventory',
+  'oob.inventory.help':
+    'Displays the last saved CPU, memory, battery, power supply, controller and drive inventory. Opening this page does not read the device; use Refresh inventory to update it.',
+  'oob.inventory.empty': 'No inventory has been collected',
+  'oob.inventory.select':
+    'Select a hardware component to inspect its properties.',
+  'oob.inventory.kind': 'Component',
+  'oob.inventory.capacity': 'Capacity',
+  'oob.inventory.properties': 'Properties',
+  'oob.inventory.children': 'Attached components',
+  'oob.telemetry.sample': 'Collect now',
+  'oob.telemetry.help':
+    'This page reads stored samples. Collect now requests a read-only device poll and stores its results.',
+  'oob.sensor': 'Sensor',
+  'oob.metric': 'Metric',
+  'oob.value': 'Reading',
+  'oob.unit': 'Unit',
+  'oob.quality': 'Availability',
+  'oob.source': 'Source',
+  'oob.observedAt': 'Observed at',
+  'oob.health': 'Health',
+  'oob.deviceTime': 'Device timestamp',
+  'oob.history.range': 'Time range',
+  'oob.history.sensor': 'Sensor series',
+  'oob.history.query': 'Query history',
+  'oob.history.empty': 'No history in this range',
+  'oob.history.help':
+    'Long ranges are aggregated on the server. Gaps remain visible; different units use separate charts.',
+  'oob.history.average': 'Average',
+  'oob.history.minimum': 'Minimum',
+  'oob.history.maximum': 'Maximum',
+  'oob.history.count': 'Samples',
+  'oob.history.hours': 'Last 24 hours',
+  'oob.power.help':
+    'Choose an action and confirm the server name to send it. A short press, forced power off and graceful shutdown have different effects, described below.',
+  'oob.power.actions': 'Available power actions',
+  'oob.power.refreshCapabilities': 'Refresh power capabilities and state',
+  'oob.power.loadingCapabilities':
+    'Reading device power capabilities and state…',
+  'oob.power.disabled':
+    'Power control is disabled on the server. Power commands cannot be sent.',
+  'oob.power.stateUnknown': 'Unknown',
+  'oob.power.stateUnavailable':
+    'The power state is unknown or transitioning. Refresh the state before continuing.',
+  'oob.power.confirm.title': 'Confirm physical server power action',
+  'oob.power.confirm.help':
+    'Enter the exact server name to confirm this action: {name}',
+  'oob.power.force':
+    'This is a forced action and may interrupt the operating system or unsaved work.',
+  'oob.power.confirm.name': 'Server name confirmation',
+  'oob.power.confirm.submit': 'Submit action',
+  'oob.power.confirm.invalid':
+    'The confirmation does not match the server name',
+  'oob.power.unknown':
+    'The outcome is unknown. The request was not retried. Use the operation record to reconcile it.',
+  'oob.power.none': 'No confirmed power actions are available for this device',
+  'oob.power.operations': 'Power operation records',
+  'oob.power.On': 'Power on',
+  'oob.power.GracefulShutdown': 'Graceful shutdown',
+  'oob.power.ForceOff': 'Long press effect (force off)',
+  'oob.power.PushPowerButton': 'Short press power button',
+  'oob.power.GracefulRestart': 'Graceful restart',
+  'oob.power.ForceRestart': 'Force restart',
+  'oob.power.PowerCycle': 'Force power cycle',
+  'oob.power.description.On': 'Turn on a powered-off server.',
+  'oob.power.description.PushPowerButton':
+    'Simulate a short press of the physical power button. Starts a powered-off server; while running, the operating system power-button policy determines the response.',
+  'oob.power.description.GracefulShutdown':
+    'Ask the operating system to shut down normally. Requires its support and response.',
+  'oob.power.description.ForceOff':
+    'Force the host power off, with an effect similar to holding the power button. The controller determines the duration.',
+  'oob.power.description.GracefulRestart':
+    'Ask the operating system to shut down normally and restart.',
+  'oob.power.description.ForceRestart':
+    'Reset and restart immediately without waiting for a normal operating system shutdown.',
+  'oob.power.description.PowerCycle':
+    'Force the power off and then turn it back on.',
+  'oob.power.operation.status': 'Outcome',
+  'oob.power.operation.time': 'Submitted',
+  'oob.power.operation.message': 'Details',
+  'oob.back': 'Back to servers',
+  'oob.load.failed': 'Could not load data',
+  'oob.retry': 'Retry',
+  'oob.warnings': 'Collection notices',
+  'oob.settings.failed': 'Could not save account settings',
+  'oob.auth.mobileUnavailable':
+    'Mobile sign-in is not configured. Use account and password sign-in.',
+  'oob.history.from': 'From',
+  'oob.history.to': 'To',
+  'oob.details.notFound': 'The server could not be found',
+  'oob.server.subtitle':
+    'Keep device credentials on the backend; query, monitor and operate only confirmed management targets.',
+} as const;

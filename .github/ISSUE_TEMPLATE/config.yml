@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 安全漏洞报告
+    url: https://github.com/tongyaninfo/tongyaninfo-OOB/security/advisories/new
+    about: 请通过 GitHub 私密漏洞报告提交安全问题，不要在公开 Issue 中披露。
+  - name: 使用文档
+    url: https://github.com/tongyaninfo/tongyaninfo-OOB/blob/main/docs/README.md
+    about: 先查阅文档中心，确认是否已有说明。

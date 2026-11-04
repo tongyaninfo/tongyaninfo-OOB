@@ -1,0 +1,12 @@
+<Project>
+  <!-- 产品版本统一读取仓库 VERSION；SDK 派生程序集和文件版本，不触发 Git 或数据库操作。 -->
+  <PropertyGroup>
+    <Version>$([System.IO.File]::ReadAllText('$(MSBuildThisFileDirectory)VERSION').Trim())</Version>
+    <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
+  </PropertyGroup>
+  <ItemGroup Condition="'$(MSBuildProjectName)' == 'OobManagement.Api'">
+    <!-- 服务器及复用 API 的桌面发布副本都携带版本和迁移清单，便于离线核对。 -->
+    <Content Include="$(MSBuildThisFileDirectory)VERSION" Link="VERSION" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+    <Content Include="$(MSBuildThisFileDirectory)docs/releases/*.json" Link="releases/%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+  </ItemGroup>
+</Project>

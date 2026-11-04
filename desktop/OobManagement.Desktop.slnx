@@ -1,0 +1,9 @@
+<Solution>
+  <Project Path="../backend/src/OobManagement.Domain/OobManagement.Domain.csproj" />
+  <Project Path="../backend/src/OobManagement.Application/OobManagement.Application.csproj" />
+  <Project Path="../backend/src/OobManagement.Infrastructure/OobManagement.Infrastructure.csproj" />
+  <Project Path="../backend/src/OobManagement.Api/OobManagement.Api.csproj" />
+  <Project Path="backend/OobManagement.Desktop.Storage/OobManagement.Desktop.Storage.csproj" />
+  <Project Path="backend/OobManagement.Desktop.Host/OobManagement.Desktop.Host.csproj" />
+  <Project Path="tests/OobManagement.Desktop.Tests/OobManagement.Desktop.Tests.csproj" />
+</Solution>

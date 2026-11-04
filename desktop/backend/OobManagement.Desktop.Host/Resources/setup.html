@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>带外管理 · 本地设置</title>
+  <style nonce="{{nonce}}">
+    body{margin:0;background:#f5f7fa;color:#172033;font:16px system-ui,sans-serif;display:grid;min-height:100vh;place-items:center}
+    main{box-sizing:border-box;width:min(520px,calc(100vw - 32px));background:white;border-radius:16px;padding:32px;box-shadow:0 12px 50px #17203312}
+    header{display:flex;justify-content:flex-end;align-items:center;gap:10px;flex-wrap:wrap}
+    h1{font-size:26px}p{line-height:1.8;color:#586477}
+    label{display:block;margin-top:24px}header label{margin:0}
+    input,button,select{box-sizing:border-box;font:inherit;border-radius:8px;padding:12px}
+    input,button{width:100%;margin-top:10px}input,select{border:1px solid #b7c1d0}
+    select{max-width:100%;background:white;color:inherit;padding:8px}
+    button{background:#1677ff;color:white;border:0;cursor:pointer}button:disabled{opacity:.5}
+    #message{min-height:2em;color:#b42318;white-space:pre-wrap}
+    [hidden]{display:none!important}
+    @media(max-width:440px){main{padding:24px}h1{font-size:23px}}
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <label for="language" data-i18n="language">语言</label>
+    <select id="language">
+      <option value="zh-CN">简体中文</option>
+      <option value="zh-TW">繁體中文</option>
+      <option value="en-US">English</option>
+    </select>
+  </header>
+  <h1 data-i18n="title">带外管理 · 本地设置</h1>
+  <p id="intro">正在检查本地数据…</p>
+  <form id="setup" novalidate>
+    <label for="password" data-i18n="password">管理员密码</label>
+    <input id="password" type="password" minlength="8" maxlength="128" required autocomplete="new-password">
+    <label id="confirmLabel" for="confirm" data-i18n="confirm">确认密码</label>
+    <input id="confirm" type="password" minlength="8" maxlength="128" required autocomplete="new-password">
+    <button id="submit" type="submit" disabled>初始化本地数据</button>
+  </form>
+  <p id="message" role="status" aria-live="polite"></p>
+</main>
+<script nonce="{{nonce}}">
+  const messages = {
+    'zh-CN': {
+      title:'带外管理 · 本地设置',language:'语言',password:'管理员密码',confirm:'确认密码',
+      checking:'正在检查本地数据…',
+      newIntro:'设置本机 admin 账号密码。点击初始化后创建本地数据，完成后进入登录页面。',
+      existingIntro:'检测到已有本地数据。请输入已有管理员密码，确认备份并完成升级；密码不会被重设。',
+      initialize:'初始化本地数据',upgrade:'备份并初始化或升级',
+      mismatch:'两次密码不一致',invalidPassword:'管理员密码须为8至128个字符，且不能全部为空白',
+      busy:'正在处理本地数据，请保持程序运行…',failed:'操作未完成，请稍后重试',
+      network:'无法连接本地服务，请稍后重试',csrf:'请求已过期，请刷新页面',
+      alreadyInitialized:'本地数据库已就绪，请进入登录页面',unauthorized:'请提供有效管理员密码以确认升级',
+      storage:'本地初始化或升级未完成，请保留数据目录并检查磁盘及备份',
+      rateLimited:'操作过于频繁，请稍后重试'
+    },
+    'zh-TW': {
+      title:'帶外管理 · 本機設定',language:'語言',password:'管理員密碼',confirm:'確認密碼',
+      checking:'正在檢查本機資料…',
+      newIntro:'設定本機 admin 帳號密碼。點選初始化後建立本機資料，完成後進入登入頁面。',
+      existingIntro:'偵測到既有本機資料。請輸入原管理員密碼，確認備份並完成升級；密碼不會重設。',
+      initialize:'初始化本機資料',upgrade:'備份並初始化或升級',
+      mismatch:'兩次密碼不一致',invalidPassword:'管理員密碼須為8至128個字元，且不能全部為空白',
+      busy:'正在處理本機資料，請保持程式執行…',failed:'操作未完成，請稍後重試',
+      network:'無法連線至本機服務，請稍後重試',csrf:'請求已過期，請重新整理頁面',
+      alreadyInitialized:'本機資料庫已就緒，請進入登入頁面',unauthorized:'請提供有效的管理員密碼以確認升級',
+      storage:'本機初始化或升級未完成，請保留資料目錄並檢查磁碟及備份',
+      rateLimited:'操作過於頻繁，請稍後重試'
+    },
+    'en-US': {
+      title:'Out-of-band management · Local setup',language:'Language',password:'Administrator password',confirm:'Confirm password',
+      checking:'Checking local data…',
+      newIntro:'Set the password for the local admin account. Initialize to create local data, then continue to the sign-in page.',
+      existingIntro:'Existing local data was found. Enter the current administrator password to confirm a backup and upgrade. The password will not be reset.',
+      initialize:'Initialize local data',upgrade:'Back up and initialize or upgrade',
+      mismatch:'The passwords do not match',invalidPassword:'Use 8–128 characters, not only whitespace, for the administrator password',
+      busy:'Preparing local data. Keep the application running…',failed:'The operation did not complete. Try again later.',
+      network:'Unable to reach the local service. Try again later.',csrf:'The request has expired. Reload this page.',
+      alreadyInitialized:'The local database is ready. Continue to the sign-in page.',unauthorized:'Enter a valid administrator password to confirm the upgrade',
+      storage:'Local initialization or upgrade did not complete. Keep the data directory and check the disk and backups.',
+      rateLimited:'Too many requests. Try again later.'
+    }
+  };
+  const language = document.querySelector('#language');
+  const passwordInput = document.querySelector('#password');
+  const confirmInput = document.querySelector('#confirm');
+  const message = document.querySelector('#message');
+  const button = document.querySelector('#submit');
+  let locale = 'zh-CN';
+  // 与正式登录页共用语言键；不根据系统语言覆盖用户明确选择。
+  try {
+    const saved = localStorage.getItem('umi_locale');
+    if (Object.hasOwn(messages, saved)) locale = saved;
+    localStorage.setItem('umi_locale', locale);
+  } catch { /* 无法访问浏览器存储时仍可用简体中文完成设置。 */ }
+  let existing = false;
+  let ready = false;
+  let pending = false;
+  let messageKey = '';
+  function render() {
+    const text = messages[locale];
+    document.documentElement.lang = locale;
+    document.title = text.title;
+    language.value = locale;
+    document.querySelectorAll('[data-i18n]').forEach(element => {
+      element.textContent = text[element.dataset.i18n];
+    });
+    document.querySelector('#intro').textContent = !ready ? text.checking : existing ? text.existingIntro : text.newIntro;
+    button.textContent = existing ? text.upgrade : text.initialize;
+    button.disabled = !ready || pending;
+    message.textContent = messageKey ? text[messageKey] : '';
+  }
+  // 切换仅更新当前文案，不刷新页面、清空密码或调用初始化接口。
+  language.addEventListener('change', () => {
+    if (!Object.hasOwn(messages, language.value)) return;
+    locale = language.value;
+    try { localStorage.setItem('umi_locale', locale); } catch { /* 当次页面仍使用所选语言。 */ }
+    render();
+  });
+  const errorMessages = {
+    CSRF_INVALID:'csrf',ALREADY_INITIALIZED:'alreadyInitialized',VALIDATION_FAILED:'invalidPassword',
+    UNAUTHORIZED:'unauthorized',DESKTOP_STORAGE_FAILED:'storage',HTTP_429:'rateLimited',RATE_LIMITED:'rateLimited'
+  };
+  async function json(url, options) {
+    let response, result;
+    try {
+      response = await fetch(url, options);
+      result = await response.json();
+    } catch { throw new Error('network'); }
+    if (!response.ok || !result.success) {
+      const error = new Error('failed');
+      error.code = result.errorCode || `HTTP_${response.status}`;
+      throw error;
+    }
+    return result.data;
+  }
+  function showError(error) {
+    messageKey = errorMessages[error.code] || (error.message === 'network' ? 'network' : 'failed');
+    render();
+  }
+  render();
+  json('/desktop/status').then(status => {
+    if (status.initialized) { location.replace('/'); return; }
+    existing = status.hasDatabase;
+    ready = true;
+    if (existing) {
+      confirmInput.required = false;
+      confirmInput.hidden = true;
+      document.querySelector('#confirmLabel').hidden = true;
+      passwordInput.autocomplete = 'current-password';
+    }
+    render();
+  }).catch(showError);
+  document.querySelector('#setup').addEventListener('submit', async event => {
+    event.preventDefault();
+    if (!ready || pending) return;
+    const password = passwordInput.value;
+    if (password.length < 8 || password.length > 128 || !password.trim()) {
+      messageKey = 'invalidPassword'; render(); return;
+    }
+    if (!existing && password !== confirmInput.value) {
+      messageKey = 'mismatch'; render(); return;
+    }
+    pending = true;
+    messageKey = 'busy';
+    render();
+    try {
+      const csrf = await json('/desktop/csrf');
+      await json('/desktop/initialize', {
+        method:'POST',headers:{'Content-Type':'application/json','X-CSRF-TOKEN':csrf.token},body:JSON.stringify({password})
+      });
+      passwordInput.value = '';
+      confirmInput.value = '';
+      location.replace('/');
+    } catch (error) {
+      pending = false;
+      showError(error);
+    }
+  });
+</script>
+</body>
+</html>

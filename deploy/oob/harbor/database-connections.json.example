@@ -1,0 +1,3 @@
+{
+  "Development": "Host=postgres;Port=5432;Database=oob_management;Username=oob_app;Password=CHANGE_TO_APPLICATION_DATABASE_PASSWORD;Timezone=UTC;Include Error Detail=false"
+}
