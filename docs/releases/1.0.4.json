@@ -1,0 +1,87 @@
+{
+  "formatVersion": 1,
+  "version": "1.0.4",
+  "previousVersion": "1.0.3",
+  "date": "2026-11-05",
+  "notes": "docs/releases/1.0.4.md",
+  "database": {
+    "postgresqlBusiness": {
+      "context": "OobDbContext",
+      "provider": "PostgreSQL",
+      "directory": "backend/src/OobManagement.Infrastructure/Persistence/Migrations",
+      "historyTable": "__EFMigrationsHistory",
+      "migrations": [
+        "20261024141558_InitialOobManagement",
+        "20261024142053_ExplicitApplicationIds",
+        "20261024163113_PerServerCertificatePolicy",
+        "20261024171205_SystemExceptionLogs",
+        "20261026005000_UnifiedFanPercentage",
+        "20261101055105_UserManagementPermissions",
+        "20261101062142_ServerAndPowerPermissions",
+        "20261102061710_AddMailSending",
+        "20261102103725_AddOperationMailReports",
+        "20261102130630_AddMcpManagement"
+      ],
+      "files": {
+        "backend/src/OobManagement.Infrastructure/Persistence/Migrations/20261024141558_InitialOobManagement.Designer.cs": "d4d75e89d03742aec8242a84f9da2367d8a513cb6f4028bd3ac46df3552eb25a",
+        "backend/src/OobManagement.Infrastructure/Persistence/Migrations/20261024141558_InitialOobManagement.cs": "02de13902d3399cefa2f925639512b7d2b477aa6c151c93c7bad1be5835f4e26",
+        "backend/src/OobManagement.Infrastructure/Persistence/Migrations/20261024142053_ExplicitApplicationIds.Designer.cs": "479a0deff2981f8441d95c0e6590cc4e83733f10d4e35b853dd19072559fcff8",
+        "backend/src/OobManagement.Infrastructure/Persistence/Migrations/20261024142053_ExplicitApplicationIds.cs": "f294a6a80e4d38a81e16bcf6d21355dccb6f927b9ac40182d4881d8071c5741a",
+        "backend/src/OobManagement.Infrastructure/Persistence/Migrations/20261024163113_PerServerCertificatePolicy.Designer.cs": "d079fde8a3bc426aba48907249991cdffb5b3669dda61f2eb8e535769612dc42",
+        "backend/src/OobManagement.Infrastructure/Persistence/Migrations/20261024163113_PerServerCertificatePolicy.cs": "b58e89c40a8a584703ae86ac4b6f241c1512f0c7c7b1a16ad79af0bb74431799",
+        "backend/src/OobManagement.Infrastructure/Persistence/Migrations/20261024171205_SystemExceptionLogs.Designer.cs": "07d01731350c6b42b4d3e13af15141940c9ae98418d33987699263c326562119",
+        "backend/src/OobManagement.Infrastructure/Persistence/Migrations/20261024171205_SystemExceptionLogs.cs": "d144b72065dac9ccd36cefd1b550f4751d181592ce46080f5e91f91995ddab2f",
+        "backend/src/OobManagement.Infrastructure/Persistence/Migrations/20261026005000_UnifiedFanPercentage.cs": "c022569630f8900fe632492f86727f7c46b195de46f6f4dc25ca72451ec9e857",
+        "backend/src/OobManagement.Infrastructure/Persistence/Migrations/20261101055105_UserManagementPermissions.Designer.cs": "b41540ac0c5885d0905f1b203e42b83e4a4beb305393871aa00ed55e62806332",
+        "backend/src/OobManagement.Infrastructure/Persistence/Migrations/20261101055105_UserManagementPermissions.cs": "5509577ee2b6fddfad4bc1fa27b12806f8f534ab62fbe42ed6bd530371ffa7d9",
+        "backend/src/OobManagement.Infrastructure/Persistence/Migrations/20261101062142_ServerAndPowerPermissions.Designer.cs": "33c3417d2c9ee17052cd84aa08ea4f2ac5801e18078f00551985e5f649a32129",
+        "backend/src/OobManagement.Infrastructure/Persistence/Migrations/20261101062142_ServerAndPowerPermissions.cs": "f6d4e9e842e858bffbc850e1302feff1111cd145c1a8b822da24b9baea9cf5c7",
+        "backend/src/OobManagement.Infrastructure/Persistence/Migrations/20261102061710_AddMailSending.Designer.cs": "3aa33609b6c0e399f7b3fadf4aa2c79efb874013e2786143f4961073a22f9475",
+        "backend/src/OobManagement.Infrastructure/Persistence/Migrations/20261102061710_AddMailSending.cs": "4d0a0e8fae7179718cfc12f30f1d2493e43bb7fc18ecb5826f13d7317ad69998",
+        "backend/src/OobManagement.Infrastructure/Persistence/Migrations/20261102103725_AddOperationMailReports.Designer.cs": "fffda4db8f5d9569a875c1f78cd85abe32e09adadec4d788db7b0784d7fbe0f5",
+        "backend/src/OobManagement.Infrastructure/Persistence/Migrations/20261102103725_AddOperationMailReports.cs": "9baaf6a7ccdffc5c9024b666313dc53784a0a37e9696d4b520c35aa5a9457394",
+        "backend/src/OobManagement.Infrastructure/Persistence/Migrations/20261102130630_AddMcpManagement.Designer.cs": "ccd9853aff752527cf69ff2e9c48231e1c21c33faa9a1da527360e97894f91a8",
+        "backend/src/OobManagement.Infrastructure/Persistence/Migrations/20261102130630_AddMcpManagement.cs": "ceedd3a7c062cc482db75d3bba65134385780830592bc906321fbe49bf235ff6",
+        "backend/src/OobManagement.Infrastructure/Persistence/Migrations/UnifiedFanPercentageSql.cs": "839846a380e534355787a52f8de1c584e979085e1850458b0575bd61475b071b"
+      },
+      "changes": []
+    },
+    "postgresqlOAuth": {
+      "context": "McpOAuthDbContext",
+      "provider": "PostgreSQL",
+      "directory": "backend/src/OobManagement.Infrastructure/Persistence/OAuthMigrations",
+      "historyTable": "__McpOAuthMigrationsHistory",
+      "migrations": [
+        "20261102130635_AddMcpOAuthStorage"
+      ],
+      "files": {
+        "backend/src/OobManagement.Infrastructure/Persistence/OAuthMigrations/20261102130635_AddMcpOAuthStorage.Designer.cs": "36bd1c2fe3973080790e74eb235230401386691d32214917daae72563abbc61c",
+        "backend/src/OobManagement.Infrastructure/Persistence/OAuthMigrations/20261102130635_AddMcpOAuthStorage.cs": "a37707bf0a64d8a6d132f6a131d1ba95b17ab5d47df560930620a7c22e2d0a94"
+      },
+      "changes": []
+    },
+    "sqlite": {
+      "context": "SqliteOobDbContext",
+      "provider": "SQLite",
+      "directory": "desktop/backend/OobManagement.Desktop.Storage/Persistence/Migrations",
+      "historyTable": "__EFMigrationsHistory",
+      "migrations": [
+        "20261101111729_InitialDesktopSqlite",
+        "20261102061714_AddMailSending",
+        "20261102103755_AddOperationMailReports",
+        "20261102130707_AddMcpManagement"
+      ],
+      "files": {
+        "desktop/backend/OobManagement.Desktop.Storage/Persistence/Migrations/20261101111729_InitialDesktopSqlite.Designer.cs": "51f61220a3547586034995d07e47ba81a9afb91ca10bf042ea18e129298b7245",
+        "desktop/backend/OobManagement.Desktop.Storage/Persistence/Migrations/20261101111729_InitialDesktopSqlite.cs": "e33392165cf9c3da6d2103fa969726b88cc02383a3fcf212f1c8783754cbfb69",
+        "desktop/backend/OobManagement.Desktop.Storage/Persistence/Migrations/20261102061714_AddMailSending.Designer.cs": "8e1f574c2ab44eead10d01268e65c1ac441b0cd7974ceeacb49232291bc1eb87",
+        "desktop/backend/OobManagement.Desktop.Storage/Persistence/Migrations/20261102061714_AddMailSending.cs": "caa5f998f40b0c3f77a9bff1d50d9374821e433f37c05380015344bbd525777c",
+        "desktop/backend/OobManagement.Desktop.Storage/Persistence/Migrations/20261102103755_AddOperationMailReports.Designer.cs": "871482012d41cfc24e66508ee808d926f16b5748eb82533ed2e7ab9f6a778cd8",
+        "desktop/backend/OobManagement.Desktop.Storage/Persistence/Migrations/20261102103755_AddOperationMailReports.cs": "62b1dde2f9fda67e81127d7a0ef9fc5aa276d454a8a5939f66edc96b2877c9aa",
+        "desktop/backend/OobManagement.Desktop.Storage/Persistence/Migrations/20261102130707_AddMcpManagement.Designer.cs": "590a4eb18daeb5958cd76ce17ad4e205d83a001169968a964c9be07838640080",
+        "desktop/backend/OobManagement.Desktop.Storage/Persistence/Migrations/20261102130707_AddMcpManagement.cs": "b29c9d1ef0f1dc9b7d1aaa7f6e7f9667da9b96aae6a06cef7dc2dc4c10ea2829"
+      },
+      "changes": []
+    }
+  }
+}

@@ -101,7 +101,7 @@ jobs:
   desktop:
     name: 桌面安装包（${{ matrix.label }}）
     runs-on: ${{ matrix.os }}
-    timeout-minutes: 45
+    timeout-minutes: 90
     needs: [prepare, frontend]
     strategy:
       fail-fast: false
@@ -188,7 +188,7 @@ jobs:
   desktop-experimental:
     name: 实验性安装包（${{ matrix.label }}）
     runs-on: ${{ matrix.os }}
-    timeout-minutes: 45
+    timeout-minutes: 90
     needs: [prepare, frontend]
     continue-on-error: true
     strategy:
