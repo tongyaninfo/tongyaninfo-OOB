@@ -58,11 +58,51 @@ jobs:
           node scripts/releases.mjs check
           echo "version=${version}" >> "$GITHUB_OUTPUT"
 
+  frontend:
+    name: PC 前端产物
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    needs: prepare
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      - name: 安装 Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+          cache-dependency-path: frontend/PC/package-lock.json
+
+      - name: 安装 PC 依赖
+        run: npm ci --prefix frontend/PC --ignore-scripts --no-audit --no-fund
+
+      - name: Umi 本地 setup
+        run: node frontend/PC/node_modules/@umijs/max/bin/max.js setup
+
+      - name: 构建 PC 前端
+        run: npm --prefix frontend/PC run build
+
+      - name: 打包前端产物
+        working-directory: frontend/PC
+        run: |
+          test -f dist/index.html
+          tar -czf frontend-dist.tar.gz dist
+          echo "前端产物文件数：$(tar -tzf frontend-dist.tar.gz | wc -l | tr -d ' ')"
+
+      - name: 上传前端产物
+        uses: actions/upload-artifact@v4
+        with:
+          name: frontend-dist
+          path: frontend/PC/frontend-dist.tar.gz
+          if-no-files-found: error
+          retention-days: 7
+
   desktop:
     name: 桌面安装包（${{ matrix.label }}）
     runs-on: ${{ matrix.os }}
     timeout-minutes: 45
-    needs: prepare
+    needs: [prepare, frontend]
     strategy:
       fail-fast: false
       matrix:
@@ -101,11 +141,18 @@ jobs:
             frontend/PC/package-lock.json
             desktop/package-lock.json
 
-      - name: 安装 PC 依赖
-        run: npm ci --prefix frontend/PC --ignore-scripts --no-audit --no-fund
+      - name: 下载前端产物
+        uses: actions/download-artifact@v4
+        with:
+          name: frontend-dist
+          path: frontend-artifact
 
-      - name: Umi 本地 setup
-        run: node frontend/PC/node_modules/@umijs/max/bin/max.js setup
+      - name: 解压前端产物
+        shell: bash
+        run: |
+          mkdir -p frontend/PC
+          tar -xzf frontend-artifact/frontend-dist.tar.gz -C frontend/PC
+          test -f frontend/PC/dist/index.html
 
       - name: 安装桌面依赖
         run: npm ci --prefix desktop --ignore-scripts --no-audit --no-fund
@@ -118,7 +165,7 @@ jobs:
         working-directory: desktop
         env:
           OOB_DESKTOP_OUTPUT: ${{ github.workspace }}/out
-        run: npm run package -- --platform ${{ matrix.platform }} --arch ${{ matrix.arch }}
+        run: npm run package -- --platform ${{ matrix.platform }} --arch ${{ matrix.arch }} --skip-frontend-build
 
       - name: 列出产物
         shell: bash
@@ -142,7 +189,7 @@ jobs:
     name: 实验性安装包（${{ matrix.label }}）
     runs-on: ${{ matrix.os }}
     timeout-minutes: 45
-    needs: prepare
+    needs: [prepare, frontend]
     continue-on-error: true
     strategy:
       fail-fast: false
@@ -170,11 +217,18 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
 
-      - name: 安装 PC 依赖
-        run: npm ci --prefix frontend/PC --ignore-scripts --no-audit --no-fund
+      - name: 下载前端产物
+        uses: actions/download-artifact@v4
+        with:
+          name: frontend-dist
+          path: frontend-artifact
 
-      - name: Umi 本地 setup
-        run: node frontend/PC/node_modules/@umijs/max/bin/max.js setup
+      - name: 解压前端产物
+        shell: bash
+        run: |
+          mkdir -p frontend/PC
+          tar -xzf frontend-artifact/frontend-dist.tar.gz -C frontend/PC
+          test -f frontend/PC/dist/index.html
 
       - name: 安装桌面依赖
         run: npm ci --prefix desktop --ignore-scripts --no-audit --no-fund
@@ -187,7 +241,7 @@ jobs:
         working-directory: desktop
         env:
           OOB_DESKTOP_OUTPUT: ${{ github.workspace }}/out
-        run: npm run package -- --platform ${{ matrix.platform }} --arch ${{ matrix.arch }}
+        run: npm run package -- --platform ${{ matrix.platform }} --arch ${{ matrix.arch }} --skip-frontend-build
 
       - name: 上传安装包
         uses: actions/upload-artifact@v4

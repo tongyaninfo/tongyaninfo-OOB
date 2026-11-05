@@ -2,6 +2,21 @@
 
 本文件记录本仓库面向开源发布的主要变更。格式参考 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/)，版本号遵循产品版本（根 [VERSION](VERSION)）。
 
+## [1.0.3] - 2026-11-05
+
+调整桌面发布流水线的前端构建方式。
+
+### 变更
+
+- PC 前端由独立 job 在 Linux x64 集中构建，产物分发给各平台桌面任务；
+- 桌面任务使用 `--skip-frontend-build` 复用前端产物，规避 Windows ARM64 上
+  Umi/utoo 原生绑定（`@utoo/pack-win32-arm64-msvc`）缺失的问题。
+
+### 说明
+
+- 无数据库结构变化，升级兼容 1.0.0 / 1.0.1 / 1.0.2。
+- 桌面安装包仍为未签名测试包：macOS 使用 ad-hoc 签名，Windows 未签名。
+
 ## [1.0.2] - 2026-11-05
 
 修复 Windows/Linux/macOS 桌面安装包构建与上传的平台差异问题。
