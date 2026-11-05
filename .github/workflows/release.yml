@@ -128,7 +128,13 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: desktop-${{ matrix.label }}
-          path: ${{ github.workspace }}/out/**
+          # 只上传安装包文件；不包含 macOS .app 目录（含符号链接，易导致 artifact 上传失败）。
+          path: |
+            ${{ github.workspace }}/out/**/*.exe
+            ${{ github.workspace }}/out/**/*.dmg
+            ${{ github.workspace }}/out/**/*.zip
+            ${{ github.workspace }}/out/**/*.deb
+            ${{ github.workspace }}/out/**/*.AppImage
           if-no-files-found: error
           retention-days: 7
 
@@ -187,7 +193,13 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: desktop-${{ matrix.label }}
-          path: ${{ github.workspace }}/out/**
+          # 只上传安装包文件；不包含 macOS .app 目录（含符号链接，易导致 artifact 上传失败）。
+          path: |
+            ${{ github.workspace }}/out/**/*.exe
+            ${{ github.workspace }}/out/**/*.dmg
+            ${{ github.workspace }}/out/**/*.zip
+            ${{ github.workspace }}/out/**/*.deb
+            ${{ github.workspace }}/out/**/*.AppImage
           if-no-files-found: error
           retention-days: 7
 

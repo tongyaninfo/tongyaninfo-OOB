@@ -2,6 +2,21 @@
 
 本文件记录本仓库面向开源发布的主要变更。格式参考 [Keep a Changelog](https://keepachangelog.com/zh-CN/1.1.0/)，版本号遵循产品版本（根 [VERSION](VERSION)）。
 
+## [1.0.2] - 2026-11-05
+
+修复 Windows/Linux/macOS 桌面安装包构建与上传的平台差异问题。
+
+### 修复
+
+- Windows：离线模板资源行尾固定为 LF，摘要校验兼容 CRLF 检出，避免误报。
+- Linux：补充 deb 包 maintainer 信息，恢复 AppImage/deb/rpm 打包。
+- macOS：安装包上传只包含安装文件，避免 `.app` 目录导致 artifact 上传内存溢出。
+
+### 说明
+
+- 无数据库结构变化，升级兼容 1.0.0 / 1.0.1。
+- 桌面安装包仍为未签名测试包：macOS 使用 ad-hoc 签名，Windows 未签名。
+
 ## [1.0.1] - 2026-11-04
 
 修复 Windows 构建环境下的前端构建校验误报。

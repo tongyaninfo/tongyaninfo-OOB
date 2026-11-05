@@ -25,7 +25,7 @@ module.exports = {
   },
   win: { target: ['nsis'], icon: 'resources/icon.ico' },
   nsis: { oneClick: false, perMachine: false, allowToChangeInstallationDirectory: true, deleteAppDataOnUninstall: false },
-  linux: { target: ['AppImage', 'deb', 'rpm'], icon: 'resources/icon.png', category: 'Utility', synopsis: '带外管理系统本地桌面版' },
+  linux: { target: ['AppImage', 'deb', 'rpm'], icon: 'resources/icon.png', category: 'Utility', synopsis: '带外管理系统本地桌面版', maintainer: 'tongyaninfo contributors <noreply@tongyaninfo.com>' },
   // 旧 AppImage 工具默认追加 --no-sandbox；显式空参数保留桌面页面既定的沙箱边界。
   appImage: { executableArgs: [] },
 };

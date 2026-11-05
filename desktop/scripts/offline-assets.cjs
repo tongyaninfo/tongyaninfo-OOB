@@ -17,9 +17,13 @@ function localizeFrontend(webRoot) {
       || !/^https:\/\/(mdn|gw)\.alipayobjects\.com\//.test(asset.url)) throw new Error('桌面固定资源清单无效');
     const source = path.join(resourceDirectory, asset.file);
     const bytes = readFileSync(source);
-    if (createHash('sha256').update(bytes).digest('hex') !== asset.sha256 || bytes.length !== asset.bytes)
+    // Windows 检出可能把 SVG 等文本模板转换为 CRLF；按规范化文本计算摘要并写入副本，避免哈希误报。
+    const normalized = /\.(?:svg|txt|json|html?|css|js)$/i.test(asset.file)
+      ? Buffer.from(bytes.toString('utf8').replace(/\r\n/g, '\n')) : bytes;
+    if (createHash('sha256').update(normalized).digest('hex') !== asset.sha256 || normalized.length !== asset.bytes)
       throw new Error(`桌面固定资源摘要不一致：${asset.file}`);
-    copyFileSync(source, path.join(destination, publicFile));
+    if (normalized === bytes) copyFileSync(source, path.join(destination, publicFile));
+    else writeFileSync(path.join(destination, publicFile), normalized);
     replacements.push([asset.url, `/desktop-assets/${publicFile}`], [asset.url.replace(/^https:/, ''), `/desktop-assets/${publicFile}`]);
   }
   let changedFiles = 0;

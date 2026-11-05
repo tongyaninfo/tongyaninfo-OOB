@@ -10,3 +10,6 @@ docs/releases/*.json text eol=lf
 
 # 构建检查按 LF 读取许可正文；固定检出行尾，避免 Windows 自动转换导致校验误报。
 frontend/PC/tools/**/LICENSE text eol=lf
+
+# 桌面离线模板按原始字节校验摘要；固定文本模板行尾，避免 Windows 自动转换导致校验误报。
+desktop/resources/offline/*.svg text eol=lf
